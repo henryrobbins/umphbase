@@ -1,0 +1,171 @@
+\documentclass[8pt]{book}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor,supertabular,multicol}
+\usepackage{booktabs}
+\usepackage{textcomp}
+\usepackage{enumitem}
+\usepackage{float}
+\setlist{nosep}
+
+\usepackage{fancyhdr}
+\fancyhf{} % clear all header and footers
+\renewcommand{\headrulewidth}{0pt} % remove the header rule
+\fancyfoot[LE,RO]{\thepage} % Left side on Even pages; Right side on Odd pages
+\pagestyle{fancy}
+
+% --------------------------------------------------------------------
+% Definitions (do not change this)
+% --------------------------------------------------------------------
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}} 	% Horizontal rule
+
+\makeatletter							% Title
+\def\printtitle{%						
+    {\centering \@title\par}}
+\makeatother									
+
+\makeatletter							% Author
+\def\printauthor{%					
+    {\centering \large \@author}}				
+\makeatother							
+
+% --------------------------------------------------------------------
+% Metadata (Change this)
+% --------------------------------------------------------------------
+\title{	\normalsize \textsc{} 	% Subtitle
+		 	\\[2.0cm]								% 2cm spacing
+			\HRule{2pt} \\ [0.5cm]		% Lower rule + 0.5cm spacing
+			\Huge \textbf{\uppercase{UMPHBASE}}	% Title
+			\HRule{2pt} \\ [0.5cm]		% Lower rule + 0.5cm spacing
+			\large \today			% Todays date
+		}
+
+\author{
+		Henry W. Robbins\\	
+		Cornell University\\	
+		Operation Research and Information Engineering\\
+        \texttt{hwr26@cornell.edu} \\
+}
+
+
+\begin{document}
+% ------------------------------------------------------------------------------
+% Maketitle
+% ------------------------------------------------------------------------------
+\thispagestyle{empty}		% Remove page numbering on this page
+
+\printtitle					% Print the title data as defined above
+  	\vfill
+\printauthor				% Print the author data as defined above
+\newpage
+% ------------------------------------------------------------------------------
+% Begin document
+% ------------------------------------------------------------------------------
+
+\tableofcontents
+
+\newpage
+
+\chapter{Song Codes}
+
+\begin{multicols*}{4}
+ \let\mcnewpage=\newpage
+     \makeatletter
+     \renewcommand\newpage{
+           \if@firstcolumn
+                \hrule width \linewidth height0pt
+                \columnbreak
+            \else
+                \mcnewpage
+            \fi}
+\begin{footnotesize}
+\input{song_codes}
+\end{footnotesize}
+\end{multicols*}
+
+\chapter{Setlists}
+
+\input{setlists}
+
+\chapter{State Counts}
+
+\begin{multicols*}{2}
+ \let\mcnewpage=\newpage
+     \makeatletter
+     \renewcommand\newpage{
+           \if@firstcolumn
+                \hrule width \linewidth height0pt
+                \columnbreak
+            \else
+                \mcnewpage
+            \fi}
+\input{state_special_counts}
+\end{multicols*}
+
+\chapter{Venues}
+
+\setlength{\tabcolsep}{10pt}
+\begin{multicols*}{2}
+ \let\mcnewpage=\newpage
+     \makeatletter
+     \renewcommand\newpage{
+           \if@firstcolumn
+                \hrule width \linewidth height0pt
+                \columnbreak
+            \else
+                \mcnewpage
+            \fi}
+\input{venue}
+\end{multicols*}
+\input{venue_sm}
+
+\chapter{Support}
+
+\begin{multicols*}{2}
+ \let\mcnewpage=\newpage
+     \makeatletter
+     \renewcommand\newpage{
+           \if@firstcolumn
+                \hrule width \linewidth height0pt
+                \columnbreak
+            \else
+                \mcnewpage
+            \fi}
+\input{support}
+\end{multicols*}
+
+\chapter{umVIP}
+
+\begin{multicols*}{2}
+ \let\mcnewpage=\newpage
+     \makeatletter
+     \renewcommand\newpage{
+           \if@firstcolumn
+                \hrule width \linewidth height0pt
+                \columnbreak
+            \else
+                \mcnewpage
+            \fi}
+\input{vip}
+\end{multicols*}
+
+\chapter{Songs}
+
+\setlength{\columnseprule}{0.5pt}
+\setlength{\tabcolsep}{3pt}
+\begin{multicols*}{4}
+ \let\mcnewpage=\newpage
+     \makeatletter
+     \renewcommand\newpage{
+           \if@firstcolumn
+                \hrule width \linewidth height0pt
+                \columnbreak
+            \else
+                \mcnewpage
+            \fi}
+\begin{footnotesize}
+\input{song_instances}
+\end{footnotesize}
+\end{multicols*}
+
+
+\end{document}
