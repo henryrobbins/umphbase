@@ -1,68 +1,152 @@
 \documentclass[8pt]{book}
 \usepackage[margin=0.5in]{geometry}
-\usepackage{xcolor,supertabular,multicol}
-\usepackage{booktabs}
-\usepackage{textcomp}
-\usepackage{enumitem}
-\usepackage{float}
-\setlist{nosep}
 
+\usepackage{xcolor, supertabular, multicol} 
+\usepackage{booktabs} % Used by to_latex pandas
+\usepackage{textcomp}
+\usepackage{xparse} % Use to check for optimal arguments
+
+% Remove enumerate vertical spacing
+\usepackage{enumitem}
+\setlist{nosep}
+\usepackage{float}
+
+% Page numbering
 \usepackage{fancyhdr}
-\fancyhf{} % clear all header and footers
-\renewcommand{\headrulewidth}{0pt} % remove the header rule
-\fancyfoot[LE,RO]{\thepage} % Left side on Even pages; Right side on Odd pages
+\fancyhf{} 
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[LE,RO]{\thepage} 
 \pagestyle{fancy}
 
-% --------------------------------------------------------------------
-% Definitions (do not change this)
-% --------------------------------------------------------------------
-\newcommand{\HRule}[1]{\rule{\linewidth}{#1}} 	% Horizontal rule
+% --------------------------------------
+% Commands & Environments
+% --------------------------------------
 
-\makeatletter							% Title
+\makeatletter
+\let\mcnewpage=\newpage
+\newcommand{\TrickSupertabularIntoMulticols}{
+\renewcommand\newpage{
+    \if@firstcolumn
+        \hrule width\linewidth height0pt
+            \columnbreak
+        \else
+          \mcnewpage
+        \fi
+}}
+
+\newenvironment{boxed}
+    {\begin{center}
+    \begin{tabular}{|p{0.9\textwidth}|}
+    \hline\\
+    }
+    { 
+    \\\\\hline
+    \end{tabular} 
+    \end{center}
+    }
+    
+\newcommand{\SetList}[6] {
+    \begin{minipage}{\textwidth}
+    \noindent\underline{\textbf{#1\quad#2}} \newline
+    
+    #3 \newline
+    
+   \def\temp{#4}\ifx\temp\empty
+   \else
+        \begin{enumerate}
+        #4
+        \end{enumerate}
+        \vspace{3pt}
+   \fi
+   
+     \def\temp{#5}\ifx\temp\empty
+     \else
+        \textbf{\noindent Notes:} \begin{enumerate}
+        #5
+        \end{enumerate}
+        \vspace{3pt}
+     \fi
+     
+     \def\temp{#6}\ifx\temp\empty
+     \else
+        \noindent \textbf{Support:} #6
+     \fi
+     \vspace{5pt}
+     \end{minipage}
+}
+    
+\newcommand{\VenueSummary}[3] {
+    \setlength{\tabcolsep}{5pt}
+    \begin{center}\textbf{#1}\end{center}
+    \begin{center}#2\end{center}
+    \input{#3} \newline
+}
+
+\newcommand{\SupportSummary}[2] {
+    \setlength{\tabcolsep}{3pt}
+    \begin{center}\textbf{#1}\end{center}
+    \input{#2} \newline
+}
+
+\newcommand{\SongInstances}[2] {
+    \setlength{\tabcolsep}{0.5pt}
+    \begin{center}\textbf{#1}\end{center}
+    \input{#2} \newline
+}
+
+
+
+
+
+% ---------------------------------
+% Commands for title page
+% ---------------------------------
+
+% Horizontal rule
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}} 	
+
+% Title
+\makeatletter							
 \def\printtitle{%						
     {\centering \@title\par}}
 \makeatother									
 
-\makeatletter							% Author
-\def\printauthor{%					
+% Author
+\makeatletter							
+\def\printauthor{					
     {\centering \large \@author}}				
-\makeatother							
+\makeatother		
+		
+% ----------------
+% Title page 
+% ----------------		
 
-% --------------------------------------------------------------------
-% Metadata (Change this)
-% --------------------------------------------------------------------
-\title{	\normalsize \textsc{} 	% Subtitle
-		 	\\[2.0cm]								% 2cm spacing
-			\HRule{2pt} \\ [0.5cm]		% Lower rule + 0.5cm spacing
-			\Huge \textbf{\uppercase{UMPHBASE}}	% Title
-			\HRule{2pt} \\ [0.5cm]		% Lower rule + 0.5cm spacing
-			\large \today			% Todays date
-		}
+\title{	\normalsize \textsc{} 					% Subtitle
+        \\[2.0cm]								
+        \HRule{2pt} \\ [0.5cm]		
+	\Huge \textbf{\uppercase{UMPHBASE}}	% Title
+	\HRule{2pt} \\ [0.5cm]
+	\large \today						% Todays date
+}
 
 \author{
-		Henry W. Robbins\\	
-		Cornell University\\	
-		Operation Research and Information Engineering\\
+	Henry W. Robbins\\	
+	Cornell University\\	
+	Operation Research and Information Engineering\\
         \texttt{hwr26@cornell.edu} \\
 }
 
-
 \begin{document}
-% ------------------------------------------------------------------------------
+
 % Maketitle
-% ------------------------------------------------------------------------------
-\thispagestyle{empty}		% Remove page numbering on this page
-
-\printtitle					% Print the title data as defined above
-  	\vfill
-\printauthor				% Print the author data as defined above
+\thispagestyle{empty}		
+\printtitle					
+\vfill
+\printauthor				
 \newpage
-% ------------------------------------------------------------------------------
-% Begin document
-% ------------------------------------------------------------------------------
 
+% Table of contents
 \tableofcontents
-
 \newpage
 
 \chapter{Song Codes}
@@ -78,92 +162,48 @@
                 \mcnewpage
             \fi}
 \begin{footnotesize}
-\input{song_codes}
+%\input{song_codes}
 \end{footnotesize}
 \end{multicols*}
 
 \chapter{Setlists}
 
-\input{setlists}
+%\input{setlists}
 
 \chapter{State Counts}
 
 \begin{multicols*}{2}
- \let\mcnewpage=\newpage
-     \makeatletter
-     \renewcommand\newpage{
-           \if@firstcolumn
-                \hrule width \linewidth height0pt
-                \columnbreak
-            \else
-                \mcnewpage
-            \fi}
-\input{state_special_counts}
+\TrickSupertabularIntoMulticols
+%\input{state_special_counts}
 \end{multicols*}
 
 \chapter{Venues}
 
-\setlength{\tabcolsep}{10pt}
-\begin{multicols*}{2}
- \let\mcnewpage=\newpage
-     \makeatletter
-     \renewcommand\newpage{
-           \if@firstcolumn
-                \hrule width \linewidth height0pt
-                \columnbreak
-            \else
-                \mcnewpage
-            \fi}
-\input{venue}
+\begin{multicols*}{3}
+\TrickSupertabularIntoMulticols
+%\input{venue}
 \end{multicols*}
-\input{venue_sm}
+%\input{venue_sm}
 
 \chapter{Support}
 
-\begin{multicols*}{2}
- \let\mcnewpage=\newpage
-     \makeatletter
-     \renewcommand\newpage{
-           \if@firstcolumn
-                \hrule width \linewidth height0pt
-                \columnbreak
-            \else
-                \mcnewpage
-            \fi}
-\input{support}
+\begin{multicols*}{3}
+\TrickSupertabularIntoMulticols
+%\input{support}
 \end{multicols*}
 
 \chapter{umVIP}
 
-\begin{multicols*}{2}
- \let\mcnewpage=\newpage
-     \makeatletter
-     \renewcommand\newpage{
-           \if@firstcolumn
-                \hrule width \linewidth height0pt
-                \columnbreak
-            \else
-                \mcnewpage
-            \fi}
-\input{vip}
-\end{multicols*}
+%\input{vip}
 
 \chapter{Songs}
 
 \setlength{\columnseprule}{0.5pt}
 \setlength{\tabcolsep}{3pt}
 \begin{multicols*}{4}
- \let\mcnewpage=\newpage
-     \makeatletter
-     \renewcommand\newpage{
-           \if@firstcolumn
-                \hrule width \linewidth height0pt
-                \columnbreak
-            \else
-                \mcnewpage
-            \fi}
+\TrickSupertabularIntoMulticols
 \begin{footnotesize}
-\input{song_instances}
+%\input{song_instances}
 \end{footnotesize}
 \end{multicols*}
 
