@@ -95,9 +95,6 @@
 }
 
 
-
-
-
 % ---------------------------------
 % Commands for title page
 % ---------------------------------
@@ -152,17 +149,9 @@
 \chapter{Song Codes}
 
 \begin{multicols*}{4}
- \let\mcnewpage=\newpage
-     \makeatletter
-     \renewcommand\newpage{
-           \if@firstcolumn
-                \hrule width \linewidth height0pt
-                \columnbreak
-            \else
-                \mcnewpage
-            \fi}
+\TrickSupertabularIntoMulticols
 \begin{footnotesize}
-%\input{song_codes}
+\input{song_codes}
 \end{footnotesize}
 \end{multicols*}
 
@@ -174,27 +163,41 @@
 
 \begin{multicols*}{2}
 \TrickSupertabularIntoMulticols
-%\input{state_special_counts}
+\input{state_special_counts}
 \end{multicols*}
 
 \chapter{Venues}
 
 \begin{multicols*}{3}
 \TrickSupertabularIntoMulticols
-%\input{venue}
+\input{venue}
 \end{multicols*}
-%\input{venue_sm}
+\input{venue_sm}
 
 \chapter{Support}
 
 \begin{multicols*}{3}
 \TrickSupertabularIntoMulticols
-%\input{support}
+\input{support}
 \end{multicols*}
 
-\chapter{umVIP}
+\chapter{Hall of Fame}
 
-%\input{vip}
+\begin{multicols*}{5}
+\TrickSupertabularIntoMulticols
+\input{hof}
+\end{multicols*}
+
+\chapter{Jimmy Stewarts}
+
+\begin{multicols*}{5}
+\setlength{\tabcolsep}{1pt}
+\TrickSupertabularIntoMulticols
+\input{stewart}
+\begin{center}\textbf{Jimmy Stewart with Lyrics}\end{center}
+\input{stewart_with_lyrics}
+\end{multicols*}
+
 
 \chapter{Songs}
 
@@ -203,7 +206,7 @@
 \begin{multicols*}{4}
 \TrickSupertabularIntoMulticols
 \begin{footnotesize}
-%\input{song_instances}
+\input{song_instances}
 \end{footnotesize}
 \end{multicols*}
 

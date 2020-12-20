@@ -1,7 +1,8 @@
 \contentsline {chapter}{\numberline {1}Song Codes}{5}
-\contentsline {chapter}{\numberline {2}Setlists}{7}
-\contentsline {chapter}{\numberline {3}State Counts}{9}
-\contentsline {chapter}{\numberline {4}Venues}{11}
-\contentsline {chapter}{\numberline {5}Support}{13}
-\contentsline {chapter}{\numberline {6}umVIP}{15}
-\contentsline {chapter}{\numberline {7}Songs}{17}
+\contentsline {chapter}{\numberline {2}Setlists}{11}
+\contentsline {chapter}{\numberline {3}State Counts}{13}
+\contentsline {chapter}{\numberline {4}Venues}{15}
+\contentsline {chapter}{\numberline {5}Support}{39}
+\contentsline {chapter}{\numberline {6}Hall of Fame}{51}
+\contentsline {chapter}{\numberline {7}Jimmy Stewarts}{53}
+\contentsline {chapter}{\numberline {8}Songs}{63}
