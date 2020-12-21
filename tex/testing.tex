@@ -87,6 +87,14 @@
     \input{#2}
 }
 
+\newcommand{\Review}[4] {
+    \noindent\underline{\textbf{#1 - #3}} \newline
+    
+    #4 \newline
+    
+    \vspace{5pt}
+}
+
 % ---------------------------------
 % Commands for title page
 % ---------------------------------
@@ -149,6 +157,8 @@
 \end{footnotesize}
 \end{multicols*}
 
+%\iffalse
+
 \chapter{Setlists}
 
 \input{setlists}
@@ -210,6 +220,16 @@
 \TrickSupertabularIntoMulticols
 \noindent
 \input{support}
+\end{multicols*}
+
+%\fi
+
+\chapter{Reviews}
+
+\begin{multicols*}{2}
+\TrickSupertabularIntoMulticols
+\noindent
+\input{reviews}
 \end{multicols*}
 
 \end{document}
