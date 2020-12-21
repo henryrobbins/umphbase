@@ -1,7 +1,7 @@
 \documentclass[8pt]{book}
 \usepackage[margin=0.5in]{geometry}
 
-\usepackage{xcolor, supertabular, multicol} 
+\usepackage{array, xcolor, supertabular, multicol, longtable} 
 \usepackage{booktabs} % Used by to_latex pandas
 \usepackage{textcomp}
 \usepackage{xparse} % Use to check for optimal arguments
@@ -45,55 +45,47 @@
     \end{center}
     }
     
-\newcommand{\SetList}[6] {
+\newcommand{\SetList}[4] {
     \begin{minipage}{\textwidth}
     \noindent\underline{\textbf{#1\quad#2}} \newline
     
-    #3 \newline
+    \input{#3} \vspace{5pt}
+    #4
     
-   \def\temp{#4}\ifx\temp\empty
-   \else
-        \begin{enumerate}
-        #4
-        \end{enumerate}
-        \vspace{3pt}
-   \fi
-   
-     \def\temp{#5}\ifx\temp\empty
-     \else
-        \textbf{\noindent Notes:} \begin{enumerate}
-        #5
-        \end{enumerate}
-        \vspace{3pt}
-     \fi
-     
-     \def\temp{#6}\ifx\temp\empty
-     \else
-        \noindent \textbf{Support:} #6
-     \fi
-     \vspace{5pt}
-     \end{minipage}
+    \end{minipage}
 }
     
 \newcommand{\VenueSummary}[3] {
-    \setlength{\tabcolsep}{5pt}
+    \setlength{\tabcolsep}{0pt}
+    \begin{minipage}{\columnwidth}
     \begin{center}\textbf{#1}\end{center}
     \begin{center}#2\end{center}
     \input{#3} \newline
+    \end{minipage}
 }
 
 \newcommand{\SupportSummary}[2] {
-    \setlength{\tabcolsep}{3pt}
+    \setlength{\tabcolsep}{0pt}
+    \begin{minipage}{\columnwidth}
     \begin{center}\textbf{#1}\end{center}
     \input{#2} \newline
+    \end{minipage}
 }
 
 \newcommand{\SongInstances}[2] {
+    \setlength{\columnseprule}{0.5pt}
     \setlength{\tabcolsep}{0.5pt}
-    \begin{center}\textbf{#1}\end{center}
+    \begin{center}\small{\textbf{#1}}\end{center}
     \input{#2} \newline
 }
 
+\newcommand{\SongListByYear}[2] {
+   \setlength{\columnseprule}{0.5pt}
+    \setlength{\tabcolsep}{0pt}
+    \begin{center}\textbf{\large{#1}}\end{center}
+    
+    \input{#2}
+}
 
 % ---------------------------------
 % Commands for title page
@@ -146,6 +138,8 @@
 \tableofcontents
 \newpage
 
+\chapter{Introduction}
+
 \chapter{Song Codes}
 
 \begin{multicols*}{4}
@@ -157,10 +151,43 @@
 
 \chapter{Setlists}
 
-%\input{setlists}
+\input{setlists}
+
+\chapter{Songs Played}
+
+\input{songs_played}
+\newpage
+\setlength{\tabcolsep}{3.5pt}
+\input{ct_by_year}
+
+\chapter{Every Time Played}
+
+\begin{multicols*}{4}
+\TrickSupertabularIntoMulticols
+\begin{footnotesize}
+\input{song_instances}
+\end{footnotesize}
+\end{multicols*}
+
+\chapter{Hall of Fame}
+
+\begin{multicols*}{3}
+\TrickSupertabularIntoMulticols
+\input{hof}
+\end{multicols*}
+
+\chapter{Jimmy Stewarts}
+
+\begin{multicols*}{3}
+\TrickSupertabularIntoMulticols
+\input{stewart}
+\begin{center}\Large{\textbf{Jimmy Stewarts with Lyrics}}\end{center}
+\input{stewart_with_lyrics}
+\end{multicols*}
 
 \chapter{State Counts}
 
+\setlength{\tabcolsep}{5pt}
 \begin{multicols*}{2}
 \TrickSupertabularIntoMulticols
 \input{state_special_counts}
@@ -170,45 +197,19 @@
 
 \begin{multicols*}{3}
 \TrickSupertabularIntoMulticols
+\noindent
 \input{venue}
 \end{multicols*}
+\newpage
+\begin{Large}\noindent\textbf{Venues (Few Shows)}\end{Large}
 \input{venue_sm}
 
 \chapter{Support}
 
 \begin{multicols*}{3}
 \TrickSupertabularIntoMulticols
+\noindent
 \input{support}
 \end{multicols*}
-
-\chapter{Hall of Fame}
-
-\begin{multicols*}{5}
-\TrickSupertabularIntoMulticols
-\input{hof}
-\end{multicols*}
-
-\chapter{Jimmy Stewarts}
-
-\begin{multicols*}{5}
-\setlength{\tabcolsep}{1pt}
-\TrickSupertabularIntoMulticols
-\input{stewart}
-\begin{center}\textbf{Jimmy Stewart with Lyrics}\end{center}
-\input{stewart_with_lyrics}
-\end{multicols*}
-
-
-\chapter{Songs}
-
-\setlength{\columnseprule}{0.5pt}
-\setlength{\tabcolsep}{3pt}
-\begin{multicols*}{4}
-\TrickSupertabularIntoMulticols
-\begin{footnotesize}
-\input{song_instances}
-\end{footnotesize}
-\end{multicols*}
-
 
 \end{document}
