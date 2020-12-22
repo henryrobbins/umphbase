@@ -1,7 +1,7 @@
 \documentclass[8pt]{book}
 \usepackage[margin=0.5in]{geometry}
 
-\usepackage{array, xcolor, supertabular, multicol, longtable} 
+\usepackage{array, xcolor, supertabular, multicol, longtable, listings} 
 \usepackage{booktabs} % Used by to_latex pandas
 \usepackage{textcomp}
 \usepackage{xparse} % Use to check for optimal arguments
@@ -25,14 +25,16 @@
 \makeatletter
 \let\mcnewpage=\newpage
 \newcommand{\TrickSupertabularIntoMulticols}{
-\renewcommand\newpage{
+  \renewcommand\newpage{
     \if@firstcolumn
-        \hrule width\linewidth height0pt
-            \columnbreak
-        \else
-          \mcnewpage
-        \fi
-}}
+      \hrule width\linewidth height0pt
+      \columnbreak
+    \else
+      \mcnewpage
+    \fi
+  }
+}
+\makeatother
 
 \newenvironment{boxed}
     {\begin{center}
@@ -146,8 +148,14 @@
 \tableofcontents
 \newpage
 
+% ---------------------------------------
+% Introduction
+% ---------------------------------------
 \chapter{Introduction}
 
+% ---------------------------------------
+% Song Codes
+% ---------------------------------------
 \chapter{Song Codes}
 
 \begin{multicols*}{4}
@@ -157,12 +165,18 @@
 \end{footnotesize}
 \end{multicols*}
 
-%\iffalse
+\iffalse
 
+% ---------------------------------------
+% Setlists
+% ---------------------------------------
 \chapter{Setlists}
 
 \input{setlists}
 
+% ---------------------------------------
+% Songs Played
+% ---------------------------------------
 \chapter{Songs Played}
 
 \input{songs_played}
@@ -170,6 +184,9 @@
 \setlength{\tabcolsep}{3.5pt}
 \input{songs_played_by_year}
 
+% ---------------------------------------
+% Every Time Played
+% ---------------------------------------
 \chapter{Every Time Played}
 
 \begin{multicols*}{4}
@@ -179,6 +196,9 @@
 \end{footnotesize}
 \end{multicols*}
 
+% ---------------------------------------
+% Hall of Fame
+% ---------------------------------------
 \chapter{Hall of Fame}
 
 \begin{multicols*}{3}
@@ -186,6 +206,9 @@
 \input{hof}
 \end{multicols*}
 
+% ---------------------------------------
+% Jimmy Stewarts
+% ---------------------------------------
 \chapter{Jimmy Stewarts}
 
 \begin{multicols*}{3}
@@ -195,6 +218,9 @@
 \input{stewart_with_lyrics}
 \end{multicols*}
 
+% ---------------------------------------
+% State Counts
+% ---------------------------------------
 \chapter{State Counts}
 
 \setlength{\tabcolsep}{5pt}
@@ -203,6 +229,9 @@
 \input{location}
 \end{multicols*}
 
+% ---------------------------------------
+% Venues
+% ---------------------------------------
 \chapter{Venues}
 
 \begin{multicols*}{3}
@@ -214,6 +243,9 @@
 \begin{Large}\noindent\textbf{Venues (Few Shows)}\end{Large}
 \input{venues_sm}
 
+% ---------------------------------------
+% Support
+% ---------------------------------------
 \chapter{Support}
 
 \begin{multicols*}{3}
@@ -222,8 +254,9 @@
 \input{support}
 \end{multicols*}
 
-%\fi
-
+% ---------------------------------------
+% Reviews
+% ---------------------------------------
 \chapter{Reviews}
 
 \begin{multicols*}{2}
@@ -231,5 +264,7 @@
 \noindent
 \input{reviews}
 \end{multicols*}
+
+\fi
 
 \end{document}
