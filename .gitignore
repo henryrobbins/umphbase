@@ -143,3 +143,5 @@ cython_debug/
 *.synctex.gz
 *.toc
 
+# ATU Database
+atu_database/*
