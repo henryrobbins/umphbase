@@ -1,4 +1,5 @@
 import json
+import os
 import xmltodict
 import pandas as pd
 import subprocess
@@ -75,7 +76,9 @@ setlists_df
 # Write dataframes as CSV files
 # =============================
 
-path = 'atu_database'
+db_path = 'atu_database'
+if not os.path.exists(db_path):
+    os.mkdir(db_path)
 df_names = {
     'songs': songs_df,
     'shows': shows_df,
@@ -84,4 +87,4 @@ df_names = {
     'venues': venues_df
 }
 for name in df_names:
-    df_names[name].to_csv(path + '/%s.csv' % name)
+    df_names[name].to_csv(db_path + '/%s.csv' % name)
