@@ -15,10 +15,42 @@ to access the site's data. Read more about the transition
 based on a setlist engine called [Songfish](https://songfish.xyz/) by
 [Adam Scheinberg](https://adamscheinberg.com/).
 
-## Installation
+## Installation (v1.0.0)
 
-The commands below clone the repo and then pull the latest setlist data from
-the ATU database via the APU (v1).
+First, clone the repo and naviagate to the [directory](v1.0.0) containing files
+related to Umphbase v1.0.0.
+
+```
+git clone https://github.com/henryrobbins/umphbase.git
+cd umphbase/v1.0.0
+```
+
+The last web-scrape from the old version of ATU is located in
+[atu_pull_2020](v1.0.0/atu_pull_2020-12-21). Umphbase v1.0.0 is created with
+[LaTeX](https://www.latex-project.org/). The compilation of the book
+requires two steps: generating the `.tex` files and then compiling them.
+
+Generating the `.tex` files can be done by running the jupyter notebook
+[compile.ipynb](v1.0.0/compile.ipynb) or from the commandline:
+
+```
+pip install runipy
+runipy compile.ipynb
+```
+
+Lastly, use your favorite LaTeX compiler (like
+[Texmaker](https://www.xm1math.net/texmaker/)) to compile
+[umphbase-v1.0.0.tex](v1.0.0/umphbase-v1.0.0/umphbase-v1.0.0.tex).
+
+Generating the `.tex` files and compiling them takes about 10 minutes and
+30 seconds respectively on a MacBookPro 11.4.0 (16GB, 2.6GHz). For this reason,
+the [PDF](v1.0.0/umphbase-v1.0.0/umphbase-v1.0.0.pdf) is pre-compiled.
+
+## Installation (v2.0.0)
+
+Umphbase v2.0.0 is currently in the works. The commands below clone the repo
+and then pull the latest setlist data from the ATU database via the API (v1).
+The book compilation component of v2.0.0 is under development.
 
 ```
 git clone https://github.com/henryrobbins/umphbase.git
