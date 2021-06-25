@@ -147,5 +147,6 @@ cython_debug/
 atu_database
 
 # Umphbase compilations
-umphbase-v1.0.0
-!umphbase-v1.0.0/umphbase.tex
+umphbase-v1.0.0/*
+!umphbase-v1.0.0/umphbase-v1.0.0.tex
+!umphbase-v1.0.0/umphbase-v1.0.0.pdf
