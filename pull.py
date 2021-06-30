@@ -157,8 +157,8 @@ for i in tmp[tmp.show_id.duplicated('last')].index:
 shows_df = tmp.drop_duplicates().set_index('show_id')
 
 
-# Write dataframes as CSV files
-# =============================
+# Write dataframes as pickle files
+# ================================
 
 db_path = 'atu_database'
 if not os.path.exists(db_path):
@@ -170,4 +170,4 @@ df_names = {
     'venues': venues_df
 }
 for name in df_names:
-    df_names[name].to_csv(db_path + '/%s.csv' % name)
+    df_names[name].to_pickle(db_path + '/%s.pickle' % name)
