@@ -171,6 +171,7 @@ for i in tmp[tmp.show_id.duplicated('last')].index:
         if tmp.at[i+1, col] is None:
             tmp.at[i+1, col] = tmp.at[i, col]
 shows_df = tmp.drop_duplicates()
+shows_df = shows_df.where((pd.notnull(shows_df)), None)
 
 
 # Write dataframes as pickle files
