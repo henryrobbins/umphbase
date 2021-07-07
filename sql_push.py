@@ -23,20 +23,31 @@ def create_table(name, create, table, cursor):
         cursor.execute("DROP TABLE %s;" % name)
         cursor.execute(create)
 
-    cols = ', '.join(list(table.columns))
-    vals = ', '.join(map((lambda x: '%%(%s)s' % x), list(table.columns)))
-    insert = """INSERT INTO %s
-    (%s)
-    VALUES (%s)
-    """ % (name, cols, vals)
+    # Prepare data for SQL query
+    # fillna with NULL-VALUE to be replaced by NULL later
+    # ' must be replaced by '' in strings
+    table = table.fillna('NULL-VALUE')
+    fields = list(table.columns)
+    for field in fields:
+        table[field] = table[field].str.replace("'", "''")
 
-    for row in table.reset_index().iterrows():
-        data = row[1].to_dict()
-        try:
-            cursor.execute(insert, data)
-        except mysql.connector.Error as err:
-            print(data)
-            print(err)
+    # Build INSERT SQL query
+    fields = list(table.columns)
+    cols = ', '.join(fields)
+    val = ', '.join(map((lambda x: "'%%(%s)s'" % x), fields))
+    rows = list(table.reset_index().iterrows())
+    rows = list(map(lambda x: x[1].to_dict(), rows))
+    vals = ',\n\t'.join(map(lambda x: "(%s)" % (val % x), rows))
+    vals = vals.replace("'NULL-VALUE'", "NULL")
+    insert = ("INSERT INTO\n"
+              "\t%s(%s)\n"
+              "VALUES\n"
+              "\t%s;") % (name, cols, vals)
+
+    try:
+        cursor.execute(insert)
+    except mysql.connector.Error as err:
+        print(err)
 
 
 # connect to database
@@ -45,15 +56,17 @@ if len(sys.argv) > 1:
     with open('sql_logins/%s.json' % name) as f:
         data = json.load(f)
     host = data['host']
+    database = data['database']
     user = data['user']
     password = data['password']
 else:
     print("Connect to a SQL database.")
     host = input('Host: ').strip()
+    database = input('Database: ').strip()
     user = input('User: ').strip()
     password = input('Password: ').strip()
 cnx = mysql.connector.connect(host=host,
-                              database='umphbase',
+                              database=database,
                               user=user,
                               password=password)
 print("Connected to %s as %s." % (host, user))
