@@ -135,7 +135,6 @@ tmp = shows_df.merge(venues_df,
                      how='left')
 shows_df = tmp[['show_id', 'show_date', 'artist', 'venue_id',
                 'tour_name', 'show_order']]
-# shows_df.loc[:,('show_date')] = pd.to_datetime(shows_df['show_date'])
 
 # LIVE_SONGS Dataframe
 #
@@ -154,6 +153,7 @@ live_songs_df['transition'] = (live_songs_df['transition']
                                .replace(to_replace=' > ', value='>')
                                .replace(to_replace=', ', value=',')
                                .replace(to_replace='  ', value=np.nan))
+live_songs_df['show_notes'] = live_songs_df['show_notes'].str.strip('\r\n')
 extra_cols = (live_songs_df[['show_id', 'show_notes', 'opener', 'sound_check']]
               .drop_duplicates())
 keep = ['live_song_id', 'show_id', 'song_id', 'set_number', 'position',
@@ -172,6 +172,7 @@ for i in tmp[tmp.show_id.duplicated('last')].index:
             tmp.at[i+1, col] = tmp.at[i, col]
 shows_df = tmp.drop_duplicates()
 shows_df = shows_df.where((pd.notnull(shows_df)), None)
+assert len(shows_df['show_id'].unique()) == len(shows_df)
 
 
 # Write dataframes as pickle files
