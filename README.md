@@ -58,6 +58,50 @@ cd umphbase
 python pull.py
 ```
 
+## MySQL Database
+
+Pulling and cleaning the data from ATU can be a little time-consuming.
+Alternatively, you can pull the data from a MySQL database which is
+regularly updated. To access the database, you can use
+[MySQL Workbench](https://dev.mysql.com/downloads/workbench/). The connection
+parameters for the database are given below. Note that `user` has read-only
+access.
+
+```
+host: umphbase.c8pcawy2rbuj.us-east-2.rds.amazonaws.com
+database: umphbase
+user: user
+password: pass
+```
+
+Using [sql_push.py](sql_push.py), the pull from ATU can be pushed to a MySQL
+database. You can connect to the database in two different ways. The first
+option is to provide the connection parameters every time you run the script.
+
+```
+python sql_push.py
+Connect to a SQL database.
+Host: `host`
+Database: `database name`
+User: `user`
+Password: `password`
+```
+
+The second option is to create a `json` file (`login.json` in the example
+below) to store these parameters.
+
+```
+{
+    "host": `host`,
+    "database": `database name`,
+    "user": `user`,
+    "password": `password`
+}
+```
+```
+python sql_push.py login
+```
+
 ## License
 
 Licensed under the [GPL-3.0 License](https://choosealicense.com/licenses/gpl-3.0/)
