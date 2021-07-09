@@ -61,17 +61,18 @@ python pull.py
 ## MySQL Database
 
 Pulling and cleaning the data from ATU can be a little time-consuming.
-Alternatively, you can pull the data from a MySQL database which is
-regularly updated. To access the database, you can use
-[MySQL Workbench](https://dev.mysql.com/downloads/workbench/). The connection
-parameters for the database are given below. Note that `user` has read-only
-access.
+Alternatively, you can download a `.sql` file which is regularly updated.
+Instructions for downloading the `.sql` file and creating the MySQL database
+are given below.
 
 ```
-host: umphbase.c8pcawy2rbuj.us-east-2.rds.amazonaws.com
-database: umphbase
-user: user
-password: pass
+shell> curl https://umphbase.s3.us-east-2.amazonaws.com/umphbase.sql.gz --output umphbase.sql.gz
+shell> gzip -d umphbase.sql.gz
+shell> mysql -u [user] -p
+
+mysql> CREATE DATABASE umphbase
+mysql> USE umphbase
+mysql> SOURCE umphbase.sql
 ```
 
 Using [sql_push.py](sql_push.py), the pull from ATU can be pushed to a MySQL

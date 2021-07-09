@@ -153,3 +153,7 @@ v1.0.0/umphbase-v1.0.0/*
 
 # SQL logins
 sql_logins
+
+# Backup zip and output file
+backup/output.json
+backup/backup.zip
