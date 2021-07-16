@@ -1,9 +1,10 @@
 import json
+import sys
 import os
 import xmltodict
 import pandas as pd
 import numpy as np
-import subprocess
+import requests
 
 
 # TODO: Determine issue with direction parameter
@@ -33,8 +34,8 @@ def get_df(request: str,
     query = "order_by=%s&limit=%s" % (order_by, str(limit))
     base = "https://allthings.umphreys.com/api/v1/"
     url = base + "%s.%s?%s" % (request, form, query)
-    result = subprocess.run(['curl', url], stdout=subprocess.PIPE)
-    txt = result.stdout.decode()
+    txt = requests.get(url).text
+    print('Request: ' + "%s.%s?%s" % (request, form, query))
     if form == 'json':
         df_dict = json.loads(txt)['data']
     elif form == 'xml':
@@ -178,9 +179,9 @@ assert len(shows_df['show_id'].unique()) == len(shows_df)
 # Write dataframes as pickle files
 # ================================
 
-db_path = 'atu_database'
-if not os.path.exists(db_path):
-    os.mkdir(db_path)
+PATH = '/tmp/atu_database'
+if not os.path.exists(PATH):
+    os.makedirs(PATH)
 df_names = {
     'songs': songs_df,
     'shows': shows_df,
@@ -188,4 +189,4 @@ df_names = {
     'venues': venues_df
 }
 for name in df_names:
-    df_names[name].to_pickle(db_path + '/%s.pickle' % name)
+    df_names[name].to_pickle(PATH + '/%s.pickle' % name)

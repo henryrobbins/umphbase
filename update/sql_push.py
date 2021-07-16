@@ -1,7 +1,8 @@
 import sys
 import json
 import pandas as pd
-import mysql.connector
+import pymysql.cursors
+from pymysql.err import MySQLError
 
 
 # TODO: better handle case when the table exists
@@ -18,7 +19,7 @@ def create_table(name, create, table, cursor):
     """
     try:
         cursor.execute(create)
-    except mysql.connector.Error as err:
+    except MySQLError as err:
         print(err)
         cursor.execute("DROP TABLE %s;" % name)
         cursor.execute(create)
@@ -46,13 +47,25 @@ def create_table(name, create, table, cursor):
 
     try:
         cursor.execute(insert)
-    except mysql.connector.Error as err:
+    except MySQLError as err:
         print(err)
 
 
 # connect to database
-if len(sys.argv) > 1:
-    name = sys.argv[1]
+input_type = sys.argv[1]
+if input_type == "prompt":
+    print("Connect to a SQL database.")
+    host = input('Host: ').strip()
+    database = input('Database: ').strip()
+    user = input('User: ').strip()
+    password = input('Password: ').strip()
+elif input_type == "arguments":
+    host = sys.argv[2]
+    database = sys.argv[3]
+    user = sys.argv[4]
+    password = sys.argv[5]
+elif input_type == "json":
+    name = sys.argv[2]
     with open('sql_logins/%s.json' % name) as f:
         data = json.load(f)
     host = data['host']
@@ -60,23 +73,21 @@ if len(sys.argv) > 1:
     user = data['user']
     password = data['password']
 else:
-    print("Connect to a SQL database.")
-    host = input('Host: ').strip()
-    database = input('Database: ').strip()
-    user = input('User: ').strip()
-    password = input('Password: ').strip()
-cnx = mysql.connector.connect(host=host,
-                              database=database,
-                              user=user,
-                              password=password)
+    raise ValueError("Inalid input type.")
+cnx = pymysql.connect(host=host,
+                      database=database,
+                      user=user,
+                      password=password)
 print("Connected to %s as %s." % (host, user))
 cursor = cnx.cursor()
+
+PATH = '/tmp/atu_database'
 
 # =================================================
 # shows
 # =================================================
 
-shows = pd.read_pickle('atu_database/shows.pickle')
+shows = pd.read_pickle('%s/shows.pickle' % PATH)
 shows['show_date'] = shows['show_date'].astype(str)
 
 create_shows = """
@@ -99,7 +110,7 @@ create_table('shows', create_shows, shows, cursor)
 # songs
 # =================================================
 
-songs = pd.read_pickle('atu_database/songs.pickle')
+songs = pd.read_pickle('%s/songs.pickle' % PATH)
 
 create_songs = """
 CREATE TABLE songs (
@@ -117,7 +128,7 @@ create_table('songs', create_songs, songs, cursor)
 # venues
 # =================================================
 
-venues = pd.read_pickle('atu_database/venues.pickle')
+venues = pd.read_pickle('%s/venues.pickle' % PATH)
 
 create_venues = """
 CREATE TABLE venues (
@@ -135,7 +146,7 @@ create_table('venues', create_venues, venues, cursor)
 # live_songs
 # =================================================
 
-live_songs = pd.read_pickle('atu_database/live_songs.pickle')
+live_songs = pd.read_pickle('%s/live_songs.pickle' % PATH)
 
 create_live_songs = """
 CREATE TABLE live_songs (
