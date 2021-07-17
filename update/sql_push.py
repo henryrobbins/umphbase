@@ -172,6 +172,6 @@ def main(path, input_type, arg1=None, arg2=None, arg3=None, arg4=None):
 
 if __name__ == "__main__":
     args = {i: None for i in range(6)}
-    for i in range(1, len(sys.argv)):
-        args[i] = sys.argv[i]
+    for i in range(0, len(sys.argv) - 1):
+        args[i] = sys.argv[i + 1]
     main(args[0], args[1], args[2], args[3], args[4], args[5])
