@@ -15,16 +15,16 @@ A [Makefile](Makefile) is provided with targets for building and deploying the
 the Lambda function. To build and deploy, run the following commands:
 
 ```
-make zip
-make update
+make lambda
+make deploy
 ```
 
 The table below provides descriptions of all available targets.
 
 | Target        | Description                                               |
 | ------------- | --------------------------------------------------------- |
-| zip           | Create a zip directory with lambda function source code   |
-| update        | Deploy lambda function                                    |
+| lambda        | Create a zip directory with lambda function source code   |
+| deploy        | Deploy lambda function                                    |
 | invoke        | Invoke the lambda function                                |
 
 
