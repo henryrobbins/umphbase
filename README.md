@@ -55,7 +55,7 @@ The book compilation component of v2.0.0 is under development.
 ```
 git clone https://github.com/henryrobbins/umphbase.git
 cd umphbase
-python pull.py
+python update/pull.py atu_database
 ```
 
 ## MySQL Database
@@ -75,12 +75,13 @@ mysql> USE umphbase
 mysql> SOURCE umphbase.sql
 ```
 
-Using [sql_push.py](sql_push.py), the pull from ATU can be pushed to a MySQL
-database. You can connect to the database in two different ways. The first
-option is to provide the connection parameters every time you run the script.
+Using [sql_push.py](update/sql_push.py), the pull from ATU can be pushed to a
+MySQL database. You can connect to the database in two different ways. The
+first option is to provide the connection parameters every time you run the
+script.
 
 ```
-python sql_push.py
+python update/sql_push.py atu_database prompt
 Connect to a SQL database.
 Host: `host`
 Database: `database name`
@@ -100,8 +101,19 @@ below) to store these parameters.
 }
 ```
 ```
-python sql_push.py login
+python update/sql_push.py atu_database json login.json
 ```
+
+## AWS Lambda
+
+The endpoint for the `.sql` file is kept up to data using [AWS
+Lambda](https://aws.amazon.com/lambda/). There are two Lambda functions:
+UpdateUmphbase and BackupUmphbase defined in the directories [update](update)
+and [backup](backup) respectively. UpdateUmphbase pulls the latest ATU data and
+updates an [RDS Database](https://aws.amazon.com/rds/). BackupUmphbase creates
+a snapshot of the database and uploads it to [S3](https://aws.amazon.com/s3/)
+where it is made publicly available via an endpoint. Details on each lambda
+function can be found in the associated READMEs.
 
 ## License
 
