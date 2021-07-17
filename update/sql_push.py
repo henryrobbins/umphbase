@@ -51,121 +51,127 @@ def create_table(name, create, table, cursor):
         print(err)
 
 
-# connect to database
-input_type = sys.argv[1]
-if input_type == "prompt":
-    print("Connect to a SQL database.")
-    host = input('Host: ').strip()
-    database = input('Database: ').strip()
-    user = input('User: ').strip()
-    password = input('Password: ').strip()
-elif input_type == "arguments":
-    host = sys.argv[2]
-    database = sys.argv[3]
-    user = sys.argv[4]
-    password = sys.argv[5]
-elif input_type == "json":
-    name = sys.argv[2]
-    with open('sql_logins/%s.json' % name) as f:
-        data = json.load(f)
-    host = data['host']
-    database = data['database']
-    user = data['user']
-    password = data['password']
-else:
-    raise ValueError("Inalid input type.")
-cnx = pymysql.connect(host=host,
-                      database=database,
-                      user=user,
-                      password=password)
-print("Connected to %s as %s." % (host, user))
-cursor = cnx.cursor()
+def main(path, input_type, arg1=None, arg2=None, arg3=None, arg4=None):
+    """Push the tables at the path into a SQL database."""
+    # connect to database
+    if input_type == "prompt":
+        print("Connect to a SQL database.")
+        host = input('Host: ').strip()
+        database = input('Database: ').strip()
+        user = input('User: ').strip()
+        password = input('Password: ').strip()
+    elif input_type == "arguments":
+        host = arg1
+        database = arg2
+        user = arg3
+        password = arg4
+    elif input_type == "json":
+        name = arg1
+        with open('sql_logins/%s.json' % name) as f:
+            data = json.load(f)
+        host = data['host']
+        database = data['database']
+        user = data['user']
+        password = data['password']
+    else:
+        raise ValueError("Inalid input type.")
+    cnx = pymysql.connect(host=host,
+                          database=database,
+                          user=user,
+                          password=password)
+    print("Connected to %s as %s." % (host, user))
+    cursor = cnx.cursor()
 
-PATH = '/tmp/atu_database'
+    # =================================================
+    # shows
+    # =================================================
 
-# =================================================
-# shows
-# =================================================
+    shows = pd.read_pickle('%s/shows.pickle' % path)
+    shows['show_date'] = shows['show_date'].astype(str)
 
-shows = pd.read_pickle('%s/shows.pickle' % PATH)
-shows['show_date'] = shows['show_date'].astype(str)
+    create_shows = """
+    CREATE TABLE shows (
+        show_id BIGINT PRIMARY KEY,
+        show_date DATE NOT NULL,
+        show_order TEXT NOT NULL,
+        artist TEXT NOT NULL,
+        venue_id TEXT NOT NULL,
+        tour_name TEXT NOT NULL,
+        show_notes LONGTEXT,
+        opener TEXT,
+        sound_check LONGTEXT
+    );
+    """
 
-create_shows = """
-CREATE TABLE shows (
-    show_id BIGINT PRIMARY KEY,
-    show_date DATE NOT NULL,
-    show_order TEXT NOT NULL,
-    artist TEXT NOT NULL,
-    venue_id TEXT NOT NULL,
-    tour_name TEXT NOT NULL,
-    show_notes LONGTEXT,
-    opener TEXT,
-    sound_check LONGTEXT
-);
-"""
+    create_table('shows', create_shows, shows, cursor)
 
-create_table('shows', create_shows, shows, cursor)
+    # =================================================
+    # songs
+    # =================================================
 
-# =================================================
-# songs
-# =================================================
+    songs = pd.read_pickle('%s/songs.pickle' % path)
 
-songs = pd.read_pickle('%s/songs.pickle' % PATH)
+    create_songs = """
+    CREATE TABLE songs (
+        song_id INT PRIMARY KEY,
+        name TEXT NOT NULL,
+        slug TEXT NOT NULL,
+        original_artist TEXT NOT NULL,
+        original BOOLEAN NOT NULL
+    );
+    """
 
-create_songs = """
-CREATE TABLE songs (
-    song_id INT PRIMARY KEY,
-    name TEXT NOT NULL,
-    slug TEXT NOT NULL,
-    original_artist TEXT NOT NULL,
-    original BOOLEAN NOT NULL
-);
-"""
+    create_table('songs', create_songs, songs, cursor)
 
-create_table('songs', create_songs, songs, cursor)
+    # =================================================
+    # venues
+    # =================================================
 
-# =================================================
-# venues
-# =================================================
+    venues = pd.read_pickle('%s/venues.pickle' % path)
 
-venues = pd.read_pickle('%s/venues.pickle' % PATH)
+    create_venues = """
+    CREATE TABLE venues (
+        venue_id TEXT NOT NULL,
+        venue_name TEXT NOT NULL,
+        city TEXT NOT NULL,
+        state TEXT,
+        country TEXT NOT NULL
+    );
+    """
 
-create_venues = """
-CREATE TABLE venues (
-    venue_id TEXT NOT NULL,
-    venue_name TEXT NOT NULL,
-    city TEXT NOT NULL,
-    state TEXT,
-    country TEXT NOT NULL
-);
-"""
+    create_table('venues', create_venues, venues, cursor)
 
-create_table('venues', create_venues, venues, cursor)
+    # =================================================
+    # live_songs
+    # =================================================
 
-# =================================================
-# live_songs
-# =================================================
+    live_songs = pd.read_pickle('%s/live_songs.pickle' % path)
 
-live_songs = pd.read_pickle('%s/live_songs.pickle' % PATH)
+    create_live_songs = """
+    CREATE TABLE live_songs (
+        live_song_id BIGINT PRIMARY KEY,
+        show_id BIGINT NOT NULL,
+        song_id INT NOT NULL,
+        set_number TEXT NOT NULL,
+        position INT NOT NULL,
+        transition TEXT,
+        footnote TEXT,
+        jamchart BOOLEAN NOT NULL,
+        jamchart_notes TEXT
+    );
+    """
 
-create_live_songs = """
-CREATE TABLE live_songs (
-    live_song_id BIGINT PRIMARY KEY,
-    show_id BIGINT NOT NULL,
-    song_id INT NOT NULL,
-    set_number TEXT NOT NULL,
-    position INT NOT NULL,
-    transition TEXT,
-    footnote TEXT,
-    jamchart BOOLEAN NOT NULL,
-    jamchart_notes TEXT
-);
-"""
+    create_table('live_songs', create_live_songs, live_songs, cursor)
 
-create_table('live_songs', create_live_songs, live_songs, cursor)
+    # commit changes and close connection
+    cursor.close()
+    cnx.commit()
+    cnx.close()
+    print("Updated.")
 
-# commit changes and close connection
-cursor.close()
-cnx.commit()
-cnx.close()
-print("Updated.")
+
+if __name__ == "__main__":
+    args = {i: None for i in range(6)}
+    for i in range(1, len(sys.argv)):
+        args[i] = sys.argv[i]
+    main(args[0], args[1], args[2], args[3], args[4], args[5])

@@ -1,8 +1,8 @@
 import os
 import boto3
 import json
-import subprocess
-from botocore.client import Config
+import pull
+import sql_push
 
 
 def update_database(event, context):
@@ -30,31 +30,9 @@ def update_database(event, context):
     username = secret_dict.get('username')
     password = secret_dict.get('password')
 
-    # # By default, S3 resolves buckets using the internet.  To use the VPC
-    # # endpoint instead, use the 'path' addressing style config.
-    # # Source: https://stackoverflow.com/a/44478894
-    # s3 = boto3.client(service_name='s3')
-    # s3.download_file(Bucket='lambda-function-python-packages',
-    #                  Key='UpdateUmphbase.zip',
-    #                  Filename='/tmp/package.zip')
-
-    # To execute the bash script on AWS Lambda, change its permissions and move
-    # it into the /tmp/ directory.
-    # Source: https://stackoverflow.com/a/48196444
-    def make_available(file):
-        subprocess.check_call(["cp ./%s /tmp/%s" % (file, file)], shell=True)
-        subprocess.check_call(["chmod 755 /tmp/%s" % (file)], shell=True)
-
-    make_available("update.sh")
-    make_available("pull.py")
-    make_available("sql_push.py")
-
-    # TODO: Why do we need this? We might not...
-    subprocess.check_call(["cp ./update.sh /tmp/update.sh"], shell=True)
-    subprocess.check_call(["chmod 755 /tmp/update.sh"], shell=True)
-
-    # TODO: Figure out how to abstract this to here.
-    # path = '/tmp/atu_database'
-    subprocess.check_call(["/tmp/update.sh", host, username, password])
+    # Pull from ATU and push to RDS SQL database
+    path = '/tmp/atu_database'
+    pull.main(path)
+    sql_push.main(path, 'arguments', host, 'umphbase', username, password)
 
     return True

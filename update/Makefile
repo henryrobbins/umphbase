@@ -1,4 +1,7 @@
-PKG_DIR=packages
+# Makefile variables
+FUNC_NAME=UpdateUmphbase
+PKG_NAME=umphbase-packages
+PKG_DIR=$(PKG_NAME)/python/lib/python3.8/site-packages
 NUMPY=numpy-1.21.0-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl
 PANDAS=pandas-1.3.0-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl
 
@@ -18,46 +21,46 @@ pandas:
 	--output $(PKG_DIR)/$(PANDAS)
 	cd $(PKG_DIR) && unzip $(PANDAS)
 
-# TODO: Make work with layer
-# pip install -t common-lib/python -r requirements.txt
-# cd common-lib/python && rm -r *.dist-info __pycache__
-# cd common-lib && zip -r ../common-lib.zip .
-
-# Create a zip directory with lambda layer source code.
-# https://medium.com/@avijitsarkar123/
-# how-lambda-layer-reduced-my-deployment-package-size-b571ebff79f1
-dependencies:
-	rm -rf packages
+# Create a zip directory with lambda layer source code
+layer:
+	rm -rf $(PKG_NAME)
 	mkdir -p $(PKG_DIR)
 	make numpy
 	make pandas
-	cd $(PKG_DIR) && pip install -t . pytz
-	cd $(PKG_DIR) && pip install -t . pymysql
-	cd $(PKG_DIR) && pip install -t . requests
-	cd $(PKG_DIR) && pip install -t . xmltodict
+	pip install -t $(PKG_DIR) pytz
+	pip install -t $(PKG_DIR) pymysql
+	pip install -t $(PKG_DIR) requests
+	pip install -t $(PKG_DIR) xmltodict
 	cd $(PKG_DIR) && rm -r *.whl *.dist-info __pycache__
+	cd $(PKG_NAME) && zip -r $(PKG_NAME).zip python
 
-# Create a zip directory with lambda function source code.
+# Create a zip directory with lambda function source code
 lambda:
 	rm -rf update.zip
 	zip update.zip update.py
 	zip update.zip pull.py
 	zip update.zip sql_push.py
-	zip update.zip update.sh
-	cd $(PKG_DIR) && zip -r ../update.zip .
 
-# Update the lambda function source code.
-update_lambda:
-	aws lambda update-function-code --function-name UpdateUmphbase \
+# Create zip directories for both lambda function and layer
+all: layer lambda
+
+# Deploy lambda function
+deploy-lambda:
+	aws lambda update-function-code --function-name $(FUNC_NAME) \
 	--zip-file fileb://update.zip
 
-# TODO: Make work with layer
-# Update the layer source code.
-update_layer:
-	aws lambda publish-layer-version --layer-name common-lib \
-	--zip-file fileb://common-lib.zip --compatible-runtimes python3.8
+# Deploy lambda layer and update lambda function layers
+deploy-layer:
+	aws lambda publish-layer-version --layer-name $(PKG_NAME) \
+	--zip-file fileb://$(PKG_NAME)/$(PKG_NAME).zip \
+	--compatible-runtimes python3.8 | jq '.LayerVersionArn' | \
+	xargs -I {}  aws lambda update-function-configuration \
+	--function-name $(FUNC_NAME) --layers {}
 
-# Invoke the lambda function.
+# Deploy both the lambda function and layer
+deploy: deploy-lambda deploy-layer
+
+# Invoke the lambda function
 invoke:
-	aws lambda invoke --function-name UpdateUmphbase output.json \
+	aws lambda invoke --function-name $(FUNC_NAME) output.json \
 	--cli-connect-timeout 6000 --cli-read-timeout 6000

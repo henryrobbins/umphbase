@@ -161,4 +161,4 @@ backup/backup.zip
 # UpdateUmphbase lambda function zip and output file
 update/output.json
 update/update.zip
-update/packages
+update/umphbase-packages
