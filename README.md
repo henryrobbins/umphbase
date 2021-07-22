@@ -55,7 +55,7 @@ The book compilation component of v2.0.0 is under development.
 ```
 git clone https://github.com/henryrobbins/umphbase.git
 cd umphbase
-python update/pull.py atu_database
+python aws/update/pull.py atu_database
 ```
 
 ## MySQL Database
@@ -66,7 +66,7 @@ Instructions for downloading the `.sql` file and creating the MySQL database
 are given below.
 
 ```
-shell> curl https://umphbase.s3.us-east-2.amazonaws.com/umphbase.sql.gz --output umphbase.sql.gz
+shell> curl https://umphbase-bucket.s3.us-east-2.amazonaws.com/umphbase.sql.gz --output umphbase.sql.gz
 shell> gzip -d umphbase.sql.gz
 shell> mysql -u [user] -p
 
@@ -75,13 +75,13 @@ mysql> USE umphbase
 mysql> SOURCE umphbase.sql
 ```
 
-Using [sql_push.py](update/sql_push.py), the pull from ATU can be pushed to a
-MySQL database. You can connect to the database in two different ways. The
+Using [sql_push.py](aws/update/sql_push.py), the pull from ATU can be pushed to
+a MySQL database. You can connect to the database in two different ways. The
 first option is to provide the connection parameters every time you run the
 script.
 
 ```
-python update/sql_push.py atu_database prompt
+python aws/update/sql_push.py atu_database prompt
 Connect to a SQL database.
 Host: `host`
 Database: `database name`
@@ -101,19 +101,12 @@ below) to store these parameters.
 }
 ```
 ```
-python update/sql_push.py atu_database json login.json
+python aws/update/sql_push.py atu_database json login.json
 ```
 
-## AWS Lambda
-
-The endpoint for the `.sql` file is kept up to data using [AWS
-Lambda](https://aws.amazon.com/lambda/). There are two Lambda functions:
-UpdateUmphbase and BackupUmphbase defined in the directories [update](update)
-and [backup](backup) respectively. UpdateUmphbase pulls the latest ATU data and
-updates an [RDS Database](https://aws.amazon.com/rds/). BackupUmphbase creates
-a snapshot of the database and uploads it to [S3](https://aws.amazon.com/s3/)
-where it is made publicly available via an endpoint. Details on each lambda
-function can be found in the associated READMEs.
+This functionality is made possible using Amazon Web Services (AWS). To learn
+more about how AWS is used and get instructions on hosting your own endpoint,
+see the [README](aws/README.md) in the [aws](aws) directory.
 
 ## License
 

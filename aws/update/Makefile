@@ -1,6 +1,7 @@
-# Makefile variables
-FUNC_NAME=UpdateUmphbase
-PKG_NAME=umphbase-packages
+# Note: Database names must be globally unique
+UPDATE_BUCKET=umphbase-update-source
+FUNC_NAME=Update
+PKG_NAME=layer
 PKG_DIR=$(PKG_NAME)/python/lib/python3.8/site-packages
 NUMPY=numpy-1.21.0-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl
 PANDAS=pandas-1.3.0-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl
@@ -44,10 +45,10 @@ lambda:
 # Create zip directories for both lambda function and layer
 all: layer lambda
 
-# Deploy lambda function
+# Update the lambda function source code.
 deploy-lambda:
-	aws lambda update-function-code --function-name $(FUNC_NAME) \
-	--zip-file fileb://update.zip
+	aws s3api put-object --bucket $(UPDATE_BUCKET) --key update.zip \
+	--body update.zip
 
 # Deploy lambda layer and update lambda function layers
 deploy-layer:
@@ -60,6 +61,7 @@ deploy-layer:
 # Deploy both the lambda function and layer
 deploy: deploy-lambda deploy-layer
 
+# TODO: this will not work because incorrect function name
 # Invoke the lambda function
 invoke:
 	aws lambda invoke --function-name $(FUNC_NAME) output.json \

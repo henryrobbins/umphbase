@@ -154,14 +154,7 @@ v1.0.0/umphbase-v1.0.0/*
 # SQL logins
 sql_logins
 
-# BackupUmphbase lambda function zip and output file
-backup/output.json
-backup/backup.zip
-
-# UpdateUmphbase lambda function zip and output file
-update/output.json
-update/update.zip
-update/umphbase-packages
-
-# Compiled configs with AWS ID substitution
-aws/configs
+# Files that can be compiled
+*output.json
+*.zip
+aws/update/layer

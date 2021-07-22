@@ -28,10 +28,11 @@ def create_backup(event, context):
 
     # Get the DB_HOST environment variable from the lambda function
     host = os.environ['DB_HOST']
+    bucket = os.environ['BUCKET']
 
     # Use Secrets Manager to get RDS username and password
     secretsmanager = boto3.client('secretsmanager', 'us-east-2')
-    response = secretsmanager.get_secret_value(SecretId='umphbase/rds-secret')
+    response = secretsmanager.get_secret_value(SecretId='umphbase-secret')
     secret_string = response.get("SecretString")
     secret_dict = json.loads(secret_string)
     username = secret_dict.get('username')
@@ -59,7 +60,7 @@ def create_backup(event, context):
     # Make sure to give READ permission to everyone with every upload.
     public_uri = "http://acs.amazonaws.com/groups/global/AllUsers"
     s3.meta.client.upload_file(Filename='/tmp/umphbase.sql.gz',
-                               Bucket='umphbase',
+                               Bucket=bucket,
                                Key='umphbase.sql.gz',
                                ExtraArgs={'GrantRead': 'uri=%s' % public_uri})
 

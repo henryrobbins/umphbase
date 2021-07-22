@@ -1,0 +1,163 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: >
+  This stack manages the necessary resources required for storing Umphrey's
+  McGee setlist data in a database, updating the database, and creating a
+  snapshot of the database to be made available at a public endpoint. An RDS
+  DBInstance functions as the database. AWS Secrets Manager is used to store
+  the datbase login information. Two lambda functions are responsible
+  for the tasks of updating and backing up the database respectively. The
+  backup is pushed to an S3 Bucket which serves as a public endpoint. Lastly,
+  one of the two lambda functions has multiple dependencies requiring a Layer.
+Parameters:
+  BucketName:
+    Description: >
+      Name of S3 bucket (to be created) where database backup is stored
+    Type: String
+    Default: umphbase-bucket
+  LayerBucketName:
+    Description: Name of S3 bucket where layer is stored
+    Type: String
+    Default: umphbase-layer-bucket
+  UpdateBucketName:
+    Description: Name of S3 bucket where the Update source code is stored
+    Type: String
+    Default: umphbase-update-source
+  BackupBucketName:
+    Description: Name of S3 bucket where the Backup source code is stored
+    Type: String
+    Default: umphbase-backup-source
+  DBUsername:
+    Description: Username for MySQL database access
+    Type: String
+    Default: root
+    AllowedPattern: '[a-zA-Z0-9]*'
+    ConstraintDescription: Must contain only alphanumeric characters
+  DBPassword:
+    Description: Password for MySQL database access
+    Type: String
+    AllowedPattern: '[a-zA-Z0-9]*'
+    ConstraintDescription: Must contain only alphanumeric characters
+Resources:
+  RootRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: "/"
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                - logs:CreateLogGroup
+                - logs:CreateLogStream
+                - logs:PutLogEvents
+                - secretsmanager:Describe*
+                - secretsmanager:Get*
+                - secretsmanager:List*
+                - ec2:CreateNetworkInterface
+                - ec2:DescribeNetworkInterfaces
+                - ec2:DetachNetworkInterface
+                - ec2:DeleteNetworkInterface
+                - rds:*
+                - s3:*
+                Resource: "*"
+  Secret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: umphbase-secret
+      Description: Access to MySQL database for umphbase
+      SecretString: !Sub
+        - >
+          {
+            "username": "${Username}",
+            "password": "${Password}",
+            "engine": "mysql",
+            "host": "${Host}",
+            "port": 3306,
+            "dbname": "umphbase",
+            "dbInstanceIdentifier": "umphbase"
+          }
+        - Username: !Ref DBUsername
+          Password: !Ref DBPassword
+          Host: !GetAtt Umphbase.Endpoint.Address
+  Umphbase:
+    Type: 'AWS::RDS::DBInstance'
+    Properties:
+      DBInstanceIdentifier: umphbase
+      DBName: umphbase
+      DBInstanceClass: db.t2.micro
+      AllocatedStorage: 20
+      Engine: MySQL
+      EngineVersion: 8.0.23
+      MasterUsername: !Ref DBUsername
+      MasterUserPassword: !Ref DBPassword
+    DeletionPolicy: Snapshot
+  Bucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Ref BucketName
+  Layer:
+    Type: 'AWS::Lambda::LayerVersion'
+    Properties:
+      CompatibleRuntimes:
+        - python3.8
+      Content:
+        S3Bucket: !Ref LayerBucketName
+        S3Key: layer.zip
+      Description: Provides necessary dependencies for Update
+      LayerName: umphbase-layer
+  Backup:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: backup.create_backup
+      Runtime: python3.8
+      CodeUri:
+        Bucket: !Ref BackupBucketName
+        Key: backup.zip
+      Description: Backup the umphbase database to an S3 Bucket
+      MemorySize: 128
+      Timeout: 12
+      Role: !GetAtt RootRole.Arn
+      # TODO: Have this run after Update as opposed to on schedule
+      Events:
+        Schedule1:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 day)
+      Environment:
+        Variables:
+          DB_HOST: !GetAtt Umphbase.Endpoint.Address
+          BUCKET: !Ref Bucket
+  Update:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: update.update_database
+      Runtime: python3.8
+      CodeUri:
+        Bucket: !Ref UpdateBucketName
+        Key: update.zip
+      Description: Update the umphbase database using ATU data
+      MemorySize: 512
+      Timeout: 600
+      Role: !GetAtt RootRole.Arn
+      Events:
+        Schedule1:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 day)
+      Environment:
+        Variables:
+          DB_HOST: !GetAtt Umphbase.Endpoint.Address
+      Layers:
+        - !Ref Layer

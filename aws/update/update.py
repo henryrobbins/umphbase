@@ -24,7 +24,7 @@ def update_database(event, context):
 
     # Use Secrets Manager to get RDS username and password
     secretsmanager = boto3.client('secretsmanager', 'us-east-2')
-    response = secretsmanager.get_secret_value(SecretId='umphbase/rds-secret')
+    response = secretsmanager.get_secret_value(SecretId='umphbase-secret')
     secret_string = response.get("SecretString")
     secret_dict = json.loads(secret_string)
     username = secret_dict.get('username')
