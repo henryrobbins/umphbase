@@ -1,5 +1,6 @@
-# Note: Database names must be globally unique
-UPDATE_BUCKET=umphbase-update-source
+# Set Make variables from .env file
+include ../.env
+export
 
 # Create a zip directory with lambda function source code
 zip:

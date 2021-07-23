@@ -1,12 +1,6 @@
-# TODO: just define these in one place
-# Note: Database names must be globally unique
-UMPHBASE_BUCKET=umphbase-bucket
-BACKUP_BUCKET=umphbase-backup-source
-UPDATE_BUCKET=umphbase-update-source
-LAYER_BUCKET=umphbase-layer-bucket
-DB_USERNAME?=root
-DB_PASSWORD?=password
-REGION=us-east-2
+# Set Make variables from .env file
+include .env
+export
 
 # Create the S3 bucket for the BackupUmphbase source code
 backup-bucket:

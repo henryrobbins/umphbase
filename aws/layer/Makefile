@@ -1,5 +1,6 @@
-# Note: Database names must be globally unique
-LAYER_BUCKET=umphbase-layer-bucket
+# Set Make variables from .env file
+include ../.env
+export
 
 PKG_NAME=layer
 PKG_DIR=$(PKG_NAME)/python/lib/python3.8/site-packages
