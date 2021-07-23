@@ -1,10 +1,12 @@
 # TODO: just define these in one place
 # Note: Database names must be globally unique
+UMPHBASE_BUCKET=umphbase-bucket
 BACKUP_BUCKET=umphbase-backup-source
 UPDATE_BUCKET=umphbase-update-source
 LAYER_BUCKET=umphbase-layer-bucket
-REGION=us-east-2
+DB_USERNAME?=root
 DB_PASSWORD?=password
+REGION=us-east-2
 
 # Create the S3 bucket for the BackupUmphbase source code
 backup-bucket:
@@ -28,11 +30,16 @@ layer-bucket:
 # Create all S3 buckets
 buckets: backup-bucket update-bucket layer-bucket
 
-# TODO: Declare all parameters
 # Create CloudFormation
 cloudformation:
 	aws cloudformation create-stack \
 	--stack-name Umphbase \
 	--template-body file://template.yaml \
-	--parameters ParameterKey=DBPassword,ParameterValue=$(DB_PASSWORD) \
+	--parameters \
+	ParameterKey=BucketName,ParameterValue=$(UMPHBASE_BUCKET) \
+	ParameterKey=LayerBucketName,ParameterValue=$(LAYER_BUCKET) \
+	ParameterKey=UpdateBucketName,ParameterValue=$(UPDATE_BUCKET) \
+	ParameterKey=BackupBucketName,ParameterValue=$(BACKUP_BUCKET) \
+	ParameterKey=DBUsername,ParameterValue=$(DB_USERNAME) \
+	ParameterKey=DBPassword,ParameterValue=$(DB_PASSWORD) \
 	--capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_NAMED_IAM CAPABILITY_IAM
