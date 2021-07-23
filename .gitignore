@@ -157,4 +157,4 @@ sql_logins
 # Files that can be compiled
 *output.json
 *.zip
-aws/update/layer
+aws/layer/layer

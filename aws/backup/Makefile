@@ -2,7 +2,7 @@
 BACKUP_BUCKET=umphbase-backup-source
 
 # Create a zip directory with lambda function source code.
-lambda:
+zip:
 	rm -rf backup.zip
 	zip backup.zip backup.py
 	zip backup.zip backup.sh
