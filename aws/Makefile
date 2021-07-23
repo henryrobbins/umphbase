@@ -30,9 +30,23 @@ layer-bucket:
 # Create all S3 buckets
 buckets: backup-bucket update-bucket layer-bucket
 
-# Create CloudFormation
+# Create CloudFormation stack
 cloudformation:
 	aws cloudformation create-stack \
+	--stack-name Umphbase \
+	--template-body file://template.yaml \
+	--parameters \
+	ParameterKey=BucketName,ParameterValue=$(UMPHBASE_BUCKET) \
+	ParameterKey=LayerBucketName,ParameterValue=$(LAYER_BUCKET) \
+	ParameterKey=UpdateBucketName,ParameterValue=$(UPDATE_BUCKET) \
+	ParameterKey=BackupBucketName,ParameterValue=$(BACKUP_BUCKET) \
+	ParameterKey=DBUsername,ParameterValue=$(DB_USERNAME) \
+	ParameterKey=DBPassword,ParameterValue=$(DB_PASSWORD) \
+	--capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_NAMED_IAM CAPABILITY_IAM
+
+# Update CloudFormation stack
+update-stack:
+	aws cloudformation update-stack \
 	--stack-name Umphbase \
 	--template-body file://template.yaml \
 	--parameters \
