@@ -13,7 +13,11 @@ deploy:
 	aws s3api put-object --bucket $(BACKUP_BUCKET) --key backup.zip \
 	--body backup.zip
 
-# TODO: this will not work because incorrect function name
 # Invoke the lambda function.
 invoke:
-	aws lambda invoke --function-name Backup output.json
+	aws cloudformation describe-stack-resources \
+	--stack-name Umphbase --logical-resource-id Backup \
+	| jq .'StackResources' | jq '.[0]' | jq .'PhysicalResourceId' | \
+	xargs -I {} aws lambda invoke --function-name {} \
+	--cli-connect-timeout 6000 --cli-read-timeout 6000 \
+	output.json

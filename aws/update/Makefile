@@ -61,8 +61,11 @@ deploy-layer:
 # Deploy both the lambda function and layer
 deploy: deploy-lambda deploy-layer
 
-# TODO: this will not work because incorrect function name
 # Invoke the lambda function
 invoke:
-	aws lambda invoke --function-name $(FUNC_NAME) output.json \
-	--cli-connect-timeout 6000 --cli-read-timeout 6000
+	aws lambda invoke --function-name \
+	$(aws cloudformation describe-stack-resources \
+	--stack-name Umphbase --logical-resource-id Update \
+	| jq .'StackResources' | jq '.[0]' | jq .'PhysicalResourceId') \
+	--cli-connect-timeout 6000 --cli-read-timeout 6000 \
+	output.json
