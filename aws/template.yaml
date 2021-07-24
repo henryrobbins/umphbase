@@ -15,18 +15,11 @@ Parameters:
       Name of S3 bucket (to be created) where database backup is stored
     Type: String
     Default: umphbase-bucket
-  LayerBucketName:
-    Description: Name of S3 bucket where layer is stored
+  DeploymentBucketName:
+    Description: >
+      Name of S3 bucket where Lambda function and layer code is stored
     Type: String
-    Default: umphbase-layer-bucket
-  UpdateBucketName:
-    Description: Name of S3 bucket where the Update source code is stored
-    Type: String
-    Default: umphbase-update-source
-  BackupBucketName:
-    Description: Name of S3 bucket where the Backup source code is stored
-    Type: String
-    Default: umphbase-backup-source
+    Default: umphbase-source-deployment-bucket
   DBUsername:
     Description: Username for MySQL database access
     Type: String
@@ -113,7 +106,7 @@ Resources:
       CompatibleRuntimes:
         - python3.8
       Content:
-        S3Bucket: !Ref LayerBucketName
+        S3Bucket: !Ref DeploymentBucketName
         S3Key: layer.zip
       Description: Provides necessary dependencies for Update
       LayerName: umphbase-layer
@@ -123,7 +116,7 @@ Resources:
       Handler: backup.create_backup
       Runtime: python3.8
       CodeUri:
-        Bucket: !Ref BackupBucketName
+        Bucket: !Ref DeploymentBucketName
         Key: backup.zip
       Description: Backup the umphbase database to an S3 Bucket
       MemorySize: 128
@@ -145,7 +138,7 @@ Resources:
       Handler: update.update_database
       Runtime: python3.8
       CodeUri:
-        Bucket: !Ref UpdateBucketName
+        Bucket: !Ref DeploymentBucketName
         Key: update.zip
       Description: Update the umphbase database using ATU data
       MemorySize: 512

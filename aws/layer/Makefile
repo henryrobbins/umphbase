@@ -38,5 +38,5 @@ zip:
 
 # Update the lambda layer source code
 deploy:
-	aws s3api put-object --bucket $(LAYER_BUCKET) --key layer.zip \
+	aws s3api put-object --bucket $(DEPLOYMENT_BUCKET) --key layer.zip \
 	--body layer/layer.zip

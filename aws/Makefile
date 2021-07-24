@@ -2,26 +2,27 @@
 include .env
 export
 
-# Create the S3 bucket for the Backup source code
-backup-bucket:
-	aws s3 mb s3://$(BACKUP_BUCKET) --region $(REGION)
+# Deploy the Backup source code to the deployment S3 bucket
+deploy-backup:
 	cd backup && make zip
 	cd backup && make deploy
 
-# Create the S3 bucket for the Update source code
-update-bucket:
-	aws s3 mb s3://$(UPDATE_BUCKET) --region $(REGION)
+# Deploy the Update source code to the deployment S3 bucket
+deploy-update:
 	cd update && make zip
 	cd update && make deploy
 
-# Create the S3 bucket for the layer
-layer-bucket:
-	aws s3 mb s3://$(LAYER_BUCKET) --region $(REGION)
+# Deploy the Lambda layer source code to the deployment S3 bucket
+deploy-layer:
 	cd layer && make zip
 	cd layer && make deploy
 
-# Create all S3 buckets
-buckets: backup-bucket update-bucket layer-bucket
+# Create the S3 bucket for umphbase deployment code
+bucket:
+	aws s3 mb s3://$(DEPLOYMENT_BUCKET) --region $(REGION)
+	make deploy-backup
+	make deploy-update
+	make deploy-layer
 
 # Template CloudFormation command
 cloudformation:
@@ -30,9 +31,7 @@ cloudformation:
 	--template-body file://template.yaml \
 	--parameters \
 	ParameterKey=BucketName,ParameterValue=$(UMPHBASE_BUCKET) \
-	ParameterKey=LayerBucketName,ParameterValue=$(LAYER_BUCKET) \
-	ParameterKey=UpdateBucketName,ParameterValue=$(UPDATE_BUCKET) \
-	ParameterKey=BackupBucketName,ParameterValue=$(BACKUP_BUCKET) \
+	ParameterKey=DeploymentBucketName,ParameterValue=$(DEPLOYMENT_BUCKET) \
 	ParameterKey=DBUsername,ParameterValue=$(DB_USERNAME) \
 	ParameterKey=DBPassword,ParameterValue=$(DB_PASSWORD) \
 	--capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_NAMED_IAM CAPABILITY_IAM

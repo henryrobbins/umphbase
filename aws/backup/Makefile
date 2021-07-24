@@ -11,7 +11,7 @@ zip:
 
 # Update the lambda function source code.
 deploy:
-	aws s3api put-object --bucket $(BACKUP_BUCKET) --key backup.zip \
+	aws s3api put-object --bucket $(DEPLOYMENT_BUCKET) --key backup.zip \
 	--body backup.zip
 
 # Invoke the lambda function.
