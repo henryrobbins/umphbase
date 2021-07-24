@@ -6,8 +6,8 @@ export
 zip:
 	rm -rf update.zip
 	zip update.zip update.py
-	zip update.zip pull.py
-	zip update.zip sql_push.py
+	zip update.zip ../../pull.py
+	zip update.zip ../../sql_push.py
 
 # Update the lambda function source code.
 deploy:

@@ -55,7 +55,7 @@ The book compilation component of v2.0.0 is under development.
 ```
 git clone https://github.com/henryrobbins/umphbase.git
 cd umphbase
-python aws/update/pull.py atu_database
+python pull.py atu_database
 ```
 
 ## MySQL Database
@@ -81,7 +81,7 @@ first option is to provide the connection parameters every time you run the
 script.
 
 ```
-python aws/update/sql_push.py atu_database prompt
+python sql_push.py atu_database prompt
 Connect to a SQL database.
 Host: `host`
 Database: `database name`
@@ -101,7 +101,7 @@ below) to store these parameters.
 }
 ```
 ```
-python aws/update/sql_push.py atu_database json login.json
+python sql_push.py atu_database json login.json
 ```
 
 This functionality is made possible using Amazon Web Services (AWS). To learn
