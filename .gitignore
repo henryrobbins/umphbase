@@ -145,7 +145,8 @@ cython_debug/
 *.toc
 
 # ATU Database
-atu_database
+atu_unclean
+atu_cleaned
 
 # Umphbase compilations
 v1.0.0/umphbase-v1.0.0/*

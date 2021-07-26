@@ -55,7 +55,8 @@ The book compilation component of v2.0.0 is under development.
 ```
 git clone https://github.com/henryrobbins/umphbase.git
 cd umphbase
-python pull.py atu_database
+python pull.py
+python clean.py
 ```
 
 ## MySQL Database
@@ -101,7 +102,7 @@ below) to store these parameters.
 }
 ```
 ```
-python sql_push.py atu_database json login.json
+python sql_push.py atu_cleaned json login.json
 ```
 
 This functionality is made possible using Amazon Web Services (AWS). To learn

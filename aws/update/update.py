@@ -2,6 +2,7 @@ import os
 import boto3
 import json
 import pull
+import clean
 import sql_push
 
 
@@ -31,8 +32,9 @@ def update_database(event, context):
     password = secret_dict.get('password')
 
     # Pull from ATU and push to RDS SQL database
-    path = '/tmp/atu_database'
-    pull.main(path)
+    path = '/tmp/atu_cleaned'
+    pull.main('/tmp/atu_unclean')
+    clean.main(path, '/tmp/atu_unclean')
     sql_push.main(path, 'arguments', host, 'umphbase', username, password)
 
     return True
