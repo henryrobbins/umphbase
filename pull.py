@@ -120,7 +120,6 @@ def main(path: str):
 
     # SHOWS Dataframe
     # ===============
-    shows_df['showdate'] = pd.to_datetime(shows_df['showdate'], format='%Y-%m-%d')
     assert len(shows_df['show_id'].unique()) == len(shows_df)
     shows_df = shows_df.drop(columns='venue_id')
     shows_df = shows_df.rename(columns={'venuename': 'venue_name',
@@ -129,22 +128,23 @@ def main(path: str):
                                         'showorder': 'show_order'})
     shows_df = shows_df.replace(r'^\s*$', np.nan, regex=True)
     shows_df = shows_df.where((pd.notnull(shows_df)), None)
-    tmp = shows_df.merge(venues_df,
-                         on=['venue_name', 'city', 'state', 'country'],
-                         how='left')
-    shows_df = tmp[['show_id', 'show_date', 'artist', 'venue_id',
-                    'tour_name', 'show_order']]
+    len_before_merge = len(shows_df)
+    shows_df = shows_df.merge(venues_df,
+                            on=['venue_name', 'city', 'state', 'country'],
+                            how='inner')
+    assert len_before_merge == len(shows_df)
+    shows_df = shows_df[['show_id', 'show_date', 'artist', 'venue_id',
+                        'tour_name', 'show_order']]
 
     # LIVE_SONGS Dataframe
-    #
-    # Note that venue_id is float because of Nan
-    # 1508604129 is the show_id that does not map causing this
     # ====================
     live_songs_df = setlists_df.rename(columns={'uniqueid': 'live_song_id',
                                                 'setnumber': 'set_number',
                                                 'isjamchart': 'jamchart',
                                                 'soundcheck': 'sound_check',
                                                 'shownotes': 'show_notes'})
+    # 1508604129 show_id entries are duplicates of 1508604143
+    live_songs_df = live_songs_df[~live_songs_df.show_id == '1508604129']
     assert len(live_songs_df['live_song_id'].unique()) == len(live_songs_df)
     live_songs_df = live_songs_df.replace(r'^\s*$', np.nan, regex=True)
     live_songs_df = live_songs_df.where((pd.notnull(live_songs_df)), None)
