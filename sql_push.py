@@ -116,7 +116,7 @@ def main(path, input_type, arg1=None, arg2=None, arg3=None, arg4=None):
         song_id INT PRIMARY KEY,
         name TEXT NOT NULL,
         slug TEXT NOT NULL,
-        original_artist TEXT NOT NULL,
+        original_artist TEXT,
         original BOOLEAN NOT NULL
     );
     """
@@ -157,7 +157,9 @@ def main(path, input_type, arg1=None, arg2=None, arg3=None, arg4=None):
         transition TEXT,
         footnote TEXT,
         jamchart BOOLEAN NOT NULL,
-        jamchart_notes TEXT
+        jamchart_notes TEXT,
+        parent BOOLEAN NOT NULL,
+        hof BOOLEAN NOT NULL
     );
     """
 

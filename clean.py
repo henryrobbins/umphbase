@@ -2,7 +2,6 @@ import os
 import sys
 import pandas as pd
 import numpy as np
-import atu
 
 
 def main(to_path: str, from_path: str):
@@ -27,20 +26,10 @@ def main(to_path: str, from_path: str):
     # fix E.T.I. Blue Öyster Cult typo from database
     songs_df.at['eti', 'original_artist'] = 'Blue Öyster Cult'
 
-    # songs_df read in with XML which can't read '&' properly
-    # read these fields in with JSON to correct this
-    for song in songs_df[songs_df.name.isna()].index:
-        name = atu.request('songs/slug/%s' % song, 'json').at[0, 'name']
-        songs_df.at[song, 'name'] = name
-    for song in songs_df[songs_df.original_artist.isna()].index:
-        original_artist = (atu.request('songs/slug/%s' % song, 'json')
-                           .at[0, 'original_artist'])
-        songs_df.at[song, 'original_artist'] = original_artist
-
     songs_df = songs_df.reset_index()
     songs_df = songs_df[['song_id', 'name', 'slug',
                          'original_artist', 'original']]
-    assert sum(np.sum(songs_df.isna())) == 0
+    assert sum(songs_df['name'].isna()) == 0
 
     # VENUES Dataframe
     # ================
@@ -120,9 +109,9 @@ def main(to_path: str, from_path: str):
     # =====================
 
     # assign a parent (first occurence) for song sandwiches
-    live_songs_df['parent'] = 1
+    live_songs_df['parent'] = '1'
     children = live_songs_df[['show_id', 'song_id']].duplicated(keep='first')
-    live_songs_df.loc[children, 'parent'] = 0
+    live_songs_df.loc[children, 'parent'] = '0'
 
     # mark all hall of fame performances
     hof = pd.read_csv('data/hall_of_fame.csv', index_col=0)
@@ -130,8 +119,8 @@ def main(to_path: str, from_path: str):
     tmp = tmp.merge(songs_df, on='song_id', how='left')
     hof_ids = (
         hof.merge(tmp, on=['show_date', 'name'], how='left')['live_song_id'])
-    live_songs_df['hof'] = 0
-    live_songs_df.loc[live_songs_df['live_song_id'].isin(hof_ids), 'hof'] = 1
+    live_songs_df['hof'] = '0'
+    live_songs_df.loc[live_songs_df['live_song_id'].isin(hof_ids), 'hof'] = '1'
 
     # Write dataframes as pickle files
     # ================================

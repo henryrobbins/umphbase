@@ -2,6 +2,7 @@ import json
 import os
 import sys
 import pandas as pd
+import numpy as np
 import atu
 
 
@@ -9,9 +10,23 @@ def main(path: str):
     """
     Pull the ATU website and download files to the given path.
     """
-    songs = atu.request('songs', 'xml').set_index('@id')
+    songs = atu.request('songs', 'xml').set_index('slug')
     shows = atu.request('shows', 'json')
     venues = atu.request('venues', 'json')
+
+    # songs read in with XML which can't read '&' properly
+    # read these fields in with JSON to correct this
+    songs = songs.replace(r'^\s*$', np.nan, regex=True)
+    songs = songs.where((pd.notnull(songs)), None)
+    for song in songs[songs.name.isna()].index:
+        name = atu.request('songs/slug/%s' % song, 'json').at[0, 'name']
+        songs.at[song, 'name'] = name
+    for song in songs[songs.original_artist.isna()].index:
+        original_artist = (atu.request('songs/slug/%s' % song, 'json')
+                           .at[0, 'original_artist'])
+        songs.at[song, 'original_artist'] = original_artist
+    songs = songs.reset_index()
+    songs = songs.set_index('@id')
 
     # Some songs in songs_df do not have live performaces
     # for one of the following reasons:
