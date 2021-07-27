@@ -116,6 +116,23 @@ def main(to_path: str, from_path: str):
     shows_df = shows_df.where((pd.notnull(shows_df)), None)
     assert len(shows_df['show_id'].unique()) == len(shows_df)
 
+    # Additional Processing
+    # =====================
+
+    # assign a parent (first occurence) for song sandwiches
+    live_songs_df['parent'] = 1
+    children = live_songs_df[['show_id', 'song_id']].duplicated(keep='first')
+    live_songs_df.loc[children, 'parent'] = 0
+
+    # mark all hall of fame performances
+    hof = pd.read_csv('data/hall_of_fame.csv', index_col=0)
+    tmp = live_songs_df.merge(shows_df, on='show_id', how='left')
+    tmp = tmp.merge(songs_df, on='song_id', how='left')
+    hof_ids = (
+        hof.merge(tmp, on=['show_date', 'name'], how='left')['live_song_id'])
+    live_songs_df['hof'] = 0
+    live_songs_df.loc[live_songs_df['live_song_id'].isin(hof_ids), 'hof'] = 1
+
     # Write dataframes as pickle files
     # ================================
 
