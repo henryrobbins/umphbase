@@ -26,6 +26,17 @@ def main(to_path: str, from_path: str):
     # fix E.T.I. Blue Öyster Cult typo from database
     songs_df.at['eti', 'original_artist'] = 'Blue Öyster Cult'
 
+    # Some songs in songs_df do not have live performaces
+    # for one of the following reasons:
+    #  - In the discography with no live performace
+    #  - Appears as a tease/jam without its own entry in a set
+    # For now, we drop these songs from the database
+    no_live_performances = []
+    for song_id in songs_df["song_id"]:
+        if len(live_songs_df[live_songs_df.song_id == str(song_id)]) == 0:
+            no_live_performances.append(song_id)
+    songs_df = songs_df[~(songs_df.song_id.isin(no_live_performances))]
+
     songs_df = songs_df.reset_index()
     songs_df = songs_df[['song_id', 'name', 'slug',
                          'original_artist', 'original']]

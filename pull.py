@@ -28,13 +28,6 @@ def main(path: str):
     songs = songs.reset_index()
     songs = songs.set_index('@id')
 
-    # Some songs in songs_df do not have live performaces
-    # for one of the following reasons:
-    #  - In the discography with no live performace
-    #  - Appears as a tease/jam without its own entry in a set
-    # This list keeps track of songs that fall in this category
-    no_live_performs = []
-
     live_songs = pd.DataFrame()
     for slug in songs['slug']:
         try:
@@ -45,8 +38,6 @@ def main(path: str):
             form = 'xml' if slug in use_xml else 'json'
             df = atu.request('setlists/slug/%s' % slug, form)
             live_songs = live_songs.append(df)
-            if len(df) == 0:
-                no_live_performs.append(slug)
         except json.JSONDecodeError:
             print("Not parsed: %s" % slug)
 
