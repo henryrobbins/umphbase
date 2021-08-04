@@ -175,15 +175,14 @@ def code_attempts(title: str,
             if (len(no_numbers) > 0):
                 sub_code = code_attempts(no_numbers,
                                          max_length - len(nums),
-                                         word_title_freq)
-                if isinstance(sub_code, str):
-                    try:
-                        if (name.index(nums) < (len(name) / 2)):
-                            return nums + sub_code
-                        else:
-                            return sub_code + nums
-                    except ValueError:
+                                         word_title_freq)[0]
+                try:
+                    if (name.index(nums) < (len(name) / 2)):
+                        return nums + sub_code
+                    else:
                         return sub_code + nums
+                except ValueError:
+                    return sub_code + nums
         return None
 
     def acronym_code(prune: bool) -> Optional[str]:
