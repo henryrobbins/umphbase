@@ -176,7 +176,13 @@ def generate_code(title: str,
                                          word_title_freq,
                                          blacklist)
                 if isinstance(sub_code, str):
-                    return sub_code + nums
+                    try:
+                        if (name.index(nums) < (len(name) / 2)):
+                            return nums + sub_code
+                        else:
+                            return sub_code + nums
+                    except ValueError:
+                        return sub_code + nums
         return None
 
     def acronym_code(prune: bool) -> Optional[str]:
