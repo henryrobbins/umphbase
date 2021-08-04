@@ -17,6 +17,10 @@ UNITS = {units[i]: 19-i for i in range(len(units))}
 tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
         "eighty", "ninety"]
 TENS = {tens[i]: i for i in range(2, len(tens))}
+ordinals = ["first", "second", "third", "fourth", "fifth"]
+ORDINALS = {ordinals[i]: i + 1 for i in range(len(ordinals))}
+multiples = ["single", "double", "triple", "quadruple", "quintuple"]
+MULTIPLICATIVES = {multiples[i]: i + 1 for i in range(len(multiples))}
 
 # used to measure how unique a words is
 with open('data/common_english_words.txt') as f:
@@ -89,6 +93,10 @@ def clean_title(title: str) -> str:
     for k, v in TENS.items():
         title = replace(k, str(v), title)
     for k, v in UNITS.items():
+        title = replace(k, str(v), title)
+    for k, v in ORDINALS.items():
+        title = replace(k, str(v), title)
+    for k, v in MULTIPLICATIVES.items():
         title = replace(k, str(v), title)
 
     title = '<' + ' '.join(title) + '>'
