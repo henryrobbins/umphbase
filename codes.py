@@ -254,7 +254,7 @@ def generate(songs: pd.DataFrame, max_length: int) -> Dict[str, str]:
             rank = len(title_frequency)
         # account for plural form
         if ((len(word) > 1) & (word[-1] == 's')):
-            return min(rank, word_title_freq(word[:-1]))
+            return max(rank, word_title_freq(word[:-1]))
         return rank
 
     def add_song(title: str,
