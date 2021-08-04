@@ -1,5 +1,6 @@
 import string
 import pandas as pd
+from ortools.linear_solver import pywraplp as OR
 from typing import List, Dict, Union, Optional
 
 
@@ -230,7 +231,38 @@ def code_attempts(title: str,
         [letters_code(w, True) for w in words_by_length] +
         [letters_code(w, False) for w in words_by_length])
 
-    return [code for code in attempts if code is not None]
+    attempts = [code for code in attempts if code is not None]
+    attempts = list(dict.fromkeys(attempts))  # remove duplicates
+
+    return attempts
+
+
+def assignment(titles, codes, edges):
+    """A model for assigning song titles to valid song codes."""
+    TITLES = titles       # song titles
+    CODES = codes         # potential codes
+    EDGES = list(edges)   # edges between feasible title, code pairs
+    c = edges             # cost of edges
+
+    m = OR.Solver('assignment', OR.Solver.CBC_MIXED_INTEGER_PROGRAMMING)
+
+    # decision variables
+    x = {}
+    for i,j in EDGES:
+        x[i,j] = m.IntVar(0, m.infinity(), ('(%s, %s)' % (i,j)))
+
+    # objective function
+    m.Minimize(sum(c[i,j]*x[i,j] for i,j in EDGES))
+
+    # each title must be assigned exactly one code
+    for k in TITLES:
+        m.Add(sum(x[i,j] for i,j in EDGES if i==k) == 1)
+
+    # a code can be used at most one time
+    for k in CODES:
+        m.Add(sum(x[i,j] for i,j in EDGES if j==k) <= 1)
+
+    return m,x
 
 
 def generate(songs: pd.DataFrame, max_length: int) -> Dict[str, str]:
@@ -257,40 +289,26 @@ def generate(songs: pd.DataFrame, max_length: int) -> Dict[str, str]:
             return max(rank, word_title_freq(word[:-1]))
         return rank
 
-    def add_song(title: str,
-             original: bool,
-             song_to_code: Dict[str, str],
-             code_to_song: Dict[str, str]):
-        """Add a new song code to the song codes dictionaries.
-
-        Args:
-            title (str): Title (uncleaned) of the song.
-            original (bool): True if the song is an original. False otherwise.
-            song_to_code (Dict[str, str]): Dictionary from song title to code.
-            code_to_song (Dict[str, str]): Dictionary from code to song title.
-        """
-        attempts = code_attempts(title, max_length, word_title_freq)
-        if original:
-            attempts = [str.upper(code) for code in attempts]
-        valid = [code for code in attempts if code not in code_to_song]
-        if len(valid) > 0:
-            # there is an unused code in the list of attempts
-            code = valid[0]
-            song_to_code[title] = code
-            code_to_song[code] = title
-        else:
-            # all attempts are already used; re-assign another code
-            code = attempts[0]
-            blocking_title = code_to_song[code]
-            song_to_code[title] = code
-            code_to_song[code] = title
-            add_song(blocking_title, is_original, song_to_code, code_to_song)
-
-    song_to_code = {}
-    code_to_song = {}
+    title_to_attempts = {}
+    all_attempts = set([])
     for index, row in songs.iterrows():
         title = row['name']
-        is_original = bool(int(row['original']))
-        add_song(title, is_original, song_to_code, code_to_song)
+        attempts = code_attempts(title, max_length, word_title_freq)
+        if bool(int(row['original'])):
+            attempts = [str.upper(code) for code in attempts]
+        title_to_attempts[title] = attempts
+        all_attempts.update(attempts)
 
-    return song_to_code
+    edges = {}
+    for title, attempts in title_to_attempts.items():
+        for i in range(len(attempts)):
+            edges[(title, attempts[i])] = i
+
+    m,x = assignment(list(songs['name']), list(all_attempts), edges)
+
+    if m.Solve() == 2:
+        raise ValueError("Unable to generate unique codes.")
+    solution = {i: j.solution_value() for (i,j) in x.items()}
+    selected = {i: j for (i,j) in solution.items() if j == 1}
+
+    return {i: j for i,j in selected}
