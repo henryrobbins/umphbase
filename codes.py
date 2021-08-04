@@ -18,7 +18,6 @@ tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
         "eighty", "ninety"]
 TENS = {tens[i]: i for i in range(2, len(tens))}
 
-
 # used to measure how unique a words is
 with open('data/common_english_words.txt') as f:
     words = [w.rstrip() for w in f.readlines()]
@@ -133,15 +132,10 @@ def remove_numbers(word: str) -> str:
     return ''.join([c for c in word if c not in NUMBERS])
 
 
-def generate_code(title: str,
+def code_attempts(title: str,
                   max_length: int,
-                  word_title_freq,
-                  blacklist: List[str]) -> Union[str, List[str]]:
-    """
-    Generate a code for the given song title. If none of generated codes are
-    validated, return the ordered list of attempted codes.
-    """
-
+                  word_title_freq) -> Union[str, List[str]]:
+    """Return a list of potential song codes ordered by preference."""
     name = clean_title(title)
     words = name.split()
     words_by_freq = sorted(words, key=lambda x: word_rank(x), reverse=True)
@@ -171,10 +165,9 @@ def generate_code(title: str,
         if (len(nums) in [1, 2]):
             no_numbers = remove_numbers(name)
             if (len(no_numbers) > 0):
-                sub_code = generate_code(no_numbers,
+                sub_code = code_attempts(no_numbers,
                                          max_length - len(nums),
-                                         word_title_freq,
-                                         blacklist)
+                                         word_title_freq)
                 if isinstance(sub_code, str):
                     try:
                         if (name.index(nums) < (len(name) / 2)):
@@ -230,12 +223,7 @@ def generate_code(title: str,
         [letters_code(w, True) for w in words_by_length] +
         [letters_code(w, False) for w in words_by_length])
 
-    attempts = [code for code in attempts if code is not None]
-    for code in attempts:
-        if code not in blacklist:
-            return code
-
-    return attempts
+    return [code for code in attempts if code is not None]
 
 
 def generate(songs: pd.DataFrame, max_length: int) -> Dict[str, str]:
@@ -262,41 +250,40 @@ def generate(songs: pd.DataFrame, max_length: int) -> Dict[str, str]:
             return min(rank, word_title_freq(word[:-1]))
         return rank
 
+    def add_song(title: str,
+             original: bool,
+             song_to_code: Dict[str, str],
+             code_to_song: Dict[str, str]):
+        """Add a new song code to the song codes dictionaries.
+
+        Args:
+            title (str): Title (uncleaned) of the song.
+            original (bool): True if the song is an original. False otherwise.
+            song_to_code (Dict[str, str]): Dictionary from song title to code.
+            code_to_song (Dict[str, str]): Dictionary from code to song title.
+        """
+        attempts = code_attempts(title, max_length, word_title_freq)
+        if original:
+            attempts = [str.upper(code) for code in attempts]
+        valid = [code for code in attempts if code not in code_to_song]
+        if len(valid) > 0:
+            # there is an unused code in the list of attempts
+            code = valid[0]
+            song_to_code[title] = code
+            code_to_song[code] = title
+        else:
+            # all attempts are already used; re-assign another code
+            code = attempts[0]
+            blocking_title = code_to_song[code]
+            song_to_code[title] = code
+            code_to_song[code] = title
+            add_song(blocking_title, is_original, song_to_code, code_to_song)
+
     song_to_code = {}
     code_to_song = {}
-    blacklist = []
     for index, row in songs.iterrows():
         title = row['name']
         is_original = bool(int(row['original']))
-        code_or_tried = generate_code(title, max_length, word_title_freq, blacklist)
-        if isinstance(code_or_tried, list):
-            tried = code_or_tried
-            reassign_success = False
-            for code in tried:
-                if code in blacklist:
-                    # re-assign the song currently assigned to this code
-                    blocking_title = code_to_song[code]
-                    new_code = generate_code(blocking_title,
-                                             max_length,
-                                             word_title_freq,
-                                             blacklist)
-                    if isinstance(new_code, list):
-                        continue
-                    song_to_code[blocking_title] = new_code
-                    code_to_song[new_code] = blocking_title
-
-                    # this code is now free to be assigned to the current code
-                    song_to_code[title] = code
-                    code_to_song[code] = title
-                    reassign_success = True
-                    break
-            if not reassign_success:
-                raise ValueError("Unable to generate unique codes.")
-        else:
-            code = code_or_tried
-            code = str.upper(code) if is_original else code
-            blacklist.append(code)
-            song_to_code[title] = code
-            code_to_song[code] = title
+        add_song(title, is_original, song_to_code, code_to_song)
 
     return song_to_code
