@@ -248,21 +248,21 @@ def assignment(titles, codes, edges):
 
     # decision variables
     x = {}
-    for i,j in EDGES:
-        x[i,j] = m.IntVar(0, m.infinity(), ('(%s, %s)' % (i,j)))
+    for i, j in EDGES:
+        x[i, j] = m.IntVar(0, m.infinity(), ('(%s, %s)' % (i, j)))
 
     # objective function
-    m.Minimize(sum(c[i,j]*x[i,j] for i,j in EDGES))
+    m.Minimize(sum(c[i, j] * x[i, j] for i, j in EDGES))
 
     # each title must be assigned exactly one code
     for k in TITLES:
-        m.Add(sum(x[i,j] for i,j in EDGES if i==k) == 1)
+        m.Add(sum(x[i, j] for i, j in EDGES if i == k) == 1)
 
     # a code can be used at most one time
     for k in CODES:
-        m.Add(sum(x[i,j] for i,j in EDGES if j==k) <= 1)
+        m.Add(sum(x[i, j] for i, j in EDGES if j == k) <= 1)
 
-    return m,x
+    return m, x
 
 
 def generate(songs: pd.DataFrame, max_length: int) -> Dict[str, str]:
@@ -304,11 +304,11 @@ def generate(songs: pd.DataFrame, max_length: int) -> Dict[str, str]:
         for i in range(len(attempts)):
             edges[(title, attempts[i])] = i
 
-    m,x = assignment(list(songs['name']), list(all_attempts), edges)
+    m, x = assignment(list(songs['name']), list(all_attempts), edges)
 
     if m.Solve() == 2:
         raise ValueError("Unable to generate unique codes.")
-    solution = {i: j.solution_value() for (i,j) in x.items()}
-    selected = {i: j for (i,j) in solution.items() if j == 1}
+    solution = {i: j.solution_value() for (i, j) in x.items()}
+    selected = {i: j for (i, j) in solution.items() if j == 1}
 
-    return {i: j for i,j in selected}
+    return {i: j for i, j in selected}
