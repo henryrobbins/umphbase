@@ -82,6 +82,11 @@ def clean_live_songs(df: pd.DataFrame) -> pd.DataFrame:
     children = df[['show_id', 'song_id']].duplicated(keep='first')
     df.loc[children, 'parent'] = '0'
 
+    keep = ['live_song_id', 'show_id', 'song_id', 'parent', 'set_number',
+            'position', 'transition', 'footnote', 'jamchart', 'jamchart_notes',
+            'show_notes', 'opener', 'sound_check']
+    df = df[keep]
+
     return df
 
 
