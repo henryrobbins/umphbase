@@ -1,48 +1,53 @@
 import json
 import pandas as pd
+import argparse
 import pymysql.cursors
 from pymysql.connections import Connection
 from typing import List, Dict
 
 
-def connect(method: str,
-            host: str = None,
-            database: str = None,
-            user: str = None,
-            password: str = None,
-            json_path: str = None) -> Connection:
-    """Return a connection to a MySQL server.
+class Credentials:
 
-    Args:
-        method (str): {"args", "prompt", "json"}
-        host (str, optional): Host where the database server is located.
-        database (str, optional): Database to use.
-        user (str, optional): Username to log in as.
-        password (str, optional): Password to use.
-        json_path (str, optional): Path to JSON file with connection info.
+    def __init__(self, args):
+        """Return a SQL database credentials object."""
+        if args.method == "prompt":
+            print("Connect to a SQL database.")
+            self.host = input('Host: ').strip()
+            self.database = input('Database: ').strip()
+            self.user = input('User: ').strip()
+            self.password = input('Password: ').strip()
+        if args.method == "json":
+            with open(args.json_path) as f:
+                data = json.load(f)
+            self.host = data['host']
+            self.database = data['database']
+            self.user = data['user']
+            self.password = data['password']
+        else:
+            self.host = args.host
+            self.database = args.database
+            self.user = args.user
+            self.password = args.password
 
-    Returns:
-        Connection: A connection to a MySQL database
-    """
-    if method == "prompt":
-        print("Connect to a SQL database.")
-        host = input('Host: ').strip()
-        database = input('Database: ').strip()
-        user = input('User: ').strip()
-        password = input('Password: ').strip()
-    if method == "json":
-        with open(json_path) as f:
-            data = json.load(f)
-        host = data['host']
-        database = data['database']
-        user = data['user']
-        password = data['password']
-    cnx = pymysql.connect(host=host,
-                          database=database,
-                          user=user,
-                          password=password)
-    print("Connected to %s as %s." % (host, user))
-    return cnx
+    def argparser() -> argparse.ArgumentParser:
+        """Return an argparser with arguments for credentials."""
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--method', help="How to pass credentials")
+        parser.add_argument('--host', help="Host name")
+        parser.add_argument('-d', '--database', help="Name of database")
+        parser.add_argument('-u', '--user', help="Name of user for login")
+        parser.add_argument('-p', '--password', help="Password for user")
+        parser.add_argument('--json_path', help="Json file with credentials")
+        return parser
+
+    def connect(self) -> Connection:
+        """Return a connection to a MySQL server with these credentials."""
+        cnx = pymysql.connect(host=self.host,
+                              database=self.database,
+                              user=self.user,
+                              password=self.password)
+        print("Connected to %s as %s." % (self.host, self.user))
+        return cnx
 
 
 def get_fields(name: str, cursor) -> List[str]:

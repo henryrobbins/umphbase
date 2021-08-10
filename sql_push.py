@@ -1,7 +1,5 @@
-import sys
-import pandas as pd
-import argparse
 import sql_util
+import pandas as pd
 from pymysql.err import MySQLError
 
 
@@ -30,11 +28,9 @@ def create_table(name, create, table, cursor):
         print(err)
 
 
-def main(path, method, host=None, database=None, username=None,
-         password=None, json_path=None):
+def main(path: str, credential: sql_util.Credentials):
     """Push the tables at the path into a SQL database."""
-    cnx = sql_util.connect(method, host=host, database=database, user=username,
-                           password=password, json_path=json_path)
+    cnx = credential.connect()
     cursor = cnx.cursor()
 
     shows = pd.read_pickle('%s/shows.pickle' % path)
@@ -65,20 +61,7 @@ def main(path, method, host=None, database=None, username=None,
 
 # TODO: Update README to reflect argparse change
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+    parser = sql_util.Credentials.argparser()
     parser.add_argument('--path', help="Path to files to push to SQL database")
-    parser.add_argument('--method', help="How to pass database credentials")
-    parser.add_argument('--host', help="Host name")
-    parser.add_argument('-d', '--database', help="Name of database")
-    parser.add_argument('-u', '--username', help="Username for login")
-    parser.add_argument('-p', '--password', help="Password for user")
-    parser.add_argument('--json', help="Path to json file with credentials")
     args = parser.parse_args()
-
-    main(path=args.path,
-         method=args.method,
-         host=args.host,
-         database=args.database,
-         username=args.username,
-         password=args.password,
-         json_path=args.json)
+    main(args.path, sql_util.Credentials(args))

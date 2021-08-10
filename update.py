@@ -1,20 +1,16 @@
 import atu
-import sys
 import clean
 import datetime
 import sql_util
-import argparse
 from typing import Dict
 
 
 LOOKBACK = 5  # days
 
 
-def main(method, host=None, database=None, username=None,
-         password=None, json_path=None):
+def main(credential: sql_util.Credentials):
     """Update the SQL database."""
-    cnx = sql_util.connect(method, host=host, database=database, user=username,
-                           password=password, json_path=json_path)
+    cnx = credential.connect()
     cursor = cnx.cursor()
 
     def exists(id: str, table: str) -> bool:
@@ -112,18 +108,5 @@ def main(method, host=None, database=None, username=None,
 
 # TODO: Update README to reflect argparse change
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--method', help="How to pass database credentials")
-    parser.add_argument('--host', help="Host name")
-    parser.add_argument('-d', '--database', help="Name of database")
-    parser.add_argument('-u', '--username', help="Username for login")
-    parser.add_argument('-p', '--password', help="Password for user")
-    parser.add_argument('--json', help="Path to json file with credentials")
-    args = parser.parse_args()
-
-    main(method=args.method,
-         host=args.host,
-         database=args.database,
-         username=args.username,
-         password=args.password,
-         json_path=args.json)
+    parser = sql_util.Credentials.argparser()
+    main(sql_util.Credentials(parser.parse_args()))
