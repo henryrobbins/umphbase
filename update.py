@@ -3,23 +3,18 @@ import sys
 import clean
 import datetime
 import sql_util
+import argparse
 from typing import Dict
 
 
 LOOKBACK = 5  # days
 
 
-def main(method, arg1=None, arg2=None, arg3=None, arg4=None):
+def main(method, host=None, database=None, username=None,
+         password=None, json_path=None):
     """Update the SQL database."""
-    if method == 'prompt':
-        cnx = sql_util.connect(method)
-    elif method == 'args':
-        cnx = sql_util.connect(method, host=arg1, database=arg2,
-                               user=arg3, password=arg4)
-    elif method == 'json':
-        cnx = sql_util.connect(method, json_path=arg1)
-    else:
-        raise ValueError("Inalid input type.")
+    cnx = sql_util.connect(method, host=host, database=database, user=username,
+                           password=password, json_path=json_path)
     cursor = cnx.cursor()
 
     def exists(id: str, table: str) -> bool:
@@ -115,8 +110,20 @@ def main(method, arg1=None, arg2=None, arg3=None, arg4=None):
     print('updated.')
 
 
+# TODO: Update README to reflect argparse change
 if __name__ == "__main__":
-    args = {i: None for i in range(5)}
-    for i in range(0, len(sys.argv) - 1):
-        args[i] = sys.argv[i + 1]
-    main(args[0], args[1], args[2], args[3], args[4])
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--method', help="How to pass database credentials")
+    parser.add_argument('--host', help="Host name")
+    parser.add_argument('-d', '--database', help="Name of database")
+    parser.add_argument('-u', '--username', help="Username for login")
+    parser.add_argument('-p', '--password', help="Password for user")
+    parser.add_argument('--json', help="Path to json file with credentials")
+    args = parser.parse_args()
+
+    main(method=args.method,
+         host=args.host,
+         database=args.database,
+         username=args.username,
+         password=args.password,
+         json_path=args.json)

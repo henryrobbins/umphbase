@@ -160,3 +160,6 @@ sql_logins
 *output.json
 *.zip
 aws/layer/layer
+
+# user-specific Makefile
+Makefile
