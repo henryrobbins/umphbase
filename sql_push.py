@@ -1,7 +1,6 @@
 import sys
-import json
 import pandas as pd
-import pymysql.cursors
+import sql_util
 from pymysql.err import MySQLError
 
 
@@ -9,7 +8,7 @@ from pymysql.err import MySQLError
 def create_table(name, create, table, cursor):
     """Create a table in an SQL database.
 
-    Warning: this function overrides any exisiting data!
+    Warning: this function overrides any existing data!
 
     Attributes:
         name (str): Name of the table
@@ -24,62 +23,24 @@ def create_table(name, create, table, cursor):
         cursor.execute("DROP TABLE %s;" % name)
         cursor.execute(create)
 
-    # Prepare data for SQL query
-    # fillna with NULL-VALUE to be replaced by NULL later
-    # ' must be replaced by '' in strings
-    table = table.fillna('NULL-VALUE')
-    fields = list(table.columns)
-    for field in fields:
-        table[field] = table[field].str.replace("'", "''")
-
-    # Build INSERT SQL query
-    fields = list(table.columns)
-    cols = ', '.join(fields)
-    val = ', '.join(map((lambda x: "'%%(%s)s'" % x), fields))
-    rows = list(table.reset_index().iterrows())
-    rows = list(map(lambda x: x[1].to_dict(), rows))
-    vals = ',\n\t'.join(map(lambda x: "(%s)" % (val % x), rows))
-    vals = vals.replace("'NULL-VALUE'", "NULL")
-    insert = ("INSERT INTO\n"
-              "\t%s(%s)\n"
-              "VALUES\n"
-              "\t%s;") % (name, cols, vals)
-
     try:
-        cursor.execute(insert)
+        cursor.execute(sql_util.insert_statement(name, table))
     except MySQLError as err:
         print(err)
 
 
-def main(path, input_type, arg1=None, arg2=None, arg3=None, arg4=None):
+def main(path, method, arg1=None, arg2=None, arg3=None, arg4=None):
     """Push the tables at the path into a SQL database."""
     # connect to database
-    if input_type == "prompt":
-        print("Connect to a SQL database.")
-        host = input('Host: ').strip()
-        database = input('Database: ').strip()
-        user = input('User: ').strip()
-        password = input('Password: ').strip()
-    elif input_type == "arguments":
-        host = arg1
-        database = arg2
-        user = arg3
-        password = arg4
-    elif input_type == "json":
-        name = arg1
-        with open('sql_logins/%s.json' % name) as f:
-            data = json.load(f)
-        host = data['host']
-        database = data['database']
-        user = data['user']
-        password = data['password']
+    if method == 'prompt':
+        cnx = sql_util.connect(method)
+    elif method == 'args':
+        cnx = sql_util.connect(method, host=arg1, database=arg2,
+                               user=arg3, password=arg4)
+    elif method == 'json':
+        cnx = sql_util.connect(method, json_path=arg1)
     else:
         raise ValueError("Inalid input type.")
-    cnx = pymysql.connect(host=host,
-                          database=database,
-                          user=user,
-                          password=password)
-    print("Connected to %s as %s." % (host, user))
     cursor = cnx.cursor()
 
     # =================================================
