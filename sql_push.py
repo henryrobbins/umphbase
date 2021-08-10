@@ -3,55 +3,26 @@ import pandas as pd
 from pymysql.err import MySQLError
 
 
-# TODO: better handle case when the table exists
-def create_table(name, create, table, cursor):
-    """Create a table in an SQL database.
-
-    Warning: this function overrides any existing data!
-
-    Attributes:
-        name (str): Name of the table
-        create (str): SQL statement for creating the table
-        table (pd.DataFrame): The table to be added
-        cursor (MySQLCursor): Cursor for MySQL database
-    """
-    try:
-        cursor.execute(create)
-    except MySQLError as err:
-        print(err)
-        cursor.execute("DROP TABLE %s;" % name)
-        cursor.execute(create)
-
-    try:
-        cursor.execute(sql_util.multi_insert(name, table))
-    except MySQLError as err:
-        print(err)
-
-
 def main(path: str, credential: sql_util.Credentials):
     """Push the tables at the path into a SQL database."""
     cnx = credential.connect()
     cursor = cnx.cursor()
 
-    shows = pd.read_pickle('%s/shows.pickle' % path)
-    with open('sql/create_shows.sql', 'r') as f:
-        query = f.read()
-        create_table('shows', query, shows, cursor)
-
-    songs = pd.read_pickle('%s/songs.pickle' % path)
-    with open('sql/create_songs.sql', 'r') as f:
-        query = f.read()
-        create_table('songs', query, songs, cursor)
-
-    venues = pd.read_pickle('%s/venues.pickle' % path)
-    with open('sql/create_venues.sql', 'r') as f:
-        query = f.read()
-        create_table('venues', query, venues, cursor)
-
-    live_songs = pd.read_pickle('%s/live_songs.pickle' % path)
-    with open('sql/create_live_songs.sql', 'r') as f:
-        query = f.read()
-        create_table('live_songs', query, live_songs, cursor)
+    tables = ['shows', 'songs', 'venues', 'live_songs']
+    for table in tables:
+        df = pd.read_pickle('%s/%s.pickle' % (path, table))
+        with open('sql/create_%s.sql' % table, 'r') as f:
+            query = f.read()
+            try:
+                cursor.execute(query)
+            except MySQLError as err:
+                print(err)
+                cursor.execute("DROP TABLE %s;" % table)
+                cursor.execute(query)
+            try:
+                cursor.execute(sql_util.multi_insert(table, df))
+            except MySQLError as err:
+                print(err)
 
     cursor.close()
     cnx.commit()
