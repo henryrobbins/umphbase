@@ -45,6 +45,12 @@ def connect(method: str,
     return cnx
 
 
+def get_fields(name: str, cursor) -> List[str]:
+    """Return the field names for the given table."""
+    cursor.execute('DESCRIBE %s' % name)
+    return [row[0] for row in cursor.fetchall()]
+
+
 def sanitize(val: str) -> str:
     """Sanitize the string for input to a SQL query."""
     if val is None:
@@ -56,14 +62,32 @@ def sanitize(val: str) -> str:
 
 def row_string(row: Dict[str, str], fields: List[str]) -> str:
     """Return a SQL row string for the given row."""
-    values = [sanitize(row[field]) for field in fields]
+    values = [sanitize(str(row[field])) for field in fields]
     values = ["'%s'" % val for val in values]
     row_str = "(%s)" % ', '.join(values)
     row_str = row_str.replace("'NULL'", "NULL")
     return row_str
 
 
-def insert_statement(name: str, table: pd.DataFrame, fields: List[str] = None):
+def single_insert(name: str, row: Dict[str, str], fields: List[str]) -> str:
+    """Return a MySQL INSERT statement to insert the row into the table.
+
+    Args:
+        name (str): Name of the table to insert these rows.
+        row (Dict[str, str]): Row to insert into the table.
+        fields (List[str]): Fields to insert.
+    """
+    cols = ', '.join(fields)
+    vals = row_string(row, fields)
+    return ("INSERT INTO\n"
+            "\t%s(%s)\n"
+            "VALUES\n"
+            "\t%s;") % (name, cols, vals)
+
+
+def multi_insert(name: str,
+                 table: pd.DataFrame,
+                 fields: List[str] = None) -> str:
     """Return a MySQL INSERT statement to insert the rows of table.
 
     Args:

@@ -24,7 +24,7 @@ def create_table(name, create, table, cursor):
         cursor.execute(create)
 
     try:
-        cursor.execute(sql_util.insert_statement(name, table))
+        cursor.execute(sql_util.multi_insert(name, table))
     except MySQLError as err:
         print(err)
 
