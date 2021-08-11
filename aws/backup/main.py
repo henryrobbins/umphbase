@@ -12,7 +12,7 @@ from botocore.client import Config
 import subprocess
 
 
-def create_backup(event, context):
+def main(event, context):
     """
     Create a backup of an RDS MySQL database and store it on S3
     :param event: provides information about the triggering of the function

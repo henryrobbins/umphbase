@@ -114,7 +114,7 @@ Resources:
   Backup:
     Type: 'AWS::Serverless::Function'
     Properties:
-      Handler: backup.create_backup
+      Handler: main.main
       Runtime: python3.8
       CodeUri:
         Bucket: !Ref DeploymentBucketName

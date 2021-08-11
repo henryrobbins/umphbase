@@ -5,7 +5,7 @@ export
 # Create a zip directory with lambda function source code.
 zip:
 	rm -rf backup.zip
-	zip backup.zip backup.py
+	zip backup.zip main.py
 	zip backup.zip backup.sh
 	zip backup.zip mysqldump
 
