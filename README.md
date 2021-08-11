@@ -76,7 +76,7 @@ mysql> USE umphbase
 mysql> SOURCE umphbase.sql
 ```
 
-Using [upload.py](aws/update/upload.py), the pull from ATU can be pushed to
+Using [upload.py](upload.py), the pull from ATU can be pushed to
 a MySQL database. You can connect to the database in multiple different ways.
 An example of each of the three methods is given below.
 
