@@ -302,7 +302,7 @@ def generate(songs: pd.DataFrame, max_length: int) -> Dict[str, str]:
     edges = {}
     for title, attempts in title_to_attempts.items():
         for i in range(len(attempts)):
-            edges[(title, attempts[i])] = i
+            edges[(title, attempts[i])] = 10**i
 
     m, x = assignment(list(songs['name']), list(all_attempts), edges)
 
