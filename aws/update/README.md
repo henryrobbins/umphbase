@@ -1,38 +1,23 @@
-# UpdateUmphbase
+# Update Lambda Function
 
-This [AWS Lambda](https://aws.amazon.com/lambda/) function is responsible for
-pulling data from [All Things Umphrey's](https://allthings.umphreys.com/) (ATU)
-and updating a MySQL [RDS Database](https://aws.amazon.com/rds/). As the
-function has multiple dependencies, it utilizes a
-[Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html).
+*Relies on multiple resources defined in the
+[Umphbase CloudFormation Stack](../README.md)*
 
-## Build & Deploy
+This [Lambda Function](https://aws.amazon.com/lambda/) is responsible for
+pulling the newest data from
+[All Things Umphrey's](https://allthings.umphreys.com/) (ATU) and updating a
+MySQL [RDS Database](https://aws.amazon.com/rds/). As the function has multiple
+dependencies, it utilizes a [Lambda Layer](../layer/README.md).
 
-*NOTE: This assume the UpdateUmphbase function has already been created
-properly, the RDS database is setup, and Secrets Manager has the username and
-password for this RDS database.*
+## Deploy & Invoke
 
-A [Makefile](Makefile) is provided with targets for building and deploying both
-the Lambda function and layer. To build and deploy, run the following commands:
-
-```
-make all
-make deploy
-```
-
-The table below provides descriptions of all available targets.
+A [Makefile](Makefile) is provided with targets for deploying and invoking the
+Lambda Function. The available targets are described in the table below.
 
 | Target        | Description                                               |
 | ------------- | --------------------------------------------------------- |
-| all           | Create zip directories for both lambda function and layer |
-| layer         | Create a zip directory with lambda layer source code      |
-| lambda        | Create a zip directory with lambda function source code   |
-| deploy        | Deploy both the lambda function and layer                 |
-| deploy-layer  | Deploy lambda layer and update lambda function layers     |
-| deploy-lambda | Deploy lambda function                                    |
-| invoke        | Invoke the lambda function                                |
-
-
-## License
-
-Licensed under the [GPL-3.0 License](https://choosealicense.com/licenses/gpl-3.0/)
+| deploy        | Update the source code of the Lambda Function             |
+| invoke        | Invoke the Lambda Function                                |
+| zip           | Create a zip directory with lambda function source code   |
+| upload        | Upload the zip directory to the deployment S3 Bucket      |
+| update        | Update the Lambda Function from the S3 Bucket             |

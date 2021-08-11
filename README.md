@@ -76,33 +76,40 @@ mysql> USE umphbase
 mysql> SOURCE umphbase.sql
 ```
 
-Using [sql_push.py](aws/update/sql_push.py), the pull from ATU can be pushed to
-a MySQL database. You can connect to the database in two different ways. The
-first option is to provide the connection parameters every time you run the
-script.
+Using [upload.py](aws/update/upload.py), the pull from ATU can be pushed to
+a MySQL database. You can connect to the database in multiple different ways.
+An example of each of the three methods is given below.
+
+Method 1: Pass the arguments directly to the script
 
 ```
-python sql_push.py atu_database prompt
+python upload.py --path atu_cleaned --method args \
+--host [host] --database [database] --u [user] -p [password]
+```
+
+Method 2: Have the script prompt you for the arguments
+
+```
+python upload.py --path atu_cleaned --method prompt
 Connect to a SQL database.
-Host: `host`
-Database: `database name`
-User: `user`
-Password: `password`
+Host: [host]
+Database: [database]
+User: [user]
+Password: [password]
 ```
 
-The second option is to create a `json` file (`login.json` in the example
-below) to store these parameters.
+Method 3: Store the arguments in a JSON file
 
 ```
+python upload.py --path atu_cleaned --method json --json credentials.json
+
+# credentials.json
 {
-    "host": `host`,
-    "database": `database name`,
-    "user": `user`,
-    "password": `password`
+    "host": [host],
+    "database": [database],
+    "user": [user],
+    "password": [password]
 }
-```
-```
-python sql_push.py atu_cleaned json login.json
 ```
 
 This functionality is made possible using Amazon Web Services (AWS). To learn
