@@ -1,12 +1,11 @@
 import os
 import boto3
 import json
-import pull
-import clean
-import sql_push
+import update
+from sql_util import Credentials
 
 
-def update_database(event, context):
+def main(event, context):
     """
     Update an RDS MySQL database with newest ATU setlists
     :param event: provides information about the triggering of the function
@@ -31,10 +30,11 @@ def update_database(event, context):
     username = secret_dict.get('username')
     password = secret_dict.get('password')
 
-    # Pull from ATU and push to RDS SQL database
-    path = '/tmp/atu_cleaned'
-    pull.main('/tmp/atu_unclean')
-    clean.main(path, '/tmp/atu_unclean')
-    sql_push.main(path, 'arguments', host, 'umphbase', username, password)
+    # Look to ATU for changes and update the RDS SQL database
+    credentials = Credentials(host=host,
+                              database="umphbase",
+                              user=username,
+                              password=password)
+    update.main(credentials)
 
     return True

@@ -136,7 +136,7 @@ Resources:
   Update:
     Type: 'AWS::Serverless::Function'
     Properties:
-      Handler: update.update_database
+      Handler: main.main
       Runtime: python3.8
       CodeUri:
         Bucket: !Ref DeploymentBucketName
