@@ -223,10 +223,10 @@ def code_attempts(title: str,
         [all_number_code()] +
         [part_number_code()] +
         [acronym_code(prune=True)] +
-        [unique_title_word_code(w, False) for w in words_by_name_freq] +
-        [unique_english_word_code(w, False) for w in words_by_freq] +
         [unique_title_word_code(w, True) for w in words_by_name_freq] +
         [unique_english_word_code(w, True) for w in words_by_freq] +
+        [unique_title_word_code(w, False) for w in words_by_name_freq] +
+        [unique_english_word_code(w, False) for w in words_by_freq] +
         [acronym_code(prune=False)] +
         [letters_code(w, True) for w in words_by_length] +
         [letters_code(w, False) for w in words_by_length])
