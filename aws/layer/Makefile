@@ -36,7 +36,7 @@ zip:
 	cd $(PKG_DIR) && rm -r *.whl *.dist-info __pycache__
 	cd $(PKG_NAME) && zip -r $(PKG_NAME).zip python
 
-# Update the lambda layer source code
-deploy:
+# Upload the lambda function source code to the bucket.
+upload:
 	aws s3api put-object --bucket $(DEPLOYMENT_BUCKET) --key layer.zip \
 	--body layer/layer.zip
