@@ -35,4 +35,4 @@ if __name__ == "__main__":
     parser = sql_util.Credentials.argparser()
     parser.add_argument('--path', help="Path to files to push to SQL database")
     args = parser.parse_args()
-    main(args.path, sql_util.Credentials(args))
+    main(args.path, sql_util.Credentials.from_args(args))

@@ -8,26 +8,41 @@ from typing import List, Dict
 
 class Credentials:
 
-    def __init__(self, args):
-        """Return a SQL database credentials object."""
+    def __init__(self, host: str, database: str, user: str, password: str):
+        """Initialize a Credentials instance for access to a MySQL database.
+
+        Args:
+            host (str): Host where the database server is located.
+            database (str): Database to be accessed.
+            user (str): Username to log in as.
+            password (str): Password for the given username.
+        """
+        self.host = host
+        self.database = database
+        self.user = user
+        self.password = password
+
+    def from_args(args):
+        """Initialize a Credentials instance from args."""
         if args.method == "prompt":
             print("Connect to a SQL database.")
-            self.host = input('Host: ').strip()
-            self.database = input('Database: ').strip()
-            self.user = input('User: ').strip()
-            self.password = input('Password: ').strip()
+            host = input('Host: ').strip()
+            database = input('Database: ').strip()
+            user = input('User: ').strip()
+            password = input('Password: ').strip()
         if args.method == "json":
             with open(args.json_path) as f:
                 data = json.load(f)
-            self.host = data['host']
-            self.database = data['database']
-            self.user = data['user']
-            self.password = data['password']
+            host = data['host']
+            database = data['database']
+            user = data['user']
+            password = data['password']
         else:
-            self.host = args.host
-            self.database = args.database
-            self.user = args.user
-            self.password = args.password
+            host = args.host
+            database = args.database
+            user = args.user
+            password = args.password
+        return Credentials(host, database, user, password)
 
     def argparser() -> argparse.ArgumentParser:
         """Return an argparser with arguments for credentials."""
