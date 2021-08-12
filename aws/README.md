@@ -63,3 +63,11 @@ make create-stack DB_PASSWORD=[your_password]
 Alternatively, you can create the stack using
 [AWS Management Console](https://aws.amazon.com/console/) or
 [AWS Command Line Interface (CLI)](https://aws.amazon.com/cli/).
+
+Lastly, the Update Lambda Function will only add the most recent shows to the
+database. To initialize the AWS RDS database with the entire setlist history,
+use the target `init`.
+
+```
+make init
+```

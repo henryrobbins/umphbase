@@ -2,6 +2,12 @@
 include .env
 export
 
+# Get the full function name from the cloudformation stack
+define host_name
+	aws rds describe-db-instances --db-instance-identifier umphbase \
+	| jq ."DBInstances" | jq ".[0]" | jq ."Endpoint" | jq ."Address" |
+endef
+
 # Deploy the Backup source code to the deployment S3 bucket
 deploy-backup:
 	cd backup && make zip
@@ -43,3 +49,17 @@ create-stack:
 # Update CloudFormation stack
 update-stack:
 	make cloudformation COMMAND=update-stack
+
+# Upload a local ATU pull to the AWS RDS Database (Warning: Overwrites!)
+upload:
+	$(call host_name) \
+	xargs -I {} cd .. && python upload.py \
+	--method args --path atu_cleaned \
+	--host {} --database umphbase \
+	--user $(DB_USERNAME) --password $(DB_PASSWORD)
+
+# Initialize the AWS RDS Database with a fresh local pull from ATU
+init:
+	cd .. && python pull.py
+	cd .. && python clean.py
+	make upload
