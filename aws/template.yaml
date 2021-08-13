@@ -142,8 +142,8 @@ Resources:
         Bucket: !Ref DeploymentBucketName
         Key: update.zip
       Description: Update the umphbase database using ATU data
-      MemorySize: 512
-      Timeout: 600
+      MemorySize: 128
+      Timeout: 30
       Role: !GetAtt RootRole.Arn
       Events:
         Schedule1:
