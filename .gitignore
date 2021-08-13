@@ -147,6 +147,7 @@ cython_debug/
 # ATU Database
 atu_unclean
 atu_cleaned
+aws/umphbase.sql
 
 # Umphbase compilations
 v1.0.0/umphbase-v1.0.0/*

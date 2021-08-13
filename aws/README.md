@@ -30,10 +30,12 @@ for the Lambda Layer.
 To make the deployment bucket, first edit the [.env](.env)
 file to choose a different bucket name; S3 Buckets in AWS must have unique names
 and the default values are already in use. It is left as an exercise for the
-reader to determine who is using them ;).
+reader to determine who is using them ;). You will also need to choose a
+different bucket name for the S3 bucket where the public backup is stored.
 
 ```
 #.env
+UMPHBASE_BUCKET=[something-else]
 DEPLOYMENT_BUCKET=[something-else]
 ```
 

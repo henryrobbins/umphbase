@@ -63,3 +63,9 @@ init:
 	cd .. && python pull.py
 	cd .. && python clean.py
 	make upload
+
+# Download and unzip the .sql file backup of the AWS RDS Database
+download:
+	curl https://$(UMPHBASE_BUCKET).s3.$(REGION).amazonaws.com/umphbase.sql.gz \
+	--output umphbase.sql.gz
+	gzip -d umphbase.sql.gz
