@@ -144,6 +144,9 @@ cython_debug/
 *.synctex.gz
 *.toc
 
+# Environment setup
+aws/.env
+
 # ATU Database
 atu_unclean
 atu_cleaned

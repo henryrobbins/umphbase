@@ -27,39 +27,28 @@ and [backup](backup) directories contain the source code for each Lambda
 Function respectively. The [layer](layer) directory contains the source code
 for the Lambda Layer.
 
-To make the deployment bucket, first edit the [.env](.env)
-file to choose a different bucket name; S3 Buckets in AWS must have unique names
-and the default values are already in use. It is left as an exercise for the
-reader to determine who is using them ;). You will also need to choose a
-different bucket name for the S3 bucket where the public backup is stored.
+To make the deployment bucket, first rename the [.env.example](.env.example)
+file to `.env` and choose different bucket names; S3 Buckets in AWS must have
+globally unique names and the default values are already in use. It is left as
+an exercise for the reader to determine who is using them ;). At this time,
+it is recommended to change the default database password of `password`.
 
 ```
-#.env
+#.env.example -> .env
 UMPHBASE_BUCKET=[something-else]
 DEPLOYMENT_BUCKET=[something-else]
+
+DB_PASSWORD=[your_password]
 ```
 
-Then, use the make target `bucket` to make the bucket and populate it with the
-source code for the Lambda Functions and Lambda Layer. After the bucket has been
-created, use the target `create-stack` for creating the Umphbase stack.
+Then, use the make target `bucket` to make the deployment bucket and populate
+it with the source code for the Lambda Functions and Lambda Layer. After the
+bucket has been created, use the target `create-stack` for creating the
+Umphbase stack.
 
 ```
 make bucket
 make create-stack
-```
-
-It is recommended to change the default database password of `password`. You
-can either edit the [.env](.env) file
-
-```
-#.env
-DB_PASSWORD=[your_password]
-```
-
-or pass in the environment variable when you create the stack
-
-```
-make create-stack DB_PASSWORD=[your_password]
 ```
 
 Alternatively, you can create the stack using
