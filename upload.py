@@ -30,7 +30,6 @@ def main(path: str, credential: sql_util.Credentials):
     print("uploaded.")
 
 
-# TODO: Update README to reflect argparse change
 if __name__ == "__main__":
     parser = sql_util.Credentials.argparser()
     parser.add_argument('--path', help="Path to files to push to SQL database")

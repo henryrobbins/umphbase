@@ -106,7 +106,6 @@ def main(credential: sql_util.Credentials):
     print('updated.')
 
 
-# TODO: Update README to reflect argparse change
 if __name__ == "__main__":
     parser = sql_util.Credentials.argparser()
     main(sql_util.Credentials.from_args(parser.parse_args()))
