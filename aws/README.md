@@ -21,27 +21,40 @@ template defines the following resources.
 | Update    | Lambda::Function       | Used to update the database              |
 | Backup    | Lambda::Function       | Used to backup the database              |
 
-Creating the Umphbase stack requires creating an [S3](https://aws.amazon.com/s3/)
-bucket with the Lambda Function and Layer source code. The [update](update)
-and [backup](backup) directories contain the source code for each Lambda
-Function respectively. The [layer](layer) directory contains the source code
-for the Lambda Layer.
+*Note: The [update](update) and [backup](backup) directories contain the source
+code for each Lambda Function respectively. The [layer](layer) directory
+contains the source code for the Lambda Layer.*
 
-To make the deployment bucket, first rename the [.env.example](.env.example)
-file to `.env` and choose different bucket names; S3 Buckets in AWS must have
-globally unique names and the default values are already in use. It is left as
-an exercise for the reader to determine who is using them ;). At this time,
-it is recommended to change the default database password of `password`.
+The template for the CloudFormation stack requires multiple parameters which
+are defined in the `.env` file. The [.env.example](.env.example) file provides
+an example setup. The `UMPHBASE_BUCKET` and `DEPLOYMENT_BUCKET` environment
+variables define the names of the two [S3](https://aws.amazon.com/s3/) buckets
+where the backup and Lambda Function source code is stored respectively. These
+values *must* be changed as S3 Buckets in AWS must have globally unique names
+and the default values are already in use. It is left as an exercise for the
+reader to determine who is using them ;).
 
 ```
 #.env.example -> .env
 UMPHBASE_BUCKET=[something-else]
 DEPLOYMENT_BUCKET=[something-else]
-
-DB_PASSWORD=[your_password]
 ```
 
-Then, use the make target `bucket` to make the deployment bucket and populate
+Other environment variables can be changed as well. Two recommended changes are
+to choose a new password and to choose an email to receive logging information
+when the Lambda Functions are run.
+
+```
+#.env.example -> .env
+DB_PASSWORD=[your_password]
+EMAIL=[your@email.com]
+```
+
+If an email is provided, the `email` make target can be used to verify the
+email address. An email will be sent to the email address defined in the `.env`
+file which provides a link to finish the verification.
+
+Next, use the make target `bucket` to make the deployment bucket and populate
 it with the source code for the Lambda Functions and Lambda Layer. After the
 bucket has been created, use the target `create-stack` for creating the
 Umphbase stack.

@@ -5,6 +5,9 @@ import update
 from sql_util import Credentials
 
 
+CHARSET = "UTF-8"
+
+
 def main(event, context):
     """
     Update an RDS MySQL database with newest ATU setlists
@@ -22,6 +25,7 @@ def main(event, context):
     # Get the DB_HOST environment variable from the lambda function
     host = os.environ['DB_HOST']
 
+    # TODO: No longer hard code the AWS Region
     # Use Secrets Manager to get RDS username and password
     secretsmanager = boto3.client('secretsmanager', 'us-east-2')
     response = secretsmanager.get_secret_value(SecretId='umphbase-secret')
@@ -35,7 +39,35 @@ def main(event, context):
                               database="umphbase",
                               user=username,
                               password=password)
-    update.main(credentials)
+    log = update.main(credentials)
+
+    # Send an email with logging information
+    body = (
+    "All Things Umphrey's: https://allthings.umphreys.com/setlists/ \n\n"
+    "Log from Update Lambda Function call: \n\n"
+    "%s" % log
+    )
+
+    email = os.environ['EMAIL']
+    client = boto3.client('ses', region_name='us-east-2')
+    response = client.send_email(
+        Destination={
+            'ToAddresses': [email],
+        },
+        Message={
+            'Body': {
+                'Text': {
+                    'Charset': CHARSET,
+                    'Data': body,
+                },
+            },
+            'Subject': {
+                'Charset': CHARSET,
+                'Data': "[UMPHBASE] Update Lambda Function",
+            },
+        },
+        Source=email,
+    )
 
     # Trigger the Backup Lambda Function
     lambda_client = boto3.client('lambda')

@@ -30,6 +30,10 @@ bucket:
 	make deploy-update
 	make deploy-layer
 
+# Adds the email address to the list of identities in SES
+email:
+	aws ses verify-email-identity --email-address $(EMAIL)
+
 # Template CloudFormation command
 cloudformation:
 	aws cloudformation $(COMMAND) \
@@ -40,6 +44,7 @@ cloudformation:
 	ParameterKey=DeploymentBucketName,ParameterValue=$(DEPLOYMENT_BUCKET) \
 	ParameterKey=DBUsername,ParameterValue=$(DB_USERNAME) \
 	ParameterKey=DBPassword,ParameterValue=$(DB_PASSWORD) \
+	ParameterKey=Email,ParameterValue=$(EMAIL) \
 	--capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_NAMED_IAM CAPABILITY_IAM
 
 # Create CloudFormation stack

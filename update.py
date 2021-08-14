@@ -8,10 +8,11 @@ from typing import Dict
 LOOKBACK = 5  # days
 
 
-def main(credential: sql_util.Credentials):
+def main(credential: sql_util.Credentials) -> str:
     """Update the SQL database."""
     cnx = credential.connect()
     cursor = cnx.cursor()
+    log = ""  # maintain log to return
 
     def exists(id: str, table: str) -> bool:
         """Return true if the given id is in the table."""
@@ -30,6 +31,7 @@ def main(credential: sql_util.Credentials):
 
         cursor.execute(sql_util.single_insert("venues", row, fields))
         print("%s added to venues." % row['venue_name'])
+        log += "%s added to venues." % row['venue_name']
         return venue_id
 
     def new_song(row: Dict[str, str]):
@@ -40,6 +42,7 @@ def main(credential: sql_util.Credentials):
         row['original'] = row['isoriginal']
         cursor.execute(sql_util.single_insert("songs", row, fields))
         print("%s added to songs." % row['name'])
+        log += "%s added to songs." % row['name']
 
     def add_venue_id(df: Dict[str, str]):
         """Append the venue_name field to the given dictionary."""
@@ -66,6 +69,7 @@ def main(credential: sql_util.Credentials):
     for date in dates:
         raw_df = atu.request('shows/showdate/%s' % date, 'json')
         if len(raw_df) == 0:
+            log += "no shows on %s. \n" % date
             continue  # no show on this date
         df = clean.clean_shows(raw_df)
         for index, row in df.iterrows():
@@ -99,11 +103,15 @@ def main(credential: sql_util.Credentials):
                 q = sql_util.single_insert("shows", show_dict, fields)
                 cursor.execute(q)
                 print("show on %s added to shows." % date)
+                log += "added show on %s to the database. \n" % date
+            else:
+                log += "found show on %s but already in database. \n" % date
 
     cursor.close()
     cnx.commit()
     cnx.close()
     print('updated.')
+    return log
 
 
 if __name__ == "__main__":
