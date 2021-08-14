@@ -52,8 +52,8 @@ update-stack:
 
 # Upload a local ATU pull to the AWS RDS Database (Warning: Overwrites!)
 upload:
-	$(call host_name) \
-	xargs -I {} cd .. && python upload.py \
+	cd .. && $(call host_name) \
+	xargs -I {} python upload.py \
 	--method args --path atu_cleaned \
 	--host {} --database umphbase \
 	--user $(DB_USERNAME) --password $(DB_PASSWORD)
