@@ -37,4 +37,9 @@ def main(event, context):
                               password=password)
     update.main(credentials)
 
+    # Trigger the Backup Lambda Function
+    lambda_client = boto3.client('lambda')
+    lambda_client.invoke(FunctionName=os.environ['BACKUP'],
+                         InvocationType='Event')
+
     return True

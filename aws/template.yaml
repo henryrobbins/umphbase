@@ -62,6 +62,7 @@ Resources:
                 - ec2:DescribeNetworkInterfaces
                 - ec2:DetachNetworkInterface
                 - ec2:DeleteNetworkInterface
+                - lambda:*
                 - rds:*
                 - s3:*
                 Resource: "*"
@@ -123,12 +124,6 @@ Resources:
       MemorySize: 128
       Timeout: 12
       Role: !GetAtt RootRole.Arn
-      # TODO: Have this run after Update as opposed to on schedule
-      Events:
-        Schedule1:
-          Type: Schedule
-          Properties:
-            Schedule: rate(1 day)
       Environment:
         Variables:
           DB_HOST: !GetAtt Umphbase.Endpoint.Address
@@ -153,5 +148,6 @@ Resources:
       Environment:
         Variables:
           DB_HOST: !GetAtt Umphbase.Endpoint.Address
+          BACKUP: !Ref Backup
       Layers:
         - !Ref Layer
