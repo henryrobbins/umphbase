@@ -157,9 +157,6 @@ v1.0.0/umphbase-v1.0.0/*
 !v1.0.0/umphbase-v1.0.0/umphbase-v1.0.0.tex
 !v1.0.0/umphbase-v1.0.0/umphbase-v1.0.0.pdf
 
-# SQL logins
-sql_logins
-
 # Files that can be compiled
 *output.json
 *.zip
