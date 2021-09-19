@@ -14,6 +14,9 @@ def main(path: str):
     shows = atu.request('shows', 'json')
     venues = atu.request('venues', 'json')
 
+    # special cases
+    songs.at['ace-of-long-nights', 'original_artist'] = 'Motörhead/Ween'
+
     # songs read in with XML which can't read '&' properly
     # read these fields in with JSON to correct this
     songs = songs.replace(r'^\s*$', np.nan, regex=True)
