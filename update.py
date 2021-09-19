@@ -2,8 +2,11 @@ import atu
 import clean
 import datetime
 import sql_util
+import logging
 from typing import Dict
 
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 LOOKBACK = 5  # days
 
@@ -12,7 +15,6 @@ def main(credential: sql_util.Credentials) -> str:
     """Update the SQL database."""
     cnx = credential.connect()
     cursor = cnx.cursor()
-    log = ""  # maintain log to return
 
     def exists(id: str, table: str) -> bool:
         """Return true if the given id is in the table."""
@@ -30,19 +32,16 @@ def main(credential: sql_util.Credentials) -> str:
         fields = ['venue_id'] + fields
 
         cursor.execute(sql_util.single_insert("venues", row, fields))
-        print("%s added to venues." % row['venue_name'])
-        log += "%s added to venues." % row['venue_name']
+        logger.info("%s added to venues." % row['venue_name'])
         return venue_id
 
     def new_song(row: Dict[str, str]):
         """Add the song to the SQL database."""
         fields = sql_util.get_fields('songs', cursor)
-        row = row.to_dict()
         row['name'] = row['songname']
         row['original'] = row['isoriginal']
         cursor.execute(sql_util.single_insert("songs", row, fields))
-        print("%s added to songs." % row['name'])
-        log += "%s added to songs." % row['name']
+        logger.info("%s added to songs." % row['name'])
 
     def add_venue_id(df: Dict[str, str]):
         """Append the venue_name field to the given dictionary."""
@@ -69,7 +68,7 @@ def main(credential: sql_util.Credentials) -> str:
     for date in dates:
         raw_df = atu.request('shows/showdate/%s' % date, 'json')
         if len(raw_df) == 0:
-            log += "no shows on %s. \n" % date
+            logger.info("no shows on %s." % date)
             continue  # no show on this date
         df = clean.clean_shows(raw_df)
         for index, row in df.iterrows():
@@ -102,16 +101,14 @@ def main(credential: sql_util.Credentials) -> str:
                 fields = sql_util.get_fields('shows', cursor)
                 q = sql_util.single_insert("shows", show_dict, fields)
                 cursor.execute(q)
-                print("show on %s added to shows." % date)
-                log += "added show on %s to the database. \n" % date
+                logger.info("added show on %s to the database." % date)
             else:
-                log += "found show on %s but already in database. \n" % date
+                logger.info("found show on %s but already in database." % date)
 
     cursor.close()
     cnx.commit()
     cnx.close()
-    print('updated.')
-    return log
+    logger.info("update complete.")
 
 
 if __name__ == "__main__":

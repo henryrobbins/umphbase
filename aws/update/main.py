@@ -2,6 +2,8 @@ import os
 import boto3
 import json
 import update
+import time
+from datetime import datetime, timedelta
 from sql_util import Credentials
 
 
@@ -39,13 +41,12 @@ def main(event, context):
                               database="umphbase",
                               user=username,
                               password=password)
-    log = update.main(credentials)
+    update.main(credentials)
 
     # Send an email with logging information
     body = (
-    "All Things Umphrey's: https://allthings.umphreys.com/setlists/ \n\n"
-    "Log from Update Lambda Function call: \n\n"
-    "%s" % log
+    "SUCCESS\n\n"
+    "All Things Umphrey's: https://allthings.umphreys.com/setlists/"
     )
 
     email = os.environ['EMAIL']
