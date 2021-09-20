@@ -1,4 +1,4 @@
-# <img alt="umphbase" src="umphbase.png" height="90">
+# <img alt="umphbase" src="docs/branding/umphbase.png" height="90">
 
 [All Things Umphrey's](https://allthings.umphreys.com/) (ATU) is the static
 website which maintains setlist data for [Umphrey's McGee](https://www.umphreys.com/).
