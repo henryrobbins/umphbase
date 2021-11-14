@@ -1,0 +1,1764 @@
+,name,show_date,with_lyrics
+0,Orfeo,1998-01-31,False
+1,Slow,1998-05-08,False
+2,Muffburger Sandwich,1998-10-10,False
+3,Muffburger Sandwich,1998-10-10,True
+4,G-Song,1999-04-01,False
+5,Slacker,1999-05-15,False
+6,Fool in the Rain,1999-05-19,False
+7,Slacker,1999-06-05,False
+8,G-Song,1999-06-18,False
+9,Mamu,1999-08-20,False
+10,Front Porch,1999-08-22,False
+11,Hey Nineteen,2000-01-29,False
+12,Slacker,2000-02-19,False
+13,Fool in the Rain,2000-02-19,False
+14,Hey Nineteen,2000-02-25,False
+15,Cantaloupe Island,2000-02-26,False
+16,Slacker,2000-02-26,False
+17,Garbage Man,2000-03-04,False
+18,Slacker,2000-03-04,False
+19,Hangover,2000-03-31,False
+20,Hey Nineteen,2000-05-27,False
+21,Hey Nineteen,2000-06-15,False
+22,Cantaloupe Island,2000-06-30,False
+23,Up on Cripple Creek,2000-06-30,False
+24,2nd Self,2000-06-30,False
+25,Young Lust,2000-08-26,False
+26,Q*Bert,2000-09-07,False
+27,Young Lust,2000-09-07,False
+28,Front Porch,2000-10-16,False
+29,Q*Bert,2000-10-27,False
+30,Prowler,2000-10-27,False
+31,August,2000-10-28,False
+32,2nd Self,2000-11-10,False
+33,Prowler,2000-12-07,False
+34,Kabump,2001-02-24,False
+35,Nothing Too Fancy,2001-02-24,False
+36,Kabump,2001-03-01,False
+37,Tribute to the Spinal Shaft,2001-03-01,False
+38,Sweetness,2001-03-02,False
+39,Front Porch,2001-03-03,False
+40,Slacker,2001-04-03,False
+41,Prowler,2001-04-03,False
+42,Q*Bert,2001-04-03,False
+43,Coming In From the Cold,2001-04-04,False
+44,August,2001-04-04,False
+45,Sweetness,2001-04-13,False
+46,Slacker,2001-04-13,False
+47,Power of Soul,2001-04-13,False
+48,Prowler,2001-04-20,False
+49,Syncopated Strangers,2001-05-03,False
+50,Fool in the Rain,2001-05-03,False
+51,Out Of Order,2001-05-12,False
+52,Slacker,2001-05-19,False
+53,Front Porch,2001-05-25,False
+54,Rastaman Chant,2001-05-31,False
+55,Sweetness,2001-07-02,False
+56,Front Porch,2001-07-09,False
+57,Kabump,2001-07-11,False
+58,Slacker,2001-07-17,False
+59,Much Obliged,2001-07-18,False
+60,Andy's Last Beer,2001-08-11,False
+61,Prowler,2001-08-18,False
+62,Example 1,2001-08-18,False
+63,Nothing Too Fancy,2001-08-24,False
+64,Blue Echo,2001-08-31,False
+65,Space Funk Booty,2001-09-02,False
+66,FF,2001-09-06,False
+67,Kabump,2001-09-06,False
+68,Hajimemashite,2001-09-06,False
+69,August,2001-09-06,False
+70,Sweetness,2001-09-17,False
+71,Utopian Fir,2001-09-17,False
+72,Young Lust,2001-09-18,False
+73,Hangover,2001-09-18,False
+74,Kabump,2001-09-20,False
+75,Tribute to the Spinal Shaft,2001-09-21,False
+76,Nothing Too Fancy,2001-09-21,False
+77,"""Jimmy Stewart""",2001-09-21,False
+78,2nd Self,2001-09-23,False
+79,"""Jimmy Stewart""",2001-09-23,False
+80,Fool in the Rain,2001-09-23,False
+81,Blue Echo,2001-10-04,False
+82,August,2001-10-04,False
+83,"""Jimmy Stewart""",2001-10-05,False
+84,"""Jimmy Stewart""",2001-10-11,False
+85,"""Jimmy Stewart""",2001-10-12,False
+86,Blue Echo,2001-10-24,False
+87,Rastaman Chant,2001-10-24,False
+88,Willie the Pimp,2001-10-26,False
+89,Hajimemashite,2001-10-27,False
+90,FF,2001-10-27,False
+91,Prowler,2001-10-31,False
+92,"""Jimmy Stewart""",2001-10-31,False
+93,2x2,2001-11-02,False
+94,"""Jimmy Stewart""",2001-11-16,False
+95,Stonehenge,2001-11-17,False
+96,"""Jimmy Stewart""",2001-11-30,False
+97,Nothing Too Fancy,2001-11-30,False
+98,Flying,2001-11-30,False
+99,"""Jimmy Stewart""",2001-12-01,False
+100,The Fuzz,2001-12-05,False
+101,Willie the Pimp,2001-12-06,False
+102,"""Jimmy Stewart""",2001-12-12,False
+103,My Favorite Things,2001-12-12,False
+104,Slacker,2001-12-12,False
+105,Mediterranean Sundance,2001-12-13,False
+106,FF,2001-12-13,False
+107,Front Porch,2001-12-14,False
+108,Kabump,2002-01-23,False
+109,Rastaman Chant,2002-01-23,False
+110,FF,2002-01-26,False
+111,Hurt Bird Bath,2002-01-26,False
+112,Front Porch,2002-01-30,False
+113,"""Jimmy Stewart""",2002-02-01,False
+114,"""Jimmy Stewart""",2002-02-02,False
+115,The Haunt,2002-02-05,False
+116,Front Porch,2002-02-08,False
+117,50 Ways to Leave Your Lover,2002-02-17,False
+118,Example 1,2002-02-20,False
+119,Professor Wormbog,2002-02-21,False
+120,Blue Echo,2002-02-21,False
+121,"""Jimmy Stewart""",2002-02-22,False
+122,Blue Echo,2002-02-26,False
+123,FF,2002-02-27,False
+124,Example 1,2002-02-28,False
+125,Rastaman Chant,2002-02-28,False
+126,Kabump,2002-02-28,False
+127,"""Jimmy Stewart""",2002-03-01,False
+128,Fool in the Rain,2002-03-02,False
+129,Blue Echo,2002-03-02,False
+130,Front Porch,2002-03-05,False
+131,No Quarter,2002-03-07,False
+132,The Stranger,2002-03-07,False
+133,Good Ol' Boys,2002-03-08,False
+134,"""Jimmy Stewart""",2002-03-13,False
+135,Front Porch,2002-03-17,False
+136,Kabump,2002-03-17,False
+137,FF,2002-03-19,False
+138,Example 1,2002-03-20,False
+139,"""Jimmy Stewart""",2002-03-20,False
+140,Dump City,2002-03-20,False
+141,The Fuzz,2002-03-21,False
+142,Blue Echo,2002-03-22,False
+143,August,2002-03-22,False
+144,Nothing Too Fancy,2002-03-23,False
+145,Divisions,2002-03-23,False
+146,2nd Self,2002-03-23,False
+147,Get In The Van,2002-04-02,False
+148,Hangover,2002-04-02,False
+149,Front Porch,2002-04-02,False
+150,Blue Echo,2002-04-04,False
+151,Hurt Bird Bath,2002-04-04,False
+152,Push the Pig,2002-04-04,False
+153,Kabump,2002-04-05,False
+154,Rastaman Chant,2002-04-06,False
+155,Nothing Too Fancy,2002-04-06,False
+156,Blue Echo,2002-04-06,False
+157,Divisions,2002-04-09,False
+158,Blue Echo,2002-04-09,False
+159,Tribute to the Spinal Shaft,2002-04-09,False
+160,Nothing Too Fancy,2002-04-10,False
+161,August,2002-04-10,False
+162,Water,2002-04-11,False
+163,Hey Nineteen,2002-04-12,False
+164,Sociable Jimmy,2002-04-17,False
+165,Push the Pig,2002-04-18,False
+166,Hurt Bird Bath,2002-04-18,False
+167,Power of Soul,2002-04-19,False
+168,Example 1,2002-04-19,False
+169,Tribute to the Spinal Shaft,2002-04-19,False
+170,FF,2002-04-19,False
+171,Get Down,2002-04-19,False
+172,Kabump,2002-04-20,False
+173,Front Porch,2002-04-20,False
+174,Nothing Too Fancy,2002-04-20,False
+175,Blue Echo,2002-04-21,False
+176,Sociable Jimmy,2002-04-21,False
+177,Slacker,2002-04-22,False
+178,Professor Wormbog,2002-04-25,False
+179,Syncopated Strangers,2002-04-26,False
+180,2nd Self,2002-04-29,False
+181,The Fussy Dutchman,2002-04-29,False
+182,Divisions,2002-04-29,False
+183,The Haunt,2002-04-29,False
+184,She Came In Through The Bathroom Window,2002-05-03,False
+185,August,2002-05-16,False
+186,The Haunt,2002-05-16,False
+187,Kabump,2002-05-16,False
+188,Push the Pig,2002-05-16,False
+189,Nothing Too Fancy,2002-05-16,False
+190,2x2,2002-05-17,False
+191,Front Porch,2002-05-17,False
+192,Example 1,2002-05-17,False
+193,Blue Echo,2002-05-17,False
+194,Kabump,2002-05-25,False
+195,2x2,2002-05-25,False
+196,Prowler,2002-05-29,False
+197,August,2002-06-01,False
+198,White Man's Moccasins,2002-06-05,False
+199,Blue Echo,2002-06-06,False
+200,August,2002-06-06,False
+201,The Stranger,2002-06-07,False
+202,Front Porch,2002-06-08,False
+203,Hey Nineteen,2002-06-08,False
+204,Space Funk Booty,2002-06-13,False
+205,The Triple Wide,2002-06-13,False
+206,Tribute to the Spinal Shaft,2002-06-14,False
+207,"""Jimmy Stewart""",2002-06-19,False
+208,August,2002-06-19,False
+209,"""Jimmy Stewart""",2002-06-21,False
+210,Blue Echo,2002-06-28,False
+211,Example 1,2002-06-28,False
+212,Resolution,2002-06-29,False
+213,August,2002-07-04,False
+214,Space Funk Booty,2002-07-04,False
+215,Junct,2002-07-04,False
+216,In the Flesh?,2002-07-04,False
+217,When the World Is Running Down You Make the Best of What's Still Around,2002-07-05,False
+218,Glory,2002-07-09,False
+219,The Haunt,2002-07-09,False
+220,Der Bluten Kat,2002-07-09,False
+221,August,2002-07-10,False
+222,Kabump,2002-07-10,False
+223,Willie the Pimp,2002-07-10,False
+224,Hajimemashite,2002-07-12,False
+225,The Stranger,2002-07-12,False
+226,Utopian Fir,2002-07-12,False
+227,The Crooked One,2002-07-12,False
+228,Space Funk Booty,2002-07-13,False
+229,Walking On The Moon,2002-07-13,False
+230,Sweetness,2002-07-14,False
+231,Tribute to the Spinal Shaft,2002-07-14,False
+232,Push the Pig,2002-07-14,False
+233,Resolution,2002-07-14,False
+234,August,2002-07-16,False
+235,Pay the Snucka,2002-07-16,False
+236,Kat's Tune,2002-07-16,False
+237,Kabump,2002-07-18,False
+238,FF,2002-07-19,False
+239,Front Porch,2002-07-19,False
+240,Power of Soul,2002-07-20,False
+241,"""Jimmy Stewart""",2002-07-20,False
+242,Blue Echo,2002-07-22,False
+243,Family Feud theme,2002-07-22,False
+244,"""Jimmy Stewart""",2002-07-22,False
+245,Utopian Fir,2002-07-24,False
+246,Resolution,2002-07-24,False
+247,Hajimemashite,2002-07-26,False
+248,Blue Echo,2002-07-27,False
+249,2x2,2002-07-27,False
+250,Sweetness,2002-08-15,False
+251,"""Jimmy Stewart""",2002-08-15,False
+252,40's Theme,2002-08-15,False
+253,August,2002-08-15,False
+254,Example 1,2002-08-16,False
+255,The Triple Wide,2002-08-16,False
+256,Tribute to the Spinal Shaft,2002-08-17,False
+257,Blue Echo,2002-08-17,False
+258,"""Jimmy Stewart""",2002-08-21,False
+259,Nothing Too Fancy,2002-08-22,False
+260,Flying,2002-08-25,False
+261,Soul Food I,2002-08-25,False
+262,Resolution,2002-08-27,False
+263,Dump City,2002-08-27,False
+264,"""Jimmy Stewart""",2002-08-28,False
+265,The Haunt,2002-08-28,False
+266,Blue Echo,2002-08-28,False
+267,Soul Food I,2002-08-29,False
+268,Dr. Feelgood,2002-08-29,False
+269,August,2002-08-29,False
+270,FF,2002-08-29,False
+271,Kabump,2002-08-29,False
+272,Resolution,2002-09-06,False
+273,Roulette,2002-09-06,False
+274,JaJunk,2002-09-07,False
+275,JaJunk,2002-09-19,False
+276,50 Ways to Leave Your Lover,2002-09-19,False
+277,Utopian Fir,2002-09-19,False
+278,Syncopated Strangers,2002-09-20,False
+279,Space Funk Booty,2002-09-20,False
+280,Prowler,2002-09-21,False
+281,Visions,2002-09-21,False
+282,Kabump,2002-09-21,False
+283,Out Of Order,2002-09-21,False
+284,The Crooked One,2002-09-24,False
+285,FF,2002-09-24,False
+286,August,2002-09-24,False
+287,Walletsworth,2002-09-25,False
+288,Roulette,2002-10-04,False
+289,Push the Pig,2002-10-04,False
+290,Headphones & Snowcones,2002-10-04,False
+291,Utopian Fir,2002-10-04,False
+292,Hey Nineteen,2002-10-04,False
+293,Kabump,2002-10-05,False
+294,Sociable Jimmy,2002-10-05,False
+295,Visions,2002-10-05,False
+296,Ringo,2002-10-05,False
+297,Hurt Bird Bath,2002-10-05,False
+298,Tribute to the Spinal Shaft,2002-10-09,False
+299,JaJunk,2002-10-10,False
+300,Sweetness,2002-10-10,False
+301,"""Jimmy Stewart""",2002-10-11,False
+302,Hangover,2002-10-14,False
+303,Blue Echo,2002-10-16,False
+304,Hey Nineteen,2002-10-16,False
+305,Der Bluten Kat,2002-10-16,False
+306,Push the Pig,2002-10-17,False
+307,Andy's Last Beer,2002-10-19,False
+308,Hajimemashite,2002-10-22,False
+309,Example 1,2002-10-23,False
+310,Visions,2002-10-24,False
+311,Prowler,2002-10-24,False
+312,JaJunk,2002-10-27,False
+313,Nothing Too Fancy,2002-10-27,False
+314,Slacker,2002-11-01,False
+315,10th Grade,2002-11-01,False
+316,Resolution,2002-11-01,False
+317,The Crooked One,2002-11-02,False
+318,Utopian Fir,2002-11-02,False
+319,Resolution,2002-11-15,False
+320,"""Jimmy Stewart""",2002-11-15,True
+321,The Triple Wide,2002-11-15,False
+322,Hurt Bird Bath,2002-11-16,False
+323,The Crooked One,2002-11-20,False
+324,August,2002-11-20,False
+325,Sweetness,2002-11-20,False
+326,All Things Ninja,2002-11-21,False
+327,Utopian Fir,2002-11-22,False
+328,2nd Self,2002-11-23,False
+329,All In Time,2002-12-06,False
+330,Another Brick in the Wall,2002-12-07,False
+331,Weed Rap,2002-12-11,False
+332,Sweetness,2002-12-13,False
+333,Front Porch,2002-12-30,False
+334,In The Kitchen,2002-12-30,False
+335,Mulche's Odyssey,2002-12-31,False
+336,JaJunk,2003-01-23,False
+337,Resolution,2003-01-23,False
+338,"""Jimmy Stewart""",2003-01-23,False
+339,In The Kitchen,2003-01-24,False
+340,Blue Echo,2003-01-24,False
+341,"""Jimmy Stewart""",2003-01-25,False
+342,When the World Is Running Down You Make the Best of What's Still Around,2003-01-28,False
+343,August,2003-01-28,False
+344,Resolution,2003-01-29,False
+345,Hurt Bird Bath,2003-01-29,False
+346,Blue Echo,2003-01-30,False
+347,Glory,2003-01-30,False
+348,13 Days,2003-01-31,False
+349,Resolution,2003-01-31,False
+350,"""Jimmy Stewart""",2003-01-31,False
+351,Soul Food I,2003-02-04,False
+352,Anchor Drops,2003-02-04,True
+353,Blue Echo,2003-02-05,False
+354,Resolution,2003-02-05,False
+355,Gin and Juice,2003-02-06,False
+356,Kabump,2003-02-07,False
+357,Utopian Fir,2003-02-07,False
+358,Blue Echo,2003-02-08,False
+359,FF,2003-02-08,False
+360,In The Kitchen,2003-02-10,False
+361,"""Jimmy Stewart""",2003-02-10,False
+362,Space Funk Booty,2003-02-12,False
+363,Kabump,2003-02-12,False
+364,The Crooked One,2003-02-13,False
+365,Blue Echo,2003-02-13,False
+366,Divisions,2003-02-14,False
+367,"""Jimmy Stewart""",2003-02-14,False
+368,Orfeo,2003-02-14,False
+369,Nothing Too Fancy,2003-02-15,False
+370,Uncle Wally,2003-02-15,False
+371,2x2,2003-02-25,False
+372,"""Jimmy Stewart""",2003-02-25,False
+373,50 Ways to Leave Your Lover,2003-02-27,False
+374,"""Jimmy Stewart""",2003-03-03,False
+375,Blue Echo,2003-03-03,False
+376,Power of Soul,2003-03-03,False
+377,Uncle Wally,2003-03-04,False
+378,"""Jimmy Stewart""",2003-03-04,False
+379,Resolution,2003-03-06,False
+380,Blue Echo,2003-03-06,False
+381,FF,2003-03-07,False
+382,Soul Food I,2003-03-07,False
+383,2x2,2003-03-08,False
+384,"""Jimmy Stewart""",2003-03-17,False
+385,JaJunk,2003-03-17,False
+386,Nothing Too Fancy,2003-03-19,False
+387,FF,2003-03-20,False
+388,2x2,2003-03-20,False
+389,Visions,2003-03-21,False
+390,Waiting Room,2003-03-21,False
+391,Visions,2003-03-27,False
+392,"""Jimmy Stewart""",2003-03-27,False
+393,Resolution,2003-03-28,False
+394,Ringo,2003-03-28,False
+395,Hajimemashite,2003-03-29,False
+396,40's Theme,2003-03-29,True
+397,The Triple Wide,2003-03-29,False
+398,Mulche's Odyssey,2003-03-29,False
+399,The Fuzz,2003-03-30,False
+400,August,2003-03-30,False
+401,Uncle Wally,2003-04-01,False
+402,Example 1,2003-04-01,True
+403,Hurt Bird Bath,2003-04-04,False
+404,We're Going to War,2003-04-07,False
+405,Hurt Bird Bath,2003-04-09,False
+406,Nothing Too Fancy,2003-04-09,False
+407,Walletsworth,2003-04-10,False
+408,Divisions,2003-04-11,False
+409,Anchor Drops,2003-04-11,False
+410,Resolution,2003-04-12,True
+411,August,2003-04-12,False
+412,Dr. Feelgood,2003-04-12,False
+413,In The Kitchen,2003-04-18,False
+414,FF,2003-04-20,False
+415,Hajimemashite,2003-04-22,False
+416,Soul Food I,2003-04-22,False
+417,Example 1,2003-04-22,True
+418,Resolution,2003-04-22,False
+419,Der Bluten Kat,2003-04-23,True
+420,Smell the Mitten,2003-04-24,False
+421,Uncle Wally,2003-04-24,False
+422,Hurt Bird Bath,2003-04-24,False
+423,Push the Pig,2003-04-26,False
+424,Dump City,2003-04-26,False
+425,Blue Echo,2003-04-28,False
+426,The Triple Wide,2003-04-28,False
+427,Soul Food I,2003-04-30,False
+428,The Triple Wide,2003-04-30,False
+429,Divisions,2003-05-14,False
+430,Anchor Drops,2003-05-14,False
+431,Example 1,2003-05-15,False
+432,FF,2003-05-15,False
+433,The Triple Wide,2003-05-16,False
+434,Intro,2003-05-22,False
+435,August,2003-05-22,False
+436,Flying,2003-05-23,False
+437,Tribute to the Spinal Shaft,2003-05-23,False
+438,Water,2003-05-23,False
+439,Hajimemashite,2003-05-23,False
+440,Sweetness,2003-05-23,False
+441,Visions,2003-05-24,False
+442,Resolution,2003-05-25,False
+443,Ringo,2003-05-25,False
+444,JaJunk,2003-05-25,False
+445,Nothing Too Fancy,2003-05-25,False
+446,Blue Echo,2003-06-05,False
+447,FF,2003-06-05,False
+448,Water,2003-06-05,False
+449,Resolution,2003-06-06,True
+450,Walletsworth,2003-06-06,False
+451,Tribute to the Spinal Shaft,2003-06-06,False
+452,Uncommon,2003-06-18,False
+453,"""Jimmy Stewart""",2003-06-19,False
+454,Utopian Fir,2003-06-19,False
+455,Hurt Bird Bath,2003-06-20,False
+456,Tribute to the Spinal Shaft,2003-06-20,False
+457,The Triple Wide,2003-06-20,False
+458,Resolution,2003-06-21,False
+459,Roulette,2003-06-21,False
+460,Anchor Drops,2003-06-22,False
+461,Professor Wormbog,2003-06-30,False
+462,Soul Food I,2003-07-02,False
+463,Resolution,2003-07-02,False
+464,Nothing Too Fancy,2003-07-04,False
+465,The Triple Wide,2003-07-04,False
+466,Blue Echo,2003-07-06,False
+467,Birthday,2003-07-08,False
+468,Resolution,2003-07-08,False
+469,Big Heart,2003-07-08,False
+470,Push the Pig,2003-07-09,False
+471,JaJunk,2003-07-09,False
+472,Example 1,2003-07-11,False
+473,Visions,2003-07-11,False
+474,Power of Soul,2003-07-12,False
+475,The Triple Wide,2003-07-12,False
+476,FF,2003-07-14,False
+477,Wife Soup,2003-07-14,False
+478,Blue Echo,2003-07-15,False
+479,Hurt Bird Bath,2003-07-15,False
+480,Walletsworth,2003-07-15,False
+481,Dump City,2003-07-17,False
+482,Miss Tinkle's Overture,2003-07-18,False
+483,Nothing Too Fancy,2003-07-18,False
+484,We're Going to War,2003-07-19,False
+485,Nothing Too Fancy,2003-07-26,False
+486,FF,2003-07-26,False
+487,Uncommon,2003-07-27,False
+488,Wife Soup,2003-07-27,False
+489,Resolution,2003-08-16,False
+490,Front Porch,2003-08-16,True
+491,Hurt Bird Bath,2003-08-16,False
+492,2nd Self,2003-08-16,False
+493,"""Jimmy Stewart""",2003-08-16,False
+494,Kabump,2003-08-22,True
+495,Tribute to the Spinal Shaft,2003-08-23,False
+496,Blue Echo,2003-08-23,False
+497,In The Kitchen,2003-08-31,False
+498,August,2003-08-31,False
+499,I Am the Walrus,2003-09-03,False
+500,Der Bluten Kat,2003-09-04,True
+501,Space Funk Booty,2003-09-10,False
+502,Hajimemashite,2003-09-10,False
+503,Baby You're A Rich Man,2003-09-10,False
+504,"""Jimmy Stewart""",2003-09-11,False
+505,Padgett's Profile,2003-09-12,False
+506,Dump City,2003-09-13,False
+507,Miss Tinkle's Overture,2003-09-13,False
+508,FF,2003-09-17,False
+509,The Haunt,2003-09-19,False
+510,13 Days,2003-09-23,False
+511,Blue Echo,2003-09-25,False
+512,Push the Pig,2003-09-25,False
+513,Kabump,2003-09-26,False
+514,The Triple Wide,2003-09-26,False
+515,Resolution,2003-09-26,False
+516,The Fuzz,2003-09-27,False
+517,Ringo,2003-09-27,False
+518,In The Kitchen,2003-10-01,False
+519,FF,2003-10-01,False
+520,Hurt Bird Bath,2003-10-02,False
+521,Kabump,2003-10-02,False
+522,Resolution,2003-10-03,False
+523,The Girl Is Mine,2003-10-03,False
+524,Willie the Pimp,2003-10-08,False
+525,Example 1,2003-10-08,False
+526,Resolution,2003-10-08,False
+527,Space Funk Booty,2003-10-09,False
+528,Soul Food I,2003-10-09,False
+529,Front Porch,2003-10-09,False
+530,Blue Echo,2003-10-10,False
+531,Push the Pig,2003-10-10,False
+532,Der Bluten Kat,2003-10-15,True
+533,Kabump,2003-10-15,False
+534,JaJunk,2003-10-16,False
+535,"""Jimmy Stewart""",2003-10-16,False
+536,Glory,2003-10-16,False
+537,Resolution,2003-10-17,False
+538,Roulette,2003-10-19,False
+539,40's Theme,2003-10-22,False
+540,Front Porch,2003-10-22,False
+541,Visions,2003-10-22,False
+542,Sweetness,2003-10-22,False
+543,FF,2003-10-22,False
+544,2x2,2003-10-24,False
+545,Flying,2003-10-24,False
+546,Visions,2003-11-01,False
+547,Kabump,2003-11-07,False
+548,Who Knows,2003-11-13,False
+549,FF,2003-11-13,False
+550,Visions,2003-11-14,False
+551,Example 1,2003-11-16,False
+552,Tribute to the Spinal Shaft,2003-11-16,False
+553,JaJunk,2003-11-18,False
+554,Resolution,2003-11-18,True
+555,Uncommon,2003-11-18,False
+556,Der Bluten Kat,2003-11-19,False
+557,40's Theme,2003-11-19,True
+558,Blue Echo,2003-11-20,False
+559,Syncopated Strangers,2003-11-21,False
+560,Resolution,2003-11-22,False
+561,Much Obliged,2003-11-26,False
+562,Front Porch,2003-11-26,False
+563,Padgett's Profile,2003-11-26,False
+564,E.T.I.,2003-11-29,False
+565,Visions,2003-11-29,False
+566,Sweetness,2003-12-03,False
+567,Regulate,2003-12-03,False
+568,Blue Echo,2003-12-04,False
+569,Resolution,2003-12-04,False
+570,Kabump,2003-12-05,False
+571,2x2,2003-12-05,True
+572,"""Jimmy Stewart""",2003-12-06,False
+573,Intro,2003-12-10,False
+574,In The Kitchen,2003-12-10,False
+575,Dump City,2003-12-10,False
+576,Glory,2003-12-11,False
+577,When the World Is Running Down You Make the Best of What's Still Around,2003-12-12,False
+578,Utopian Fir,2003-12-13,False
+579,Nothing Too Fancy,2003-12-29,False
+580,Sweetness,2003-12-29,False
+581,The Haunt,2003-12-30,False
+582,Soul Food I,2003-12-30,False
+583,Roses,2003-12-30,False
+584,Pipeline,2004-01-06,False
+585,The Triple Wide,2004-01-08,False
+586,When the World Is Running Down You Make the Best of What's Still Around,2004-01-10,False
+587,Blue Echo,2004-01-30,False
+588,Padgett's Profile,2004-01-30,False
+589,Hajimemashite,2004-01-31,False
+590,Kabump,2004-01-31,False
+591,The Haunt,2004-02-04,False
+592,Utopian Fir,2004-02-04,False
+593,Der Bluten Kat,2004-02-05,False
+594,Resolution,2004-02-05,False
+595,Visions,2004-02-05,True
+596,FF,2004-02-05,False
+597,Fame,2004-02-05,False
+598,Much Obliged,2004-02-06,False
+599,Blue Echo,2004-02-06,False
+600,Last Man Swerving,2004-02-06,False
+601,Sociable Jimmy,2004-02-07,False
+602,Nothing Too Fancy,2004-02-07,False
+603,Kabump,2004-02-07,False
+604,Soul Food I,2004-02-09,True
+605,Resolution,2004-02-10,True
+606,FF,2004-02-10,False
+607,Der Bluten Kat,2004-02-11,True
+608,Visions,2004-02-11,False
+609,Resolution,2004-02-18,False
+610,Mail Package,2004-02-19,False
+611,Hurt Bird Bath,2004-02-19,False
+612,Der Bluten Kat,2004-02-20,False
+613,Much Obliged,2004-02-21,False
+614,FF,2004-02-21,False
+615,When the World Is Running Down You Make the Best of What's Still Around,2004-02-21,False
+616,Blue Echo,2004-02-21,False
+617,Syncopated Strangers,2004-02-23,False
+618,Dump City,2004-02-23,False
+619,E.T.I.,2004-02-23,False
+620,The Fuzz,2004-02-25,False
+621,Nothing Too Fancy,2004-02-25,False
+622,The Haunt,2004-02-26,False
+623,Kabump,2004-02-26,False
+624,Last Man Swerving,2004-02-26,False
+625,Front Porch,2004-02-27,False
+626,Soul Food I,2004-02-28,False
+627,Blue Echo,2004-02-28,False
+628,FF,2004-02-28,False
+629,Nothing Too Fancy,2004-02-29,False
+630,Ocean Billy,2004-02-29,False
+631,Utopian Fir,2004-02-29,False
+632,Kabump,2004-03-10,False
+633,Roulette,2004-03-11,False
+634,Ocean Billy,2004-03-12,False
+635,Bad Poker,2004-03-12,False
+636,Utopian Fir,2004-03-17,False
+637,The Haunt,2004-03-17,False
+638,The Triple Wide,2004-03-17,False
+639,Blue Echo,2004-03-18,False
+640,Tribute to the Spinal Shaft,2004-03-19,False
+641,Utopian Fir,2004-03-22,False
+642,Much Obliged,2004-03-22,False
+643,The Fuzz,2004-03-23,False
+644,Resolution,2004-03-23,True
+645,Divisions,2004-03-25,False
+646,Utopian Fir,2004-03-25,False
+647,The Haunt,2004-03-26,False
+648,FF,2004-03-26,False
+649,Kabump,2004-03-27,False
+650,Example 1,2004-03-27,False
+651,Sociable Jimmy,2004-04-02,False
+652,In The Kitchen,2004-04-02,False
+653,Nothing Too Fancy,2004-04-03,False
+654,Kabump,2004-04-03,False
+655,The Fuzz,2004-04-14,False
+656,The Girl Is Mine,2004-04-14,False
+657,Front Porch,2004-04-14,False
+658,Soul Food I,2004-04-19,False
+659,Resolution,2004-04-19,False
+660,Ocean Billy,2004-04-20,False
+661,Blue Echo,2004-04-20,False
+662,Much Obliged,2004-04-20,False
+663,Kabump,2004-04-20,False
+664,FF,2004-04-21,False
+665,Visions,2004-04-21,False
+666,Push the Pig,2004-04-22,False
+667,Der Bluten Kat,2004-04-23,False
+668,Der Bluten Kat,2004-04-27,False
+669,Example 1,2004-04-29,False
+670,Utopian Fir,2004-04-29,False
+671,FF,2004-04-29,False
+672,Ocean Billy,2004-04-30,False
+673,Resolution,2004-05-12,False
+674,Visions,2004-05-13,False
+675,August,2004-05-13,False
+676,Peter Gunn / Every Breath You Take,2004-05-13,False
+677,Kabump,2004-05-13,False
+678,FF,2004-05-14,False
+679,Ringo,2004-05-18,False
+680,Utopian Fir,2004-05-18,False
+681,Miss Tinkle's Overture,2004-05-18,False
+682,Resolution,2004-05-19,False
+683,She Came In Through The Bathroom Window,2004-05-19,False
+684,Much Obliged,2004-05-20,False
+685,Q*Bert,2004-05-27,False
+686,JaJunk,2004-05-27,False
+687,Pooh Doggie,2004-05-27,False
+688,Resolution,2004-05-29,True
+689,JaJunk,2004-05-30,False
+690,Padgett's Profile,2004-05-30,False
+691,Tribute to the Spinal Shaft,2004-06-03,False
+692,The Fuzz,2004-06-03,False
+693,Slacker,2004-06-04,False
+694,The Haunt,2004-06-04,False
+695,In The Kitchen,2004-06-05,False
+696,Uncle Wally,2004-06-05,False
+697,Soul Food I,2004-06-05,False
+698,Blue Echo,2004-06-06,False
+699,Roulette,2004-06-08,False
+700,JaJunk,2004-06-08,False
+701,Resolution,2004-06-11,False
+702,"Bright Lights, Big City",2004-06-11,False
+703,Kabump,2004-07-04,False
+704,Soul Food I,2004-07-04,False
+705,Resolution,2004-07-08,False
+706,Visions,2004-07-08,False
+707,Willie the Pimp,2004-07-08,False
+708,Tribute to the Spinal Shaft,2004-07-09,False
+709,The Triple Wide,2004-07-09,False
+710,Last Man Swerving,2004-07-09,False
+711,Utopian Fir,2004-07-10,False
+712,Example 1,2004-07-15,False
+713,FF,2004-07-15,False
+714,Much Obliged,2004-07-15,False
+715,Miss Tinkle's Overture,2004-07-16,False
+716,Push the Pig,2004-07-16,False
+717,Visions,2004-07-16,False
+718,Resolution,2004-07-16,False
+719,Syncopated Strangers,2004-07-17,False
+720,Slacker,2004-07-18,False
+721,Utopian Fir,2004-07-20,False
+722,Sweetness,2004-07-20,False
+723,Much Obliged,2004-07-21,False
+724,Kabump,2004-07-21,False
+725,Hey Nineteen,2004-07-21,False
+726,Hajimemashite,2004-07-24,False
+727,Sociable Jimmy,2004-08-06,False
+728,Much Obliged,2004-08-06,False
+729,Padgett's Profile,2004-08-06,False
+730,Example 1,2004-08-07,False
+731,Robot World,2004-08-07,False
+732,The Fuzz,2004-08-19,False
+733,Utopian Fir,2004-08-19,False
+734,Get In The Van,2004-08-19,False
+735,Resolution,2004-08-22,False
+736,FF,2004-08-26,False
+737,Ocean Billy,2004-08-27,False
+738,All Things Ninja,2004-08-27,False
+739,JaJunk,2004-09-01,False
+740,The Triple Wide,2004-09-02,False
+741,Visions,2004-09-03,False
+742,Sweetness,2004-09-04,False
+743,Blue Echo,2004-09-04,False
+744,Professor Wormbog,2004-09-07,False
+745,Kabump,2004-09-08,False
+746,The Fuzz,2004-09-09,False
+747,FF,2004-09-09,False
+748,Soul Food I,2004-09-10,False
+749,Bad Poker,2004-09-11,False
+750,Utopian Fir,2004-09-13,False
+751,Kat's Tune,2004-09-13,False
+752,The Triple Wide,2004-09-14,False
+753,I Ran,2004-09-14,False
+754,August,2004-09-16,False
+755,FF,2004-09-16,False
+756,Visions,2004-09-16,False
+757,Der Bluten Kat,2004-09-29,False
+758,Making Flippy Floppy,2004-10-01,False
+759,Soul Food I,2004-10-07,False
+760,Much Obliged,2004-10-07,False
+761,Rosanna,2004-10-08,False
+762,The Triple Wide,2004-10-08,False
+763,Ringo,2004-10-09,False
+764,#5,2004-10-09,False
+765,Ocean Billy,2004-10-09,False
+766,Plunger,2004-10-19,False
+767,Sociable Jimmy,2004-10-19,False
+768,FF,2004-10-20,False
+769,Example 1,2004-10-20,False
+770,Baby You're A Rich Man,2004-10-20,False
+771,Tribute to the Spinal Shaft,2004-10-20,False
+772,Robot World,2004-10-22,False
+773,The Haunt,2004-10-27,False
+774,"Bright Lights, Big City",2004-10-27,False
+775,Q*Bert,2004-10-27,False
+776,In The Kitchen,2004-10-28,False
+777,JaJunk,2004-10-29,False
+778,Kabump,2004-10-29,False
+779,Tribute to the Spinal Shaft,2004-10-29,False
+780,FF,2004-10-29,False
+781,Much Obliged,2004-10-30,False
+782,2nd Self,2004-11-03,False
+783,Padgett's Profile,2004-11-04,False
+784,Ringo,2004-11-04,False
+785,Much Obliged,2004-11-05,False
+786,FF,2004-11-05,False
+787,Syncopated Strangers,2004-11-05,False
+788,Resolution,2004-11-06,False
+789,Example 1,2004-11-06,False
+790,"Bright Lights, Big City",2004-11-06,False
+791,Robot World,2004-11-06,False
+792,E.T.I.,2004-11-06,False
+793,Hey Nineteen,2004-11-10,False
+794,Uncle Wally,2004-11-11,False
+795,Blue Echo,2004-11-11,False
+796,Push the Pig,2004-11-11,False
+797,Prowler,2004-11-12,False
+798,Plunger,2004-11-12,False
+799,JaJunk,2004-11-13,True
+800,Robot World,2004-11-13,False
+801,In The Kitchen,2004-12-01,False
+802,Resolution,2004-12-01,False
+803,Blue Echo,2004-12-01,False
+804,Kabump,2004-12-01,False
+805,Syncopated Strangers,2004-12-02,False
+806,Prowler,2004-12-02,False
+807,The Haunt,2004-12-03,False
+808,FF,2004-12-03,False
+809,Much Obliged,2004-12-03,False
+810,Uncle Wally,2004-12-04,False
+811,Push the Pig,2004-12-04,False
+812,Example 1,2004-12-06,False
+813,The Fuzz,2004-12-06,False
+814,Padgett's Profile,2004-12-06,False
+815,Resolution,2004-12-07,False
+816,Much Obliged,2004-12-08,False
+817,E.T.I.,2004-12-08,False
+818,2x2,2004-12-09,False
+819,FF,2004-12-09,False
+820,Blue Echo,2004-12-10,False
+821,The Triple Wide,2004-12-11,False
+822,Resolution,2004-12-11,False
+823,Much Obliged,2004-12-30,False
+824,Prowler,2004-12-31,False
+825,Resolution,2005-01-08,False
+826,Push the Pig,2005-01-08,False
+827,Hey Nineteen,2005-01-09,False
+828,Partyin' Peeps,2005-02-12,False
+829,Much Obliged,2005-02-16,False
+830,Nothing Too Fancy,2005-02-16,False
+831,Example 1,2005-02-17,False
+832,Blue Echo,2005-02-17,False
+833,Tribute to the Spinal Shaft,2005-02-18,False
+834,Der Bluten Kat,2005-02-18,True
+835,Kabump,2005-02-19,False
+836,Robot World,2005-02-19,False
+837,Kabump,2005-02-25,False
+838,"Bright Lights, Big City",2005-02-25,False
+839,Padgett's Profile,2005-02-25,False
+840,Syncopated Strangers,2005-02-27,False
+841,In The Kitchen,2005-02-27,False
+842,Example 1,2005-02-28,False
+843,Utopian Fir,2005-02-28,False
+844,Tribute to the Spinal Shaft,2005-02-28,False
+845,Divisions,2005-03-07,False
+846,Der Bluten Kat,2005-03-07,True
+847,"""Jimmy Stewart""",2005-03-08,True
+848,The Fuzz,2005-03-09,False
+849,FF,2005-03-09,True
+850,Ocean Billy,2005-03-09,False
+851,Phil's Farm,2005-03-11,True
+852,Blue Echo,2005-03-12,False
+853,Visions,2005-03-20,False
+854,Der Bluten Kat,2005-03-21,False
+855,Kabump,2005-03-22,False
+856,Ringo,2005-03-22,False
+857,Sociable Jimmy,2005-03-26,False
+858,Roulette,2005-03-26,False
+859,Space Funk Booty,2005-03-29,False
+860,FF,2005-03-30,False
+861,Robot World,2005-03-30,False
+862,Blue Echo,2005-03-30,False
+863,"""Jimmy Stewart""",2005-03-30,False
+864,The Fuzz,2005-03-31,False
+865,Utopian Fir,2005-04-01,False
+866,Equal Rights,2005-04-01,False
+867,Example 1,2005-04-01,False
+868,Q*Bert,2005-04-01,False
+869,Kabump,2005-04-02,False
+870,JaJunk,2005-04-02,True
+871,Miss Tinkle's Overture,2005-04-06,False
+872,Last Man Swerving,2005-04-07,False
+873,Robot World,2005-04-07,False
+874,Women Wine and Song,2005-04-08,False
+875,Nemo,2005-04-08,True
+876,"Bright Lights, Big City",2005-04-09,False
+877,FF,2005-04-09,False
+878,Q*Bert,2005-04-13,False
+879,In The Kitchen,2005-04-13,False
+880,Roulette,2005-04-13,False
+881,The Stranger,2005-04-14,False
+882,Phil's Farm,2005-04-14,False
+883,Another Brick in the Wall,2005-04-14,False
+884,Soul Food I,2005-04-14,False
+885,Pay the Snucka,2005-04-14,True
+886,August,2005-04-15,False
+887,Resolution,2005-04-15,False
+888,40's Theme,2005-04-16,False
+889,Robot World,2005-04-16,True
+890,Uncle Wally,2005-04-16,False
+891,Padgett's Profile,2005-04-16,False
+892,Hurt Bird Bath,2005-04-26,False
+893,Tribute to the Spinal Shaft,2005-04-28,False
+894,Kabump,2005-04-28,False
+895,August,2005-05-03,False
+896,"""Jimmy Stewart""",2005-05-03,False
+897,Power of Soul,2005-05-03,False
+898,The Bottom Half,2005-05-03,False
+899,The Fuzz,2005-05-04,False
+900,Robot World,2005-05-04,False
+901,Plunger,2005-05-05,True
+902,Hajimemashite,2005-05-05,False
+903,Blue Echo,2005-05-05,False
+904,Bridgeless,2005-05-05,False
+905,Example 1,2005-05-06,False
+906,Ringo,2005-05-06,False
+907,Much Obliged,2005-05-08,False
+908,Hurt Bird Bath,2005-05-08,False
+909,Visions,2005-05-10,False
+910,Padgett's Profile,2005-05-10,True
+911,"""Jimmy Stewart""",2005-05-10,True
+912,FF,2005-05-11,True
+913,August,2005-05-11,False
+914,Q*Bert,2005-05-11,False
+915,"Bright Lights, Big City",2005-05-12,False
+916,Ringo,2005-05-13,False
+917,Making Flippy Floppy,2005-05-13,False
+918,Hey Nineteen,2005-05-14,False
+919,Water,2005-05-27,True
+920,Much Obliged,2005-05-27,False
+921,Ringo,2005-05-27,False
+922,"Bright Lights, Big City",2005-05-27,False
+923,Syncopated Strangers,2005-06-02,False
+924,Der Bluten Kat,2005-06-02,False
+925,Walletsworth,2005-06-02,False
+926,Example 1,2005-06-03,False
+927,"Bright Lights, Big City",2005-06-04,False
+928,Sociable Jimmy,2005-06-04,False
+929,Utopian Fir,2005-06-08,False
+930,FF,2005-06-08,True
+931,"Bright Lights, Big City",2005-06-16,False
+932,Ringo,2005-06-16,False
+933,Dump City,2005-06-16,False
+934,Hey Nineteen,2005-06-17,False
+935,Hajimemashite,2005-07-02,False
+936,"""Jimmy Stewart""",2005-07-04,False
+937,Much Obliged,2005-07-04,False
+938,Divisions,2005-07-06,False
+939,Robot World,2005-07-06,True
+940,Syncopated Strangers,2005-07-06,False
+941,Padgett's Profile,2005-07-06,False
+942,Resolution,2005-07-07,False
+943,Space Funk Booty,2005-07-08,False
+944,Tribute to the Spinal Shaft,2005-07-09,False
+945,Bridgeless,2005-07-09,False
+946,The Fuzz,2005-07-10,False
+947,Utopian Fir,2005-07-12,False
+948,Making Flippy Floppy,2005-07-15,False
+949,The Triple Wide,2005-07-16,False
+950,Another Brick in the Wall,2005-07-16,False
+951,Much Obliged,2005-07-16,False
+952,Robot World,2005-07-17,False
+953,Kabump,2005-07-19,False
+954,Resolution,2005-07-19,False
+955,Visions,2005-08-20,False
+956,Resolution,2005-08-21,False
+957,Much Obliged,2005-08-21,False
+958,Blue Echo,2005-08-23,False
+959,Mulche's Odyssey,2005-08-23,False
+960,Soul Food I,2005-08-24,False
+961,Kabump,2005-08-24,False
+962,Padgett's Profile,2005-08-25,True
+963,JaJunk,2005-08-25,False
+964,FF,2005-08-26,False
+965,Plunger,2005-08-27,False
+966,Visions,2005-08-28,False
+967,Women Wine and Song,2005-09-02,False
+968,Kabump,2005-09-02,False
+969,2nd Self,2005-09-03,False
+970,Much Obliged,2005-09-03,False
+971,The Triple Wide,2005-09-04,True
+972,FF,2005-09-07,True
+973,Much Obliged,2005-09-08,False
+974,Syncopated Strangers,2005-09-09,False
+975,Resolution,2005-09-10,False
+976,Uncle Wally,2005-09-10,False
+977,Kabump,2005-09-10,False
+978,The Pequod,2005-09-11,False
+979,Much Obliged,2005-09-13,False
+980,Padgett's Profile,2005-09-13,False
+981,Blue Echo,2005-09-13,False
+982,Visions,2005-09-14,False
+983,"""Jimmy Stewart""",2005-09-14,False
+984,Blue Echo,2005-09-17,False
+985,Der Bluten Kat,2005-09-17,True
+986,"Bright Lights, Big City",2005-09-23,False
+987,The Girl Is Mine,2005-09-23,False
+988,Anchor Drops,2005-09-28,False
+989,When the World Is Running Down You Make the Best of What's Still Around,2005-09-28,False
+990,The Fuzz,2005-09-28,False
+991,Tribute to the Spinal Shaft,2005-09-28,False
+992,Phil's Farm,2005-09-29,False
+993,Water,2005-09-29,False
+994,Kabump,2005-09-29,False
+995,August,2005-09-30,False
+996,"Bright Lights, Big City",2005-09-30,False
+997,Der Bluten Kat,2005-09-30,False
+998,Ringo,2005-09-30,True
+999,Much Obliged,2005-10-01,False
+1000,Women Wine and Song,2005-10-02,False
+1001,FF,2005-10-02,True
+1002,Miss Tinkle's Overture,2005-10-02,False
+1003,Nothing Too Fancy,2005-10-12,False
+1004,Making Flippy Floppy,2005-10-12,True
+1005,Blue Echo,2005-10-13,True
+1006,August,2005-10-13,False
+1007,Higgins,2005-10-14,False
+1008,Walletsworth,2005-10-15,False
+1009,The Fuzz,2005-10-17,False
+1010,Divisions,2005-10-17,True
+1011,E.T.I.,2005-10-17,False
+1012,FF,2005-10-17,False
+1013,Robot World,2005-10-18,False
+1014,Resolution,2005-10-19,False
+1015,Example 1,2005-10-19,False
+1016,Kabump,2005-10-19,False
+1017,Der Bluten Kat,2005-10-19,True
+1018,Much Obliged,2005-10-19,False
+1019,Space Funk Booty,2005-10-20,False
+1020,Sociable Jimmy,2005-10-25,False
+1021,Blue Echo,2005-10-25,True
+1022,Uncle Wally,2005-10-26,False
+1023,Prowler,2005-10-26,False
+1024,Glory,2005-10-27,False
+1025,Helter Skelter,2005-10-28,False
+1026,FF,2005-11-04,False
+1027,The Crooked One,2005-11-09,False
+1028,Roulette,2005-11-09,False
+1029,Resolution,2005-11-10,False
+1030,Making Flippy Floppy,2005-11-10,False
+1031,Ringo,2005-11-10,False
+1032,Tribute to the Spinal Shaft,2005-11-10,False
+1033,"Bright Lights, Big City",2005-11-11,False
+1034,Syncopated Strangers,2005-11-11,False
+1035,Robot World,2005-11-11,False
+1036,Ocean Billy,2005-11-12,False
+1037,Plunger,2005-11-12,False
+1038,Uncle Wally,2005-11-15,False
+1039,The Fuzz,2005-11-15,False
+1040,No Quarter,2005-11-15,False
+1041,FF,2005-11-15,False
+1042,Tribute to the Spinal Shaft,2005-11-16,False
+1043,Nothing Too Fancy,2005-11-16,False
+1044,Push the Pig,2005-11-17,False
+1045,Blue Echo,2005-11-17,False
+1046,Resolution,2005-11-18,False
+1047,Kabump,2005-11-19,False
+1048,Kabump,2005-12-02,False
+1049,Robot World,2005-12-02,False
+1050,Much Obliged,2005-12-05,False
+1051,Uncle Wally,2005-12-06,False
+1052,Hey Nineteen,2005-12-06,False
+1053,Hurt Bird Bath,2005-12-06,False
+1054,Baby You're A Rich Man,2005-12-08,False
+1055,E.T.I.,2005-12-08,False
+1056,Resolution,2005-12-09,False
+1057,Making Flippy Floppy,2005-12-09,False
+1058,Visions,2005-12-10,False
+1059,Robot World,2005-12-10,False
+1060,Dump City,2005-12-30,False
+1061,Utopian Fir,2005-12-30,False
+1062,Women Wine and Song,2005-12-30,False
+1063,Plunger,2005-12-30,False
+1064,Plunger,2006-01-09,False
+1065,Resolution,2006-02-08,False
+1066,Nemo,2006-02-08,True
+1067,Blue Echo,2006-02-08,False
+1068,Kabump,2006-02-09,False
+1069,August,2006-02-10,True
+1070,FF,2006-02-10,False
+1071,Last Man Swerving,2006-02-14,False
+1072,Visions,2006-02-15,False
+1073,Resolution,2006-02-15,True
+1074,Nothing Too Fancy,2006-02-17,False
+1075,Syncopated Strangers,2006-02-17,False
+1076,Dump City,2006-02-18,True
+1077,Ocean Billy,2006-02-20,False
+1078,Mail Package,2006-02-22,False
+1079,Sociable Jimmy,2006-02-22,False
+1080,Tribute to the Spinal Shaft,2006-02-23,False
+1081,Blue Echo,2006-02-23,False
+1082,Visions,2006-02-24,True
+1083,Plunger,2006-02-25,False
+1084,Front Porch,2006-02-25,False
+1085,The Triple Wide,2006-03-10,False
+1086,Sociable Jimmy,2006-03-10,False
+1087,Liquid,2006-03-10,False
+1088,Plunger,2006-03-11,False
+1089,Push the Pig,2006-03-11,False
+1090,Another Brick in the Wall,2006-03-11,False
+1091,Blue Echo,2006-03-14,False
+1092,Syncopated Strangers,2006-03-14,False
+1093,Much Obliged,2006-03-15,False
+1094,Plunger,2006-03-15,False
+1095,"Bright Lights, Big City",2006-03-16,False
+1096,Utopian Fir,2006-03-19,False
+1097,Roulette,2006-03-23,False
+1098,Eat,2006-04-03,False
+1099,In The Kitchen,2006-04-07,False
+1100,Eat,2006-04-08,False
+1101,Bridgeless,2006-04-09,False
+1102,Ringo,2006-04-09,True
+1103,Morning Song,2006-04-10,False
+1104,Mail Package,2006-04-10,False
+1105,Last Man Swerving,2006-04-12,False
+1106,Kabump,2006-04-12,False
+1107,E.T.I.,2006-04-13,False
+1108,Nemo,2006-04-14,False
+1109,Miss Tinkle's Overture,2006-04-15,False
+1110,Walletsworth,2006-04-21,False
+1111,JaJunk,2006-04-21,False
+1112,Wife Soup,2006-04-27,False
+1113,Kabump,2006-04-28,False
+1114,Tribute to the Spinal Shaft,2006-04-28,False
+1115,The Fussy Dutchman,2006-05-01,False
+1116,In The Kitchen,2006-05-01,False
+1117,Wife Soup,2006-05-02,False
+1118,Hey Nineteen,2006-05-03,False
+1119,FF,2006-05-03,False
+1120,Kabump,2006-05-05,False
+1121,Glory,2006-05-05,False
+1122,Believe the Lie,2006-05-30,False
+1123,Mulche's Odyssey,2006-05-30,False
+1124,Nemo,2006-06-08,False
+1125,Intentions Clear,2006-06-08,False
+1126,Anchor Drops,2006-06-09,False
+1127,Utopian Fir,2006-06-09,False
+1128,Bridgeless,2006-06-09,False
+1129,The Haunt,2006-06-10,False
+1130,Plunger,2006-06-16,False
+1131,Intentions Clear,2006-06-16,False
+1132,All In Time,2006-06-16,False
+1133,Nothing Too Fancy,2006-06-29,False
+1134,Utopian Fir,2006-06-29,False
+1135,Higgins,2006-06-30,False
+1136,Plunger,2006-07-01,False
+1137,Syncopated Strangers,2006-07-02,False
+1138,Uncle Wally,2006-07-15,False
+1139,Hey Nineteen,2006-07-16,False
+1140,August,2006-07-16,True
+1141,Liquid,2006-07-18,False
+1142,White Man's Moccasins,2006-07-19,False
+1143,Mail Package,2006-07-19,False
+1144,Ringo,2006-07-20,False
+1145,Plunger,2006-07-20,False
+1146,Kabump,2006-07-21,False
+1147,August,2006-08-20,True
+1148,Kabump,2006-08-25,False
+1149,End of the Road,2006-08-25,False
+1150,Mail Package,2006-08-25,False
+1151,Atmosfarag,2006-08-31,False
+1152,Pay the Snucka,2006-09-21,False
+1153,Divisions,2006-09-22,False
+1154,Nemo,2006-09-22,False
+1155,Resolution,2006-09-27,False
+1156,The Haunt,2006-09-28,False
+1157,2nd Self,2006-09-29,False
+1158,Dump City,2006-09-29,False
+1159,Utopian Fir,2006-09-30,False
+1160,"Luckenbach, Texas (Back to the Basics of Love)",2006-09-30,False
+1161,Intentions Clear,2006-09-30,False
+1162,The Triple Wide,2006-09-30,True
+1163,Mail Package,2006-10-02,False
+1164,Uncommon,2006-10-02,False
+1165,What's Going On,2006-10-02,False
+1166,FF,2006-10-02,False
+1167,Nemo,2006-10-04,False
+1168,Blue Echo,2006-10-05,False
+1169,Women Wine and Song,2006-10-05,False
+1170,Great American,2006-10-05,False
+1171,Higgins,2006-10-06,True
+1172,August,2006-10-06,False
+1173,Plunger,2006-10-07,False
+1174,E.T.I.,2006-10-07,False
+1175,Sociable Jimmy,2006-10-18,False
+1176,Plunger,2006-10-18,False
+1177,Kabump,2006-10-18,False
+1178,Anchor Drops,2006-10-19,False
+1179,Higgins,2006-10-20,False
+1180,Example 1,2006-10-23,False
+1181,Hajimemashite,2006-10-24,False
+1182,Tribute to the Spinal Shaft,2006-11-02,True
+1183,Groove Holmes,2006-11-02,False
+1184,Morning Song,2006-11-02,False
+1185,Got Your Milk (Right Here),2006-11-03,False
+1186,All In Time,2006-11-03,False
+1187,Pay the Snucka,2006-11-04,False
+1188,The Triple Wide,2006-11-04,True
+1189,Kabump,2006-11-08,True
+1190,Plunger,2006-11-09,False
+1191,Divisions,2006-11-09,False
+1192,Anchor Drops,2006-11-10,False
+1193,Hey Nineteen,2006-11-10,False
+1194,Ocean Billy,2006-11-15,False
+1195,The Crooked One,2006-11-15,False
+1196,Syncopated Strangers,2006-11-16,False
+1197,40's Theme,2006-11-16,False
+1198,Intentions Clear,2006-12-01,False
+1199,Wife Soup,2006-12-01,False
+1200,Dump City,2007-01-04,False
+1201,Resolution,2007-01-04,False
+1202,Another Brick in the Wall,2007-01-06,False
+1203,In The Kitchen,2007-02-17,False
+1204,Eat,2007-02-17,True
+1205,Sociable Jimmy,2007-02-17,False
+1206,Nemo,2007-02-21,False
+1207,Phil's Farm,2007-02-23,False
+1208,Atmosfarag,2007-02-24,False
+1209,Professor Wormbog,2007-02-28,False
+1210,Ringo,2007-02-28,False
+1211,Miss Tinkle's Overture,2007-03-01,False
+1212,Hajimemashite,2007-03-01,False
+1213,The Bottom Half,2007-03-02,False
+1214,The Triple Wide,2007-03-03,False
+1215,Uncle Wally,2007-03-05,False
+1216,Dump City,2007-03-15,False
+1217,Slacker,2007-03-15,False
+1218,The Bottom Half,2007-03-16,False
+1219,Baby You're A Rich Man,2007-03-16,False
+1220,Nemo,2007-03-17,False
+1221,JaJunk,2007-03-17,False
+1222,Hajimemashite,2007-03-22,False
+1223,The Crooked One,2007-03-22,False
+1224,Intentions Clear,2007-03-23,False
+1225,"""Jimmy Stewart""",2007-03-23,True
+1226,JaJunk,2007-03-24,True
+1227,Robot World,2007-03-24,False
+1228,Push the Pig,2007-04-06,True
+1229,Uncle Wally,2007-04-11,False
+1230,Intentions Clear,2007-04-11,False
+1231,Syncopated Strangers,2007-04-11,False
+1232,Example 1,2007-04-14,False
+1233,Bridgeless,2007-04-14,False
+1234,August,2007-04-15,True
+1235,Uncle Wally,2007-04-15,False
+1236,The Bottom Half,2007-04-17,False
+1237,Peter Gunn / Every Breath You Take,2007-04-19,False
+1238,Bridgeless,2007-04-20,True
+1239,Uncle Wally,2007-04-22,False
+1240,Intentions Clear,2007-05-02,True
+1241,Last Man Swerving,2007-05-03,False
+1242,Alex's House,2007-05-03,False
+1243,Der Bluten Kat,2007-05-04,True
+1244,Making Flippy Floppy,2007-05-04,False
+1245,Dump City,2007-05-04,False
+1246,E.T.I.,2007-05-05,False
+1247,Miss Tinkle's Overture,2007-05-05,False
+1248,Eat,2007-05-25,False
+1249,Example 1,2007-05-31,False
+1250,Sweetness,2007-05-31,False
+1251,Eat,2007-06-02,False
+1252,The Triple Wide,2007-06-07,True
+1253,Atmosfarag,2007-06-07,False
+1254,Plunger,2007-06-08,False
+1255,Hey Nineteen,2007-06-09,False
+1256,Ringo,2007-06-09,True
+1257,Alex's House,2007-06-13,False
+1258,Plunger,2007-06-13,False
+1259,In The Kitchen,2007-06-14,False
+1260,Intentions Clear,2007-06-14,False
+1261,Plunger,2007-06-27,False
+1262,2x2,2007-06-28,False
+1263,White Man's Moccasins,2007-06-29,False
+1264,Walletsworth,2007-06-30,False
+1265,FF,2007-06-30,False
+1266,Wife Soup,2007-07-04,False
+1267,E.T.I.,2007-07-05,False
+1268,Walletsworth,2007-07-06,False
+1269,The Bottom Half,2007-07-13,False
+1270,Plunger,2007-07-19,False
+1271,Intentions Clear,2007-07-19,False
+1272,Mulche's Odyssey,2007-07-26,False
+1273,Nemo,2007-07-26,True
+1274,Plunger,2007-08-15,False
+1275,Walletsworth,2007-08-21,False
+1276,Wife Soup,2007-08-25,False
+1277,Intentions Clear,2007-08-25,False
+1278,Blue Echo,2007-09-13,False
+1279,Walletsworth,2007-09-13,True
+1280,Nemo,2007-09-14,True
+1281,Great American,2007-09-15,True
+1282,"Bright Lights, Big City",2007-10-04,False
+1283,2x2,2007-10-04,False
+1284,Tribute to the Spinal Shaft,2007-10-04,False
+1285,Eat,2007-10-05,False
+1286,Nemo,2007-10-06,False
+1287,Higgins,2007-10-14,False
+1288,Much Obliged,2007-10-15,True
+1289,The Fuzz,2007-10-16,False
+1290,Walletsworth,2007-10-17,False
+1291,Smell the Mitten,2007-10-17,False
+1292,Women Wine and Song,2007-10-18,False
+1293,Another Brick in the Wall,2007-10-18,False
+1294,Making Flippy Floppy,2007-10-18,False
+1295,Pay the Snucka,2007-10-19,False
+1296,Mulche's Odyssey,2007-10-20,False
+1297,August,2007-10-26,True
+1298,Higgins,2007-10-26,False
+1299,Blue Echo,2007-11-10,True
+1300,Nemo,2007-11-15,False
+1301,"""Jimmy Stewart""",2007-11-18,False
+1302,Uncle Wally,2007-11-29,False
+1303,Women Wine and Song,2007-11-30,False
+1304,Atmosfarag,2007-11-30,False
+1305,JaJunk,2007-12-16,False
+1306,Got Your Milk (Right Here),2007-12-29,False
+1307,Higgins,2007-12-29,False
+1308,Nemo,2007-12-29,False
+1309,Right Off,2007-12-30,False
+1310,Plunger,2007-12-31,True
+1311,FF,2007-12-31,False
+1312,Dump City,2008-02-07,False
+1313,Search 4,2008-02-07,False
+1314,Passing,2008-02-08,False
+1315,"""Jimmy Stewart""",2008-02-12,False
+1316,Sweetness,2008-02-12,False
+1317,Example 1,2008-02-12,False
+1318,JaJunk,2008-02-13,False
+1319,The Fuzz,2008-02-27,False
+1320,Uncle Wally,2008-02-28,False
+1321,Last Man Swerving,2008-02-28,False
+1322,Rocker Part 2,2008-03-02,False
+1323,Plunger,2008-03-04,False
+1324,Roulette,2008-03-16,False
+1325,Intro,2008-03-18,False
+1326,"""Jimmy Stewart""",2008-03-19,False
+1327,Eat,2008-04-02,False
+1328,Der Bluten Kat,2008-04-11,True
+1329,Intentions Clear,2008-04-18,False
+1330,Atmosfarag,2008-04-30,False
+1331,Intentions Clear,2008-05-01,False
+1332,Intentions Clear,2008-06-05,False
+1333,FF,2008-06-07,False
+1334,Professor Wormbog,2008-07-11,False
+1335,Intentions Clear,2008-07-11,False
+1336,Rocker Part 2,2008-07-12,False
+1337,Roulette,2008-07-16,False
+1338,Water,2008-07-17,False
+1339,Got Your Milk (Right Here),2008-07-24,False
+1340,Eat,2008-07-26,False
+1341,Passing,2008-07-27,False
+1342,Phil's Farm,2008-07-27,False
+1343,Intentions Clear,2008-07-27,False
+1344,Much Obliged,2008-07-30,False
+1345,Voices Inside My Head,2008-07-31,False
+1346,Got Your Milk (Right Here),2008-08-01,False
+1347,Wife Soup,2008-08-03,False
+1348,Eat,2008-09-01,False
+1349,Liquid,2008-09-01,False
+1350,Rocker Part 2,2008-09-01,False
+1351,Got Your Milk (Right Here),2008-09-11,False
+1352,Rocker Part 2,2008-09-12,False
+1353,End of the Road,2008-09-12,False
+1354,Der Bluten Kat,2008-09-13,True
+1355,Got Your Milk (Right Here),2008-10-04,False
+1356,Plunger,2008-10-09,False
+1357,JaJunk,2008-10-11,True
+1358,Eat,2008-10-11,False
+1359,Plunger,2008-10-14,False
+1360,Snake Juice,2008-10-14,False
+1361,Andy's Last Beer,2008-10-15,False
+1362,Sweetness,2008-10-17,True
+1363,Rosanna,2008-10-18,False
+1364,Intentions Clear,2008-10-23,False
+1365,Great American,2008-10-24,False
+1366,Plunger,2008-10-28,True
+1367,August,2008-10-29,True
+1368,Der Bluten Kat,2008-11-01,True
+1369,Eat,2008-11-13,False
+1370,Water,2008-11-18,False
+1371,Last Man Swerving,2008-11-18,False
+1372,Breathe,2008-11-21,False
+1373,Higgins,2008-12-11,False
+1374,Making Flippy Floppy,2008-12-11,False
+1375,Ocean Billy,2008-12-12,True
+1376,Plunger,2008-12-12,True
+1377,2x2,2008-12-29,False
+1378,Kabump,2008-12-29,False
+1379,Great American,2008-12-30,False
+1380,Der Bluten Kat,2008-12-30,True
+1381,In The Kitchen,2009-01-22,False
+1382,Made to Measure,2009-01-23,False
+1383,Breathe,2009-02-01,False
+1384,Red Tape,2009-02-12,False
+1385,Billie Jean,2009-02-13,False
+1386,Syncopated Strangers,2009-02-14,False
+1387,"""Jimmy Stewart""",2009-02-21,False
+1388,Dump City,2009-02-21,False
+1389,Made to Measure,2009-03-04,False
+1390,London Calling,2009-03-06,False
+1391,2x2,2009-03-12,False
+1392,Uncle Wally,2009-03-12,False
+1393,Hajimemashite,2009-03-13,False
+1394,Nothing Too Fancy,2009-03-13,True
+1395,Got Your Milk (Right Here),2009-03-14,False
+1396,Pay the Snucka,2009-03-14,False
+1397,Turn & Run,2009-03-25,False
+1398,Walletsworth,2009-03-27,False
+1399,Plunger,2009-03-27,True
+1400,Dump City,2009-04-04,True
+1401,Cemetery Walk II,2009-04-04,False
+1402,Plunger,2009-04-08,True
+1403,Turn & Run,2009-04-09,False
+1404,Turn & Run,2009-04-10,False
+1405,Turn & Run,2009-05-22,False
+1406,Utopian Fir,2009-05-29,True
+1407,Phil's Farm,2009-05-30,True
+1408,Spires,2009-06-25,False
+1409,Power of Soul,2009-06-26,False
+1410,Turn & Run,2009-07-02,False
+1411,Der Bluten Kat,2009-07-05,False
+1412,Bridgeless,2009-07-07,False
+1413,Phil's Farm,2009-07-10,True
+1414,Plunger,2009-07-10,False
+1415,Much Obliged,2009-09-04,True
+1416,Making Flippy Floppy,2009-09-06,False
+1417,Turn & Run,2009-09-09,True
+1418,Utopian Fir,2009-09-11,True
+1419,Professor Wormbog,2009-09-16,False
+1420,The Crooked One,2009-10-03,True
+1421,Eminence Front,2009-10-03,False
+1422,E.T.I.,2009-10-09,False
+1423,Breathe,2009-10-28,False
+1424,Spires,2009-11-12,False
+1425,The Bottom Half,2009-11-14,True
+1426,#5,2009-11-17,False
+1427,Resolution,2009-12-30,False
+1428,Catshot,2009-12-31,False
+1429,2x2,2010-01-14,False
+1430,Made to Measure,2010-01-14,False
+1431,Made to Measure,2010-01-20,False
+1432,Steppin' Razor,2010-01-20,False
+1433,1348,2010-01-23,False
+1434,Made to Measure,2010-02-04,True
+1435,Nemo,2010-02-04,True
+1436,Spires,2010-02-09,False
+1437,Eat,2010-02-09,False
+1438,All In Time,2010-02-25,True
+1439,Push the Pig,2010-03-05,True
+1440,Making Flippy Floppy,2010-03-12,False
+1441,Front Porch,2010-04-24,True
+1442,Girlfriend is Better,2010-05-28,False
+1443,Hangover,2010-05-29,False
+1444,Push the Pig,2010-07-08,True
+1445,August,2010-07-11,True
+1446,Resolution,2010-08-01,True
+1447,Robot World,2010-08-05,True
+1448,Made to Measure,2010-08-08,False
+1449,Turn & Dub,2010-08-08,True
+1450,1348,2010-08-11,False
+1451,Booth Love,2010-09-04,False
+1452,Spires,2010-09-23,False
+1453,FF,2010-09-23,False
+1454,"""Jimmy Stewart""",2010-09-23,True
+1455,Phil's Farm,2010-09-25,True
+1456,1348,2010-09-25,False
+1457,Ringo,2010-10-01,True
+1458,In The Kitchen,2010-10-23,False
+1459,Spires,2010-10-28,False
+1460,Wellwishers,2010-11-03,False
+1461,Phil's Farm,2010-11-05,True
+1462,Intentions Clear,2010-11-05,True
+1463,Gulf Stream,2010-11-06,False
+1464,Making Flippy Floppy,2011-01-20,False
+1465,Conduit,2011-01-27,False
+1466,The Bottom Half,2011-01-29,True
+1467,Blue Echo,2011-01-30,False
+1468,Got Your Milk (Right Here),2011-01-31,False
+1469,Cemetery Walk,2011-01-31,False
+1470,Conduit,2011-02-02,False
+1471,2x2,2011-02-04,True
+1472,Cemetery Walk,2011-02-09,False
+1473,Conduit,2011-02-11,True
+1474,"Bright Lights, Big City",2011-02-11,False
+1475,FF,2011-02-12,False
+1476,Red Tape,2011-02-17,False
+1477,Sociable Jimmy,2011-02-18,True
+1478,Intentions Clear,2011-03-03,True
+1479,Der Bluten Kat,2011-03-03,True
+1480,Bridgeless,2011-03-05,False
+1481,1348,2011-03-12,False
+1482,"""Jimmy Stewart""",2011-03-12,False
+1483,Conduit,2011-03-19,False
+1484,Cummins Lies,2011-04-02,False
+1485,Bonafide Lovin',2011-04-02,False
+1486,1348,2011-04-02,False
+1487,1348,2011-04-20,False
+1488,Conduit,2011-05-19,False
+1489,1348,2011-05-27,False
+1490,Red Tape,2011-05-27,False
+1491,Conduit,2011-05-28,False
+1492,Turn & Dub,2011-06-03,False
+1493,1348,2011-06-04,False
+1494,Red Tape,2011-06-24,False
+1495,Nemo,2011-06-24,False
+1496,Night Nurse,2011-06-24,False
+1497,Steppin' Razor,2011-07-02,False
+1498,Higgins,2011-07-02,True
+1499,Red Tape,2011-07-03,False
+1500,Phil's Farm,2011-07-10,False
+1501,End of the Road,2011-08-20,False
+1502,Deeper,2011-09-03,False
+1503,1348,2011-09-03,False
+1504,Red Tape,2011-09-08,False
+1505,The Bottom Half,2011-09-08,True
+1506,Booth Love,2011-09-09,False
+1507,Divisions,2011-09-09,False
+1508,Bridgeless,2011-09-09,False
+1509,Der Bluten Kat,2011-09-10,True
+1510,Domino Theory,2011-09-13,False
+1511,Visions,2011-09-14,False
+1512,Q*Bert,2011-09-14,False
+1513,Miami Virtue,2011-09-21,False
+1514,Power of Soul,2011-09-21,False
+1515,Miami Virtue,2011-09-23,False
+1516,Alex's House,2011-09-24,True
+1517,Ringo,2011-10-21,True
+1518,Deeper,2011-10-24,False
+1519,JaJunk,2011-10-26,True
+1520,The Haunt,2011-10-29,True
+1521,Got Your Milk (Right Here),2011-11-02,False
+1522,#5,2011-11-02,False
+1523,Resolution,2011-11-04,True
+1524,The Haunt,2011-11-05,False
+1525,Ringo,2011-11-05,True
+1526,1348,2011-11-26,True
+1527,Plunger,2011-12-30,False
+1528,JaJunk,2011-12-31,True
+1529,Conduit,2012-01-20,False
+1530,The Linear,2012-01-20,False
+1531,Domino Theory,2012-01-21,True
+1532,Miami Virtue,2012-01-21,False
+1533,Bridgeless,2012-01-21,True
+1534,Miami Virtue,2012-01-26,False
+1535,Domino Theory,2012-01-27,False
+1536,Professor Wormbog,2012-02-09,False
+1537,Spires,2012-02-09,False
+1538,Voyager,2012-02-09,False
+1539,"""Jimmy Stewart""",2012-02-10,True
+1540,Domino Theory,2012-02-10,False
+1541,Rocker Part 2,2012-02-11,False
+1542,Room to Breathe,2012-02-12,False
+1543,Miami Virtue,2012-02-12,True
+1544,Domino Theory,2012-02-15,False
+1545,Resolution,2012-02-16,False
+1546,Miami Virtue,2012-02-16,False
+1547,Wellwishers,2012-02-17,False
+1548,Miami Virtue,2012-03-17,False
+1549,Robot World,2012-03-18,False
+1550,Rosanna,2012-03-18,False
+1551,Utopian Fir,2012-03-18,True
+1552,Miami Virtue,2012-03-22,False
+1553,JaJunk,2012-03-25,False
+1554,1348,2012-04-19,False
+1555,Robot World,2012-04-28,True
+1556,Utopian Fir,2012-04-28,True
+1557,Great American,2012-05-27,True
+1558,Spires,2012-07-01,False
+1559,Liquid,2012-07-05,False
+1560,No Comment,2012-08-07,False
+1561,Liquid,2012-08-09,False
+1562,Wappy Sprayberry,2012-08-11,True
+1563,Day Nurse,2012-09-05,False
+1564,All In Time,2012-09-14,True
+1565,Puppet String,2012-09-14,False
+1566,Visions,2012-10-17,False
+1567,Spires,2012-10-18,False
+1568,Night Nurse,2012-10-18,False
+1569,Miami Virtue,2012-10-18,False
+1570,Intentions Clear,2012-10-19,False
+1571,Conduit,2012-10-19,False
+1572,Mantis,2012-10-25,False
+1573,Plunger,2012-10-31,False
+1574,Deeper,2012-10-31,False
+1575,Girlfriend is Better,2012-10-31,False
+1576,In The Kitchen,2012-11-01,False
+1577,Much Obliged,2012-11-02,False
+1578,Tribute to the Spinal Shaft,2012-11-03,False
+1579,Slacker,2012-12-28,False
+1580,Miami Virtue,2012-12-28,False
+1581,Phil's Farm,2012-12-28,False
+1582,Puppet String,2012-12-28,False
+1583,August,2012-12-29,False
+1584,Cocaine,2012-12-30,False
+1585,Kabump,2012-12-30,False
+1586,Puppet String,2013-01-18,False
+1587,The Linear,2013-01-18,False
+1588,Another Brick in the Wall,2013-01-19,False
+1589,Higgins,2013-01-19,False
+1590,Spires,2013-01-20,False
+1591,Blue Echo,2013-01-20,False
+1592,Comma Later,2013-01-20,False
+1593,Bridgeless,2013-01-20,False
+1594,Red Tape,2013-01-23,False
+1595,Divisions,2013-01-23,False
+1596,Breathe,2013-01-23,False
+1597,Made to Measure,2013-01-25,False
+1598,Kabump,2013-01-25,False
+1599,Front Porch,2013-01-25,False
+1600,Tribute to the Spinal Shaft,2013-01-26,False
+1601,Puppet String,2013-01-26,False
+1602,13 Days,2013-01-26,False
+1603,Puppet String,2013-01-30,False
+1604,The Haunt,2013-01-31,True
+1605,Got Your Milk (Right Here),2013-02-06,False
+1606,The Bottom Half,2013-02-06,True
+1607,Nemo,2013-02-07,True
+1608,August,2013-02-10,True
+1609,In The Kitchen,2013-03-07,False
+1610,Higgins,2013-03-07,False
+1611,Puppet String,2013-03-09,True
+1612,The Linear,2013-03-14,False
+1613,Utopian Fir,2013-03-14,False
+1614,Syncopated Strangers,2013-03-17,False
+1615,"""Jimmy Stewart""",2013-03-17,False
+1616,Intentions Clear,2013-03-21,False
+1617,Divisions,2013-03-23,False
+1618,Plunger,2013-03-23,False
+1619,All In Time,2013-04-10,False
+1620,No Comment,2013-04-18,False
+1621,Another Brick in the Wall,2013-04-18,False
+1622,Higgins,2013-04-19,True
+1623,The Floor,2013-04-27,False
+1624,The Floor,2013-05-16,False
+1625,The Haunt,2013-05-25,False
+1626,Glory,2013-05-31,False
+1627,The Floor,2013-06-07,False
+1628,Robot World,2013-06-08,True
+1629,Red Tape,2013-06-22,True
+1630,Slacker,2013-06-22,True
+1631,Turn & Dub,2013-07-02,False
+1632,Robot World,2013-07-02,False
+1633,1348,2013-07-06,False
+1634,The Triple Wide,2013-07-11,True
+1635,Deeper,2013-08-16,False
+1636,The Floor,2013-08-16,False
+1637,Bridgeless,2013-08-17,False
+1638,Tribute to the Spinal Shaft,2013-08-17,False
+1639,Conduit,2013-08-17,False
+1640,The Linear,2013-08-17,False
+1641,Booth Love,2013-08-18,False
+1642,Smell the Mitten,2013-08-28,False
+1643,The Linear,2013-10-05,False
+1644,Phil's Farm,2013-10-16,False
+1645,Much Obliged,2013-10-16,False
+1646,Conduit,2013-10-16,False
+1647,Dump City,2013-10-16,False
+1648,All In Time,2013-10-17,True
+1649,Great American,2013-10-18,True
+1650,Kabump,2013-10-21,False
+1651,Robot World,2013-10-24,False
+1652,The Triple Wide,2013-10-25,True
+1653,Professor Wormbog,2013-10-26,True
+1654,Higgins,2013-11-02,False
+1655,Miami Virtue,2013-11-02,False
+1656,The Bottom Half,2013-12-28,True
+1657,Plunger,2013-12-29,False
+1658,Search 4,2013-12-30,False
+1659,The Fussy Dutchman,2013-12-30,True
+1660,Miss Tinkle's Overture,2013-12-31,True
+1661,The Triple Wide,2014-01-17,False
+1662,Prowler,2014-01-30,False
+1663,Puppet String,2014-02-01,True
+1664,Mantis,2014-02-06,True
+1665,Miss Tinkle's Overture,2014-02-06,True
+1666,Plunger,2014-02-08,False
+1667,Got Your Milk (Right Here),2014-02-14,True
+1668,Much Obliged,2014-02-20,True
+1669,Mantis,2014-02-21,False
+1670,Mantis,2014-03-06,False
+1671,The Bottom Half,2014-03-19,True
+1672,Miss Tinkle's Overture,2014-03-22,True
+1673,The Bottom Half,2014-04-10,True
+1674,August,2014-04-19,True
+1675,#5,2014-05-03,False
+1676,FF,2014-05-03,False
+1677,Robot World,2014-05-04,True
+1678,Wizard Burial Ground,2014-05-04,False
+1679,Mantis,2014-05-24,False
+1680,Robot World,2014-05-24,True
+1681,Puppet String,2014-06-05,False
+1682,In The Kitchen,2014-06-19,True
+1683,Bad Friday,2014-06-20,False
+1684,Professor Wormbog,2014-08-16,False
+1685,Bad Friday,2014-08-17,False
+1686,The Floor,2014-08-28,False
+1687,1348,2014-08-29,False
+1688,Wizard Burial Ground,2014-08-29,False
+1689,Similar Skin,2014-10-17,False
+1690,Driven to Tears,2014-10-22,False
+1691,Similar Skin,2014-10-22,False
+1692,Cemetery Walk II,2014-10-22,False
+1693,Another Brick in the Wall,2014-10-23,False
+1694,All In Time,2014-10-25,True
+1695,The Floor,2014-11-01,False
+1696,Phil's Farm,2014-11-05,True
+1697,Similar Skin,2014-11-14,False
+1698,Similar Skin,2014-12-06,False
+1699,Plunger,2014-12-31,False
+1700,Conduit,2015-01-17,False
+1701,Mantis,2015-01-18,False
+1702,1348,2015-01-18,False
+1703,All In Time,2015-01-28,True
+1704,Turn & Dub,2015-01-28,False
+1705,Wizard Burial Ground,2015-01-29,False
+1706,The Floor,2015-02-04,False
+1707,All In Time,2015-02-06,True
+1708,Similar Skin,2015-02-07,False
+1709,Smell the Mitten,2015-02-13,False
+1710,Comma Later,2015-02-13,False
+1711,Much Obliged,2015-02-18,True
+1712,The Floor,2015-03-14,False
+1713,Bad Friday,2015-03-19,False
+1714,"Bright Lights, Big City",2015-03-20,True
+1715,The Floor,2015-04-10,False
+1716,Much Obliged,2015-04-11,True
+1717,Phil's Farm,2015-04-15,True
+1718,The Bottom Half,2015-04-16,True
+1719,Spires,2015-04-23,True
+1720,Orfeo,2015-05-01,False
+1721,Hindsight,2015-05-01,False
+1722,Educated Guess,2015-06-19,False
+1723,Robot World,2015-06-20,True
+1724,No Diablo,2015-08-09,False
+1725,Resolution,2015-08-09,True
+1726,Educated Guess,2015-08-13,False
+1727,Room to Breathe,2015-08-20,False
+1728,The Fussy Dutchman,2015-08-21,False
+1729,Go to Hell,2015-08-22,False
+1730,Robot World,2015-12-30,True
+1731,Chapter 1,2016-01-28,False
+1732,Chapter 2,2016-01-28,False
+1733,Chapter 3,2016-01-28,False
+1734,Chapter 4,2016-01-28,False
+1735,Chapter 5,2016-01-28,False
+1736,Chapter 6,2016-01-28,False
+1737,Chapter 7,2016-01-28,False
+1738,Chapter 8,2016-01-28,True
+1739,Chapter 9,2016-01-28,False
+1740,Chapter 10,2016-01-28,False
+1741,Comma Later,2016-01-29,False
+1742,E.T.I.,2016-02-04,False
+1743,Plunger,2016-02-13,True
+1744,Mantis,2016-03-10,True
+1745,Full Frontal,2016-03-17,False
+1746,Der Bluten Kat,2016-03-18,True
+1747,Similar Skin,2016-04-06,False
+1748,"""Jimmy Stewart""",2016-04-30,False
+1749,The Triple Wide,2016-04-30,True
+1750,Hindsight,2016-07-03,False
+1751,August,2016-07-03,True
+1752,Robot World,2016-07-17,True
+1753,Breathe,2016-09-09,False
+1754,#5,2016-10-20,False
+1755,Chapter 20,2017-01-27,True
+1756,Cut Off,2017-02-19,False
+1757,Der Bluten Kat,2017-03-17,True
+1758,Phil's Farm,2018-07-06,True
+1759,Kabump,2018-08-19,True
+1760,Phil's Farm,2019-02-02,True
+1761,JaJunk,2019-04-03,True
+1762,Ringo,2019-12-30,True
