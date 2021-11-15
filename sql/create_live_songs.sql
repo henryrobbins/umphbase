@@ -9,5 +9,7 @@ CREATE TABLE live_songs (
     jamchart BOOLEAN NOT NULL,
     jamchart_notes TEXT,
     parent BOOLEAN NOT NULL,
-    hof BOOLEAN NOT NULL
+    hof BOOLEAN NOT NULL,
+    jimmy_stewart BOOLEAN NOT NULL,
+    with_lyrics BOOLEAN NOT NULL
 )

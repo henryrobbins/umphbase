@@ -85,6 +85,9 @@ def main(credential: sql_util.Credentials) -> str:
                 # update live_songs table
                 live_songs_df = clean.clean_live_songs(raw_df)
                 live_songs_df['hof'] = 0  # can't be HOF if show just occurred
+                # Jimmy Stewart status unknown
+                live_songs_df['jimmy_stewart'] = 0
+                live_songs_df['with_lyrics'] = 0
                 fields = sql_util.get_fields('live_songs', cursor)
                 q = sql_util.multi_insert('live_songs', live_songs_df, fields)
                 cursor.execute(q)

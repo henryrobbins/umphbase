@@ -148,6 +148,25 @@ def main(to_path: str, from_path: str):
     live_songs_df['hof'] = '0'
     live_songs_df.loc[live_songs_df['live_song_id'].isin(hof_ids), 'hof'] = '1'
 
+    # Mark all Jimmy Stewart performances
+    js = pd.read_csv('data/jimmy_stewarts.csv', index_col=0)
+    tmp = live_songs_df.merge(shows_df, on='show_id', how='left')
+    tmp = tmp.merge(songs_df, on='song_id', how='left')
+    js_ids = (
+        js.merge(tmp, on=['show_date', 'name'], how='left')['live_song_id'])
+    live_songs_df['jimmy_stewart'] = '0'
+    live_songs_df.loc[live_songs_df['live_song_id'].isin(js_ids), 'jimmy_stewart'] = '1'
+
+    # Mark all Jimmy Stewart performances (with lyrics)
+    js = pd.read_csv('data/jimmy_stewarts.csv', index_col=0)
+    js = js[js['with_lyrics']]
+    tmp = live_songs_df.merge(shows_df, on='show_id', how='left')
+    tmp = tmp.merge(songs_df, on='song_id', how='left')
+    js_ids = (
+        js.merge(tmp, on=['show_date', 'name'], how='left')['live_song_id'])
+    live_songs_df['with_lyrics'] = '0'
+    live_songs_df.loc[live_songs_df['live_song_id'].isin(js_ids), 'with_lyrics'] = '1'
+
     if not os.path.exists(to_path):
         os.makedirs(to_path)
     songs_df.to_pickle('%s/songs.pickle' % to_path)
