@@ -125,3 +125,20 @@ def multi_insert(name: str,
             "\t%s(%s)\n"
             "VALUES\n"
             "\t%s;") % (name, cols, vals)
+
+
+def get_table(table: str, credential: Credentials) -> pd.DataFrame:
+    """Return a pandas dataframe for the given table.
+
+    Args:
+        table (str): Name of the table.
+        credential (Credentials): Credentials for the database with table.
+
+    Returns:
+        pd.DataFrame: pandas dataframe representing table.
+    """
+    cnx = credential.connect()
+    df = pd.read_sql('SELECT * FROM %s' % table, cnx)
+    cnx.commit()
+    cnx.close()
+    return df
