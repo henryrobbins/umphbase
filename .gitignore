@@ -152,7 +152,7 @@ atu_unclean
 atu_cleaned
 aws/umphbase.sql
 
-# Umphbase compilations
+# v1.0.0 Umphbase compilations
 v1.0.0/umphbase-v1.0.0/*
 !v1.0.0/umphbase-v1.0.0/umphbase-v1.0.0.tex
 !v1.0.0/umphbase-v1.0.0/umphbase-v1.0.0.pdf
@@ -167,3 +167,8 @@ Makefile
 
 # used to expirament with page layout
 v2.txt
+
+# Umphbase compilations
+tex/*
+!tex/umphbase.tex
+!tex/umphbase.pdf
