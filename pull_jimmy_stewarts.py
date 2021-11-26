@@ -24,4 +24,4 @@ df.columns = ['show_date', 'original_artist', 'name', 'footnote']
 df['with_lyrics'] = df['footnote'].apply(lambda x: 'lyrics' in x.lower())
 df = df[['name', 'show_date', 'with_lyrics']]
 
-df.to_csv('data/jimmy_stewarts.csv')
+df.to_csv('data/jimmy_stewarts.csv', index=False)

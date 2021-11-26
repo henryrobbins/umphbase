@@ -159,7 +159,7 @@ def main(to_path: str, from_path: str):
     live_songs_df.loc[live_songs_df['live_song_id'].isin(hof_ids), 'hof'] = '1'
 
     # Mark all Jimmy Stewart performances
-    js = pd.read_csv('data/jimmy_stewarts.csv', index_col=0)
+    js = pd.read_csv('data/jimmy_stewarts.csv')
     tmp = live_songs_df.merge(shows_df, on='show_id', how='left')
     tmp = tmp.merge(songs_df, on='song_id', how='left')
     js_ids = (
@@ -168,7 +168,7 @@ def main(to_path: str, from_path: str):
     live_songs_df.loc[live_songs_df['live_song_id'].isin(js_ids), 'jimmy_stewart'] = '1'
 
     # Mark all Jimmy Stewart performances (with lyrics)
-    js = pd.read_csv('data/jimmy_stewarts.csv', index_col=0)
+    js = pd.read_csv('data/jimmy_stewarts.csv')
     js = js[js['with_lyrics']]
     tmp = live_songs_df.merge(shows_df, on='show_id', how='left')
     tmp = tmp.merge(songs_df, on='song_id', how='left')
