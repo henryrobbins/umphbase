@@ -1,5 +1,6 @@
 import string
 import pandas as pd
+import argparse
 from ortools.linear_solver import pywraplp as OR
 from typing import List, Dict, Union, Optional
 
@@ -312,3 +313,25 @@ def generate(songs: pd.DataFrame, max_length: int) -> Dict[str, str]:
     selected = {i: j for (i, j) in solution.items() if j == 1}
 
     return {i: j for i, j in selected}
+
+def main(songs_path: str, codes_path: str, n: int):
+    """Generate length n codes for songs at path and write them to codes_path.
+
+    Args:
+        songs_path (str): Path to songs (.pickle).
+        codes_path (str): Path where codes should be written.
+        length (int): Length of the codes to generate.
+    """
+    songs_df = pd.read_pickle(songs_path)
+    codes_dict = generate(songs_df, n)
+    songs_df['code'] = songs_df['name'].apply(lambda x: codes_dict[x])
+    songs_df[['song_id', 'code']].to_csv(codes_path, index=0)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-s', '--songs_path', help="Path to songs")
+    parser.add_argument('-c', '--codes_path', help="Path to write codes to")
+    parser.add_argument('-l', '--length', help="Host name")
+    args = parser.parse_args()
+    main(args.songs_path, args.codes_path, int(args.length))
