@@ -1,5 +1,6 @@
 SELECT
 	live_songs.song_id AS song_id,
+    songs.name AS name,
     live_songs.jimmy_stewart AS jimmy_stewart,
 	live_songs.with_lyrics AS with_lyrics,
 	live_songs.hof AS hof,
@@ -23,4 +24,5 @@ LEFT JOIN live_songs AS song_after ON
 	live_songs.show_id=song_after.show_id AND
 	live_songs.position=(song_after.position - 1)
 JOIN shows ON live_songs.show_id=shows.show_id
-ORDER BY song_id, show_date, position
+JOIN songs ON live_songs.song_id=songs.song_id
+ORDER BY name, show_date
