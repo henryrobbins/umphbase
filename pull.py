@@ -32,17 +32,17 @@ def main(path: str):
     songs = songs.set_index('@id')
 
     live_songs = pd.DataFrame()
-    for slug in songs['slug']:
+    for song_id in songs.index:
+        # Try in order: JSON, XML, HTML
         try:
-            # E.T.I By Blue Öyster Cult has typo in database
-            # Blue �yster Cult can't be parsed by JSON so use XML
-            # Ringo response is large so use XML
-            use_xml = ['eti', 'ringo']
-            form = 'xml' if slug in use_xml else 'json'
-            df = atu.request('setlists/slug/%s' % slug, form)
-            live_songs = live_songs.append(df)
+            df = atu.request('setlists/song_id/%s' % song_id, 'json')
         except json.JSONDecodeError:
-            print("Not parsed: %s" % slug)
+            try:
+                df = atu.request('setlists/song_id/%s' % song_id, 'xml')
+                assert len(df) > 0
+            except AssertionError:
+                df = atu.request('setlists/song_id/%s' % song_id, 'html')
+        live_songs = live_songs.append(df)
 
     # Write pickle files to the desired path
     if not os.path.exists(path):

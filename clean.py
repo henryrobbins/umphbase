@@ -22,6 +22,9 @@ def clean_songs(df: pd.DataFrame) -> pd.DataFrame:
              'original_artist', 'original']]
     assert sum(df['name'].isna()) == 0
 
+    # ensure integer types
+    df['song_id'] = df['song_id'].astype(int)
+
     return df
 
 
@@ -56,6 +59,10 @@ def clean_shows(df: pd.DataFrame) -> pd.DataFrame:
                             'showorder': 'show_order'})
     df = df.replace(r'^\s*$', np.nan, regex=True)
     df = df.where((pd.notnull(df)), None)
+    # ensure integer types
+    int_types = ['show_id', 'show_order']
+    for int_type in int_types:
+        df[int_type] = df[int_type].astype(int)
     return df
 
 
@@ -67,7 +74,7 @@ def clean_live_songs(df: pd.DataFrame) -> pd.DataFrame:
                             'soundcheck': 'sound_check',
                             'shownotes': 'show_notes'})
     # 1508604129 show_id entries are duplicates of 1508604143
-    df = df[~(df.show_id == '1508604129')]
+    df = df[~(df.show_id == 1508604129)]
     assert len(df['live_song_id'].unique()) == len(df)
     df = df.replace(r'^\s*$', np.nan, regex=True)
     df = df.where((pd.notnull(df)), None)
@@ -86,7 +93,10 @@ def clean_live_songs(df: pd.DataFrame) -> pd.DataFrame:
             'position', 'transition', 'footnote', 'jamchart', 'jamchart_notes',
             'show_notes', 'opener', 'sound_check']
     df = df[keep]
-
+    # ensure integer types
+    int_types = ['live_song_id', 'show_id', 'song_id', 'position']
+    for int_type in int_types:
+        df[int_type] = df[int_type].astype(int)
     return df
 
 
@@ -104,7 +114,7 @@ def main(to_path: str, from_path: str):
     # For now, we drop these songs from the database
     no_live_performances = []
     for song_id in songs_df["song_id"]:
-        if len(live_songs_df[live_songs_df.song_id == str(song_id)]) == 0:
+        if len(live_songs_df[live_songs_df.song_id == song_id]) == 0:
             no_live_performances.append(song_id)
     songs_df = songs_df[~(songs_df.song_id.isin(no_live_performances))]
 
@@ -135,7 +145,7 @@ def main(to_path: str, from_path: str):
                 tmp.at[i, col] = tmp.at[i+1, col]
             if tmp.at[i+1, col] is None:
                 tmp.at[i+1, col] = tmp.at[i, col]
-    shows_df = tmp.drop_duplicates()
+    shows_df = tmp.drop_duplicates(subset=['show_id'])
     shows_df = shows_df.where((pd.notnull(shows_df)), None)
     assert len(shows_df['show_id'].unique()) == len(shows_df)
 

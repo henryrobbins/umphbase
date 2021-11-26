@@ -34,8 +34,13 @@ def request(request: str,
     txt = requests.get(url).text
     print('Request: ' + "%s.%s?%s" % (request, form, query))
     if form == 'json':
-        df_dict = json.loads(txt)['data']
+        return pd.DataFrame(json.loads(txt)['data'])
     elif form == 'xml':
-        df_dict = json.loads(json.dumps(xmltodict.parse(txt)))
-        df_dict = df_dict['results']['result']
-    return pd.DataFrame(df_dict)
+        try:
+            df_dict = json.loads(json.dumps(xmltodict.parse(txt)))
+            df_dict = df_dict['results']['result']
+            return pd.DataFrame(df_dict)
+        except Exception:
+            return pd.DataFrame()
+    elif form == 'html':
+        return pd.read_html(txt)[0]
