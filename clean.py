@@ -150,7 +150,7 @@ def main(to_path: str, from_path: str):
     assert len(shows_df['show_id'].unique()) == len(shows_df)
 
     # Mark all hall of fame performances
-    hof = pd.read_csv('data/hall_of_fame.csv', index_col=0)
+    hof = pd.read_csv('data/hall_of_fame.csv')
     tmp = live_songs_df.merge(shows_df, on='show_id', how='left')
     tmp = tmp.merge(songs_df, on='song_id', how='left')
     hof_ids = (
