@@ -142,3 +142,20 @@ def get_table(table: str, credential: Credentials) -> pd.DataFrame:
     cnx.commit()
     cnx.close()
     return df
+
+
+def query(path: str, credential: Credentials) -> pd.DataFrame:
+    """Return a pandas dataframe for the resulting query at the given path.
+
+    Args:
+        path (str): String file path of SQL query.
+        credential (Credentials): Credentials for the database to query.
+
+    Returns:
+        pd.DataFrame: pandas dataframe with query result.
+    """
+    cnx = credential.connect()
+    df = pd.read_sql(open(path).read(), cnx)
+    cnx.commit()
+    cnx.close()
+    return df
