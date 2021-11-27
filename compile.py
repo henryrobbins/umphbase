@@ -39,6 +39,13 @@ def clean_text(text):
         return None
 
 
+def short_text(text: str, max_length: int):
+    if len(text) > max_length:
+        return text[:(max_length- 3)] + '...'
+    else:
+        return text
+
+
 def table_tex(table: List[List[str]], widths: List[str]):
     rows = [''.join('\\cell{%s}{%s}' % (widths[i], row[i]) for i in range(len(row))) for row in table]
     return '\\newline\n'.join(rows)
@@ -71,12 +78,8 @@ def date_tex(date: datetime.date, jimmy_stewart: bool, with_lyrics: bool, hof: b
 
 
 def song_codes_tex(row):
-    full_name = clean_text(row['name'])
-    if len(full_name) > 20:
-        name = full_name[:19] + '...'
-    else:
-        name = full_name
-    return [name, row['code']]
+    name = clean_text(row['name'])
+    return [short_text(name, 20), row['code']]
 
 
 def compile_song_codes(credential):
@@ -90,6 +93,27 @@ def compile_song_codes(credential):
         f.write('\\noindent\n')
         f.write(table_tex(list(df['tex']), ['4cm', '0.5cm']))
         f.write('\\end{multicols*}\n')
+
+
+def song_played_tex(row):
+    full_name = clean_text(row['name'])
+    name = short_text(full_name, 36)
+    code = row['code']
+    full_artist = clean_text(row['original_artist'])
+    artist = short_text(full_artist, 36)
+    first_played = row['first_played'].strftime('%m-%d-%y')
+    last_played = row['last_played'].strftime('%m-%d-%y')
+    return (name, code, artist, first_played, last_played)
+
+
+def compile_songs_played(credential):
+    df = sql_util.query('sql/songs_played.sql', credential)
+    df = df.sort_values('name')
+    df['code'] = df['song_id'].apply(lambda x: ID_TO_CODE[x])
+    df['tex'] = df.apply(lambda x: song_played_tex(x), axis=1)
+    with open('tex/songs_played.tex', 'w') as f:
+        f.write('\\noindent\n')
+        f.write(table_tex(list(df['tex']), ['7cm', '2cm', '7cm', '2cm', '2cm']))
 
 
 def every_time_played_tex(row):
@@ -141,6 +165,7 @@ def compile_every_time_played(credential):
 
 def main(credential: sql_util.Credentials):
     compile_song_codes(credential)
+    compile_songs_played(credential)
     compile_every_time_played(credential)
 
 
