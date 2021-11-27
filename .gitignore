@@ -172,3 +172,6 @@ v2.txt
 tex/*
 !tex/umphbase.tex
 !tex/umphbase.pdf
+
+# text jupyter notebook
+test.ipynb
