@@ -70,6 +70,28 @@ def date_tex(date: datetime.date, jimmy_stewart: bool, with_lyrics: bool, hof: b
         return date_str
 
 
+def song_codes_tex(row):
+    full_name = clean_text(row['name'])
+    if len(full_name) > 20:
+        name = full_name[:19] + '...'
+    else:
+        name = full_name
+    return [name, row['code']]
+
+
+def compile_song_codes(credential):
+    df = sql_util.get_table('songs', credential)
+    df = df.sort_values('name')
+    df['code'] = df['song_id'].apply(lambda x: ID_TO_CODE[x])
+    df['tex'] = df.apply(lambda x: song_codes_tex(x), axis=1)
+    with open('tex/song_codes.tex', 'w') as f:
+        f.write('\\begin{multicols*}{3}\n')
+        f.write('\\setlength{\columnseprule}{0.4pt}\n')
+        f.write('\\noindent\n')
+        f.write(table_tex(list(df['tex']), ['4cm', '0.5cm']))
+        f.write('\\end{multicols*}\n')
+
+
 def every_time_played_tex(row):
     date = date_tex(row['show_date'], row['jimmy_stewart'], row['with_lyrics'], row['hof'], superscript=False)
     if math.isnan(row['before_song_id']) or row['before_transition'] == 'None':
@@ -116,7 +138,9 @@ def compile_every_time_played(credential):
         f.write('\\end{multicols*}')
 
 
+
 def main(credential: sql_util.Credentials):
+    compile_song_codes(credential)
     compile_every_time_played(credential)
 
 
