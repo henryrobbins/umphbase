@@ -51,17 +51,18 @@ def table_tex(table: List[List[str]], widths: List[str]):
     return '\\newline\n'.join(rows)
 
 
-def song_tex(song_id: int, jimmy_stewart: bool, with_lyrics: bool, hof: bool, superscript: bool=True) -> str:
-    code = ID_TO_CODE[song_id]
+def song_tex(song_id: int, jimmy_stewart: bool, with_lyrics: bool, hof: bool, text: str=None, superscript: bool=True) -> str:
+    if text is None:
+        text = ID_TO_CODE[song_id]
     special = [jimmy_stewart, with_lyrics, hof]
     if any(special):
         if superscript:
             ss = ''.join([SPECIAL_KEYS[i] for i in range(3) if special[i]])
-            return '\\textbf{%s\\textsuperscript{%s}}' % (code, ss)
+            return '\\textbf{%s\\textsuperscript{%s}}' % (text, ss)
         else:
-            return '\\textbf{%s}' % code
+            return '\\textbf{%s}' % text
     else:
-        return code
+        return text
 
 
 def date_tex(date: datetime.date, jimmy_stewart: bool, with_lyrics: bool, hof: bool, superscript: bool=True) -> str:
@@ -162,11 +163,30 @@ def compile_every_time_played(credential):
         f.write('\\end{multicols*}')
 
 
+def hall_of_fame_tex(row):
+    date = row['show_date'].strftime('%m-%d-%y')
+    text = clean_text(row['name'])
+    song = song_tex(row['song_id'], row['jimmy_stewart'], row['with_lyrics'],
+                    row['hof'], text=text)
+    return [date, song]
+
+
+def compile_hall_of_fame(credential):
+    df = sql_util.query('sql/hall_of_fame.sql', credential)
+    df['tex'] = df.apply(lambda x: hall_of_fame_tex(x), axis=1)
+    with open('tex/hall_of_fame.tex', 'w') as f:
+        f.write('\\begin{multicols*}{3}')
+        f.write('\\setlength{\columnseprule}{0.4pt}')
+        f.write('\\noindent\n')
+        f.write(table_tex(list(df['tex']), ['1.5cm', '4.5cm']))
+        f.write('\\end{multicols*}')
+
 
 def main(credential: sql_util.Credentials):
     compile_song_codes(credential)
     compile_songs_played(credential)
     compile_every_time_played(credential)
+    compile_hall_of_fame(credential)
 
 
 if __name__ == "__main__":
