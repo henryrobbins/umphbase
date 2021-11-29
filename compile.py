@@ -182,11 +182,31 @@ def compile_hall_of_fame(credential):
         f.write('\\end{multicols*}')
 
 
+def jimmy_stewart_tex(row):
+    date = row['show_date'].strftime('%m-%d-%y')
+    text = clean_text(row['name'])
+    song = song_tex(row['song_id'], row['jimmy_stewart'], row['with_lyrics'],
+                    row['hof'], text=text)
+    return [date, song]
+
+
+def compile_jimmy_stewart(credential):
+    df = sql_util.query('sql/jimmy_stewart.sql', credential)
+    df['tex'] = df.apply(lambda x: jimmy_stewart_tex(x), axis=1)
+    with open('tex/jimmy_stewart.tex', 'w') as f:
+        f.write('\\begin{multicols*}{3}')
+        f.write('\\setlength{\columnseprule}{0.4pt}')
+        f.write('\\noindent\n')
+        f.write(table_tex(list(df['tex']), ['1.5cm', '4.5cm']))
+        f.write('\\end{multicols*}')
+
+
 def main(credential: sql_util.Credentials):
     compile_song_codes(credential)
     compile_songs_played(credential)
     compile_every_time_played(credential)
     compile_hall_of_fame(credential)
+    compile_jimmy_stewart(credential)
 
 
 if __name__ == "__main__":

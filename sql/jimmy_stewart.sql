@@ -5,6 +5,6 @@ WITH jimmy_stewarts AS (
 )
 
 SELECT
-	show_date, name, jimmy_stewart, with_lyrics, hof
+	show_date, songs.song_id, name, jimmy_stewart, with_lyrics, hof
 FROM jimmy_stewarts JOIN songs ON jimmy_stewarts.song_id=songs.song_id
 ORDER BY show_date
