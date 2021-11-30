@@ -3,6 +3,7 @@ WITH shows_songs AS (
 		song_id,
 		YEAR(show_date) AS year
 	FROM live_songs JOIN shows ON live_songs.show_id=shows.show_id
+	WHERE parent='1'
 )
 
 SELECT

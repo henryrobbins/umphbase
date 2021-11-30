@@ -117,6 +117,30 @@ def compile_songs_played(credential):
         f.write(table_tex(list(df['tex']), ['7cm', '2cm', '7cm', '2cm', '2cm']))
 
 
+def songs_by_year_tex(row):
+    return [row['code']] + [row[i] for i in range(len(row) - 1)]
+
+
+def compile_songs_by_year(credential):
+    df = sql_util.query('sql/songs_by_year.sql', credential)
+    years = list(range(min(df['year']), max(df['year']) + 1))
+    songs = df['song_id'].unique()
+    counts = df.set_index(['song_id', 'year'])['count'].to_dict()
+    table = {}
+    for i in songs:
+        table[i] = [counts.get((i,j), 0) for j in years]
+        table[i] = table[i] + [sum(table[i])]
+    df = pd.DataFrame(table).T
+    df = df.reset_index()
+    df['code'] = df['index'].apply(lambda x: ID_TO_CODE[x])
+    df = df.drop(columns='index')
+    df['tex'] = df.apply(lambda x: songs_by_year_tex(x), axis=1)
+    df = df.sort_values('code')
+    with open('tex/songs_by_year.tex', 'w') as f:
+        f.write('\\noindent\n')
+        f.write(table_tex(list(df['tex']), ['2cm'] + (['0.7cm'] * (len(years) + 1))))
+
+
 def every_time_played_tex(row):
     date = date_tex(row['show_date'], row['jimmy_stewart'], row['with_lyrics'], row['hof'], superscript=False)
     if math.isnan(row['before_song_id']) or row['before_transition'] == 'None':
@@ -222,6 +246,7 @@ def compile_state_aggregation(credential):
 def main(credential: sql_util.Credentials):
     compile_song_codes(credential)
     compile_songs_played(credential)
+    compile_songs_by_year(credential)
     compile_every_time_played(credential)
     compile_hall_of_fame(credential)
     compile_jimmy_stewart(credential)
