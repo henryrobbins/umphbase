@@ -4,12 +4,12 @@ WITH shows_venues AS (
 )
 
 SELECT
-	state,
 	country,
+	state,
     COUNT(DISTINCT shows_venues.show_id) AS count,
-	SUM(jimmy_stewart) AS jimmy_stewart_count,
-	SUM(with_lyrics) AS with_lyrics_count,
-	SUM(hof) AS hof_count
-FROM shows_venues JOIN live_songs ON shows_venues.show_id=live_songs.show_id
+	SUM(jimmy_stewart) AS jimmy_stewart,
+	SUM(with_lyrics) AS with_lyrics,
+	SUM(hof) AS hof
+FROM shows_venues LEFT JOIN live_songs ON shows_venues.show_id=live_songs.show_id
 GROUP BY country, state
 ORDER BY country, state

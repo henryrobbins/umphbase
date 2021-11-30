@@ -201,12 +201,31 @@ def compile_jimmy_stewart(credential):
         f.write('\\end{multicols*}')
 
 
+def state_aggregation_tex(row):
+    country = clean_text(row['country'])
+    state = clean_text(row['state'])
+    return [country, state, row['count'], int(row['jimmy_stewart']),
+            int(row['with_lyrics']), int(row['hof'])]
+
+
+def compile_state_aggregation(credential):
+    df = sql_util.query('sql/state_aggregation.sql', credential)
+    df['tex'] = df.apply(lambda x: state_aggregation_tex(x), axis=1)
+    with open('tex/state_aggregation.tex', 'w') as f:
+        f.write('\\begin{multicols*}{2}')
+        f.write('\\setlength{\columnseprule}{0.4pt}')
+        f.write('\\noindent')
+        f.write(table_tex(list(df['tex']), ['4cm', '2cm', '1cm', '1cm', '1cm', '1cm']))
+        f.write('\\end{multicols*}')
+
+
 def main(credential: sql_util.Credentials):
     compile_song_codes(credential)
     compile_songs_played(credential)
     compile_every_time_played(credential)
     compile_hall_of_fame(credential)
     compile_jimmy_stewart(credential)
+    compile_state_aggregation(credential)
 
 
 if __name__ == "__main__":
