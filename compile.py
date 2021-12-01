@@ -274,6 +274,28 @@ def compile_venue_aggregation(credential):
         f.write('\\end{multicols*}\n')
 
 
+def support_tex(row):
+    show_dates = row['show_dates'].split(',')
+    show_dates = [datetime.strptime(date, '%Y-%m-%d').strftime('%m-%d-%y') for date  in show_dates]
+    venue_names = row['venue_names'].split(',')
+    venue_names = [short_text(clean_text(name), 30) for name in venue_names]
+    return list(zip(*[show_dates, venue_names]))
+
+
+def compile_support(credential):
+    df = sql_util.query('sql/support.sql', credential)
+    df['tex'] = df.apply(lambda x: support_tex(x), axis=1)
+    with open('tex/support.tex', 'w') as f:
+        f.write('\\begin{multicols*}{3}')
+        f.write('\\setlength{\columnseprule}{0.4pt}')
+        for index, row in df.iterrows():
+            support = clean_text(row['opener'])
+            f.write("\\noindent\\begin{center}\\textbf{%s}\\newline\n" % support)
+            f.write(table_tex(list(row['tex']), ['1.5cm', '5cm']))
+            f.write('\n\\end{center}\n')
+        f.write('\\end{multicols*}')
+
+
 def main(credential: sql_util.Credentials):
     compile_song_codes(credential)
     compile_songs_played(credential)
@@ -283,6 +305,7 @@ def main(credential: sql_util.Credentials):
     compile_jimmy_stewart(credential)
     compile_state_aggregation(credential)
     compile_venue_aggregation(credential)
+    compile_support(credential)
 
 
 if __name__ == "__main__":
