@@ -1,5 +1,6 @@
 import math
 import pandas as pd
+pd.set_option('display.max_colwidth', 10000)
 from datetime import datetime
 import sql_util
 from typing import List
@@ -243,6 +244,36 @@ def compile_state_aggregation(credential):
         f.write('\\end{multicols*}')
 
 
+def venue_aggregation_tex(row):
+    tex = ""
+    venue_title = '%s, %s' % (clean_text(row['venue_name']), row['city'])
+    tex += "\\noindent\\begin{center}\\textbf{%s}\\newline\n" % venue_title
+    stats = [row['count'], int(row['jimmy_stewart']), int(row['with_lyrics']), int(row['hof'])]
+    stats_tex = '$' + '\\quad'.join([str(s) for s in stats]) + '$'
+    tex += stats_tex
+    tex += "\\end{center}"
+    show_dates = row['show_dates'].split(',')
+    show_dates = [datetime.strptime(date, '%Y-%m-%d').strftime('%m-%d-%y') for date  in show_dates]
+    tex += "\\begin{multicols*}{3}\n"
+    tex += "\\begin{center}\n"
+    tex += "\\noindent\n"
+    tex += '\n'.join(show_dates)
+    tex += "\\end{center}\n"
+    tex += "\\end{multicols*}\n"
+    return tex
+
+
+def compile_venue_aggregation(credential):
+    df = sql_util.query('sql/venue_aggregation.sql', credential)
+    df = df.fillna(0)  # venues where all shows have no known setlist
+    df['tex'] = df.apply(lambda x: venue_aggregation_tex(x), axis=1)
+    with open('tex/venue_aggregation.tex', 'w') as f:
+        f.write('\\begin{multicols*}{3}\n')
+        f.write('\\setlength{\columnseprule}{0.4pt}\n')
+        f.write('\n'.join(df['tex']))
+        f.write('\\end{multicols*}\n')
+
+
 def main(credential: sql_util.Credentials):
     compile_song_codes(credential)
     compile_songs_played(credential)
@@ -251,6 +282,7 @@ def main(credential: sql_util.Credentials):
     compile_hall_of_fame(credential)
     compile_jimmy_stewart(credential)
     compile_state_aggregation(credential)
+    compile_venue_aggregation(credential)
 
 
 if __name__ == "__main__":
