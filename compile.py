@@ -17,8 +17,8 @@ SET_CODES = {'1': 'S1',
              'e3': 'E3'}
 TRANSITIONS = {'None': '',
                ',' : ',',
-               '>' : '\\textgreater',
-               '->' : '\\textrightarrow'}
+               '>' : ' \\textgreater{}',
+               '->' : ' \\textrightarrow{}'}
 
 
 def clean_text(text):
@@ -52,18 +52,22 @@ def table_tex(table: List[List[str]], widths: List[str]):
     return '\\newline\n'.join(rows)
 
 
-def song_tex(song_id: int, jimmy_stewart: bool, with_lyrics: bool, hof: bool, text: str=None, superscript: bool=True) -> str:
+def song_tex(song_id: int, jimmy_stewart: bool, with_lyrics: bool, hof: bool, text: str=None, superscript: bool=True, footnote:int=0) -> str:
     if text is None:
         text = ID_TO_CODE[song_id]
     special = [jimmy_stewart, with_lyrics, hof]
     if any(special):
         if superscript:
             ss = ''.join([SPECIAL_KEYS[i] for i in range(3) if special[i]])
-            return '\\textbf{%s\\textsuperscript{%s}}' % (text, ss)
+            tex = '\\textbf{%s\\textsuperscript{%s}}' % (text, ss)
         else:
-            return '\\textbf{%s}' % text
+            tex = '\\textbf{%s}' % text
     else:
-        return text
+        tex = text
+    if footnote != 0:
+        return tex + '[%d]' % footnote
+    else:
+        return tex
 
 
 def date_tex(date: datetime.date, jimmy_stewart: bool, with_lyrics: bool, hof: bool, superscript: bool=True) -> str:
@@ -95,6 +99,89 @@ def compile_song_codes(credential):
         f.write('\\noindent\n')
         f.write(table_tex(list(df['tex']), ['4cm', '0.5cm']))
         f.write('\\end{multicols*}\n')
+
+
+def setlists_tex(row):
+    date = row['show_date'].strftime('%m-%d-%Y')
+    venue_name = clean_text(row['venue_name'])
+    city = clean_text(row['city'])
+    state = clean_text(row['state'])
+    country = clean_text(row['country'])
+    location = ', '.join([i for i in [city, state, country] if i != 'None'])
+    title = ' | '.join([date, venue_name, location])
+
+    tex = '\\begin{minipage}{\\textwidth}\n'
+    tex += '\\noindent\\underline{\\textbf{%s}}\\newline\n' % title
+
+    def listify(string, set_split, item_split):
+        string_split = string.split(set_split)
+        return [i.split(item_split) for i in string_split]
+
+    sets = row['set_number'].split(',')
+    set_songs = listify(row['name'], '<sb>', '<|>')
+    set_transitions = listify(row['transition'], '<sb>', '<|>')
+    set_footnotes = listify(row['footnote'], '<sb>', '<|>')
+    set_jimmy_stewart = listify(row['jimmy_stewart'], '<sb>', ',')
+    set_with_lyrics = listify(row['with_lyrics'], '<sb>', ',')
+    set_hof = listify(row['hof'], '<sb>', ',')
+
+    i = 1
+    footnotes = {}
+    song_footnotes = []
+    for set_footnote in set_footnotes:
+        tmp = []
+        for footnote in set_footnote:
+            if footnote == 'None':
+                tmp.append(0)
+            else:
+                if footnote not in footnotes.keys():
+                    footnotes[footnote] = i
+                    tmp.append(i)
+                    i += 1
+                else:
+                    tmp.append(footnotes[footnote])
+        song_footnotes.append(tmp)
+    footnotes = {v: k for k, v in footnotes.items()}
+
+    for i in range(len(sets)):
+        set_title = SET_CODES[sets[i]]
+        set_song_objects = list(zip(*[set_songs[i], set_jimmy_stewart[i], set_with_lyrics[i], set_hof[i], song_footnotes[i]]))
+        set_songs_tex = [song_tex(0, int(j), int(k), int(l), text=i, footnote=w) for i,j,k,l,w in set_song_objects]
+        songs_tex = ' '.join([set_songs_tex[j] + TRANSITIONS[set_transitions[i][j]] for j in range(len(set_songs_tex) - 1)] + [set_songs_tex[-1]])
+        tex += '\\textbf{%s}: %s \\newline\n' % (set_title, songs_tex)
+
+    tex += '\\newline\n'
+
+    for i in range(1,len(footnotes)+1):
+        tex += '\\noindent[%d] %s\\newline\n' % (i, clean_text(footnotes[i]))
+
+    if len(footnotes) > 0:
+        tex += '\\newline\n'
+
+    if row['opener'] != 'None':
+        tex += '\\noindent\\textbf{Support:} %s\\newline\n' % clean_text(row['opener'])
+
+    # TODO: Be more careful parsing show notes
+    if row['show_notes'] != 'None':
+        tex += '\\noindent\\textbf{Notes:} %s\\newline\n' % clean_text(row['show_notes'])
+
+    tex += '\\end{minipage}\n'
+
+    return tex
+
+
+def compile_setlists(credential):
+    # group_concat_max_len default value of 1024 too small
+    cnx = credential.connect()
+    cursor = cnx.cursor()
+    cursor.execute('SET GLOBAL group_concat_max_len=65535')
+    cursor.close()
+    cnx.commit()
+    cnx.close()
+    df = sql_util.query('sql/setlists.sql', credential)
+    df['tex'] = df.apply(lambda x: setlists_tex(x), axis=1)
+    with open('tex/setlists.tex', 'w') as f:
+        f.write('\n'.join(df['tex']))
 
 
 def song_played_tex(row):
@@ -299,6 +386,7 @@ def compile_support(credential):
 def main(credential: sql_util.Credentials):
     compile_song_codes(credential)
     compile_songs_played(credential)
+    compile_setlists(credential)
     compile_songs_by_year(credential)
     compile_every_time_played(credential)
     compile_hall_of_fame(credential)
