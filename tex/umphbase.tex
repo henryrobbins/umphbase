@@ -59,12 +59,16 @@
 }
 
 \newcommand{\VenueSummary}[3] {
-    \setlength{\tabcolsep}{0pt}
-    \begin{minipage}{\columnwidth}
-    \begin{center}\textbf{#1}\end{center}
-    \begin{center}#2\end{center}
-    \input{#3} \newline
-    \end{minipage}
+    \noindent
+    \begin{center}
+        \textbf{#1}\newline % venue
+        $#2$ % special counts
+    \end{center}
+    \begin{multicols*}{3}
+    \begin{center}
+        \noindent#3 % show dates
+    \end{center}
+    \end{multicols*}
 }
 
 \newcommand{\SupportSummary}[2] {
