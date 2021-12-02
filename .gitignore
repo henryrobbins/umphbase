@@ -162,9 +162,6 @@ v1.0.0/umphbase-v1.0.0/*
 *.zip
 aws/layer/layer
 
-# user-specific Makefile
-Makefile
-
 # used to expirament with page layout
 v2.txt
 
