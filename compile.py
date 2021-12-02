@@ -247,17 +247,13 @@ def compile_every_time_played(credential):
     song_id_to_name = songs.set_index('song_id')['name'].to_dict()
 
     every_time_played_by_song = df.groupby('song_id')['tex'].apply(list)
-    for song_id in every_time_played_by_song.keys():
-        name = clean_text(song_id_to_name[song_id])
-        table = table_tex(every_time_played_by_song[song_id], [0.3, 0.3, 0.07, 0.07, 0.26])
-        with open('tex/every_time_played/%d.tex' % song_id, 'w') as f:
-            f.write('\\begin{center}\\textbf{%s}\\end{center}\n' % name)
-            f.write('\n')
-            f.write(table)
-
     with open('tex/every_time_played.tex', 'w') as f:
         for song_id in every_time_played_by_song.keys():
-            f.write('\\input{every_time_played/%s}\n' % song_id)
+            name = clean_text(song_id_to_name[song_id])
+            table = table_tex(every_time_played_by_song[song_id], [0.3, 0.3, 0.07, 0.07, 0.26])
+            f.write('\\begin{center}\\textbf{%s}\\end{center}\n' % name)
+            f.write('\\medskip\n\n')
+            f.write(table)
 
 
 def hall_of_fame_tex(row):
