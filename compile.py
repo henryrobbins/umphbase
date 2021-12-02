@@ -94,7 +94,7 @@ def compile_song_codes(credential):
     df['code'] = df['song_id'].apply(lambda x: ID_TO_CODE[x])
     df['tex'] = df.apply(lambda x: song_codes_tex(x), axis=1)
     with open('tex/song_codes.tex', 'w') as f:
-        f.write(table_tex(list(df['tex']), ['4cm', '0.5cm']))
+        f.write(table_tex(list(df['tex']), ['3.25cm', '0.2cm']))
 
 
 def setlists_tex(row):
