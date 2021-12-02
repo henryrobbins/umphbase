@@ -17,7 +17,7 @@ SET_CODES = {'1': 'S1',
              'e3': 'E3'}
 TRANSITIONS = {'None': '',
                ',' : ',',
-               '>' : ' \\textgreater{}',
+               '>' : '\\textgreater{}',
                '->' : ' \\textrightarrow{}'}
 
 
@@ -47,7 +47,8 @@ def short_text(text: str, max_length: int):
         return text
 
 
-def table_tex(table: List[List[str]], widths: List[str]):
+def table_tex(table: List[List[str]], widths: List[float]):
+    widths = [str(w) + '\\columnwidth' for w in widths]
     rows = [''.join('\\cell{%s}{%s}' % (widths[i], row[i]) for i in range(len(row))) for row in table]
     return '\\newline\n'.join(rows)
 
@@ -94,7 +95,7 @@ def compile_song_codes(credential):
     df['code'] = df['song_id'].apply(lambda x: ID_TO_CODE[x])
     df['tex'] = df.apply(lambda x: song_codes_tex(x), axis=1)
     with open('tex/song_codes.tex', 'w') as f:
-        f.write(table_tex(list(df['tex']), ['3.25cm', '0.2cm']))
+        f.write(table_tex(list(df['tex']), [0.75, 0.25]))
 
 
 def setlists_tex(row):
@@ -140,20 +141,20 @@ def setlists_tex(row):
     for i in range(len(sets)):
         set_title = SET_CODES[sets[i]]
         set_song_objects = list(zip(*[set_songs[i], set_jimmy_stewart[i], set_with_lyrics[i], set_hof[i], song_footnotes[i]]))
-        set_songs_tex = [song_tex(0, int(j), int(k), int(l), text=i, footnote=w) for i,j,k,l,w in set_song_objects]
+        set_songs_tex = [song_tex(0, int(j), int(k), int(l), text=clean_text(i), footnote=w) for i,j,k,l,w in set_song_objects]
         songs_tex = ' '.join([set_songs_tex[j] + TRANSITIONS[set_transitions[i][j]] for j in range(len(set_songs_tex) - 1)] + [set_songs_tex[-1]])
-        setlist_tex += '\\textbf{%s}: %s \\newline\n' % (set_title, songs_tex)
+        setlist_tex += '\\textbf{%s}: %s \\smallskip\n\n' % (set_title, songs_tex)
 
     notes_tex = ""
     for i in range(1,len(footnotes)+1):
-        notes_tex += '\\noindent[%d] %s\\newline\n' % (i, clean_text(footnotes[i]))
+        notes_tex += '[%d] %s\\smallskip\n\n' % (i, clean_text(footnotes[i]))
     if len(footnotes) > 0:
-        notes_tex += '\\newline\n'
+        notes_tex += '\\smallskip\n\n'
     if row['opener'] != 'None':
-        notes_tex += '\\noindent\\textbf{Support:} %s\\newline\n' % clean_text(row['opener'])
+        notes_tex += '\\textbf{Support:} %s\\smallskip\n\n' % clean_text(row['opener'])
     # TODO: Be more careful parsing show notes
     if row['show_notes'] != 'None':
-        notes_tex += '\\noindent\\textbf{Notes:} %s\\newline\n' % clean_text(row['show_notes'])
+        notes_tex += '\\textbf{Notes:} %s\\smallskip\n\n' % clean_text(row['show_notes'])
 
     return '\\SetList{%s}{%s}{%s}' % (title, setlist_tex, notes_tex)
 
@@ -189,8 +190,8 @@ def compile_songs_played(credential):
     df['code'] = df['song_id'].apply(lambda x: ID_TO_CODE[x])
     df['tex'] = df.apply(lambda x: song_played_tex(x), axis=1)
     with open('tex/songs_played.tex', 'w') as f:
-        f.write('\\noindent\n')
-        f.write(table_tex(list(df['tex']), ['7cm', '2cm', '7cm', '2cm', '2cm']))
+        f.write('\n')
+        f.write(table_tex(list(df['tex']), [0.35, 0.1, 0.35, 0.1, 0.1]))
 
 
 def songs_by_year_tex(row):
@@ -213,8 +214,9 @@ def compile_songs_by_year(credential):
     df['tex'] = df.apply(lambda x: songs_by_year_tex(x), axis=1)
     df = df.sort_values('code')
     with open('tex/songs_by_year.tex', 'w') as f:
-        f.write('\\noindent\n')
-        f.write(table_tex(list(df['tex']), ['2cm'] + (['0.7cm'] * (len(years) + 1))))
+        f.write('\n')
+        w = math.floor((0.9 / (len(years) + 1)) * 1000) / 1000
+        f.write(table_tex(list(df['tex']), [0.1] + ([w] * (len(years) + 1))))
 
 
 def every_time_played_tex(row):
@@ -247,10 +249,10 @@ def compile_every_time_played(credential):
     every_time_played_by_song = df.groupby('song_id')['tex'].apply(list)
     for song_id in every_time_played_by_song.keys():
         name = clean_text(song_id_to_name[song_id])
-        table = table_tex(every_time_played_by_song[song_id], ['1.3cm', '1.3cm', '0.3cm', '0.4cm', '1.2cm'])
+        table = table_tex(every_time_played_by_song[song_id], [0.3, 0.3, 0.07, 0.07, 0.26])
         with open('tex/every_time_played/%d.tex' % song_id, 'w') as f:
             f.write('\\begin{center}\\textbf{%s}\\end{center}\n' % name)
-            f.write('\\noindent\n')
+            f.write('\n')
             f.write(table)
 
     with open('tex/every_time_played.tex', 'w') as f:
@@ -270,7 +272,7 @@ def compile_hall_of_fame(credential):
     df = sql_util.query('sql/hall_of_fame.sql', credential)
     df['tex'] = df.apply(lambda x: hall_of_fame_tex(x), axis=1)
     with open('tex/hall_of_fame.tex', 'w') as f:
-        f.write(table_tex(list(df['tex']), ['1.5cm', '4.5cm']))
+        f.write(table_tex(list(df['tex']), [0.25, 0.27]))
 
 
 def jimmy_stewart_tex(row):
@@ -285,7 +287,7 @@ def compile_jimmy_stewart(credential):
     df = sql_util.query('sql/jimmy_stewart.sql', credential)
     df['tex'] = df.apply(lambda x: jimmy_stewart_tex(x), axis=1)
     with open('tex/jimmy_stewart.tex', 'w') as f:
-        f.write(table_tex(list(df['tex']), ['1.5cm', '4.5cm']))
+        f.write(table_tex(list(df['tex']), [0.25, 0.75]))
 
 
 def state_aggregation_tex(row):
@@ -299,7 +301,7 @@ def compile_state_aggregation(credential):
     df = sql_util.query('sql/state_aggregation.sql', credential)
     df['tex'] = df.apply(lambda x: state_aggregation_tex(x), axis=1)
     with open('tex/state_aggregation.tex', 'w') as f:
-        f.write(table_tex(list(df['tex']), ['4cm', '2cm', '1cm', '1cm', '1cm', '1cm']))
+        f.write(table_tex(list(df['tex']), [0.3, 0.3, 0.1, 0.1, 0.1, 0.1]))
 
 
 def venue_aggregation_tex(row):
@@ -334,7 +336,7 @@ def compile_support(credential):
     with open('tex/support.tex', 'w') as f:
         for _, row in df.iterrows():
             support = clean_text(row['opener'])
-            table = table_tex(list(row['tex']), ['1.5cm', '5cm'])
+            table = table_tex(list(row['tex']), [0.25, 0.75])
             f.write('\\SupportSummary{%s}{%s}' % (support, table))
 
 

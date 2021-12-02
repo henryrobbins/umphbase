@@ -5,6 +5,7 @@
 \usepackage{booktabs} % Used by to_latex pandas
 \usepackage{textcomp}
 \usepackage{xparse} % Use to check for optimal arguments
+\usepackage{parskip} % Use instead of \newline to avoid underfull
 
 % Remove enumerate vertical spacing
 \usepackage{enumitem}
@@ -20,6 +21,7 @@
 
 %TODO ADDED
 \newcommand{\cell}[2]{\makebox[#1][l]{#2}}
+\setlength\parindent{0pt} % globally suppress indentation
 
 % --------------------------------------
 % Commands & Environments
@@ -52,27 +54,27 @@
 
 \newcommand{\SetList}[3] {
     \begin{minipage}{\textwidth}
-    \noindent\underline{\textbf{#1}}\newline % title
-    #2\newline % setlist
+    \underline{\textbf{#1}} \medskip % title
+
+    #2 \medskip % setlist
+
     #3 % remaining info
     \end{minipage}
 }
 
 \newcommand{\VenueSummary}[3] {
-    \noindent
     \begin{center}
         \textbf{#1}\newline % venue
         $#2$ % special counts
     \end{center}
     \begin{multicols*}{3}
     \begin{center}
-        \noindent#3 % show dates
+        #3 % show dates
     \end{center}
     \end{multicols*}
 }
 
 \newcommand{\SupportSummary}[2] {
-    \noindent
     \begin{center}
         \textbf{#1}\newline % support
         #2 % table of dates / venues
@@ -95,7 +97,7 @@
 }
 
 \newcommand{\Review}[4] {
-    \noindent\underline{\textbf{#1 - #3}} \newline
+    \underline{\textbf{#1 - #3}} \newline
 
     #4 \newline
 
@@ -167,7 +169,6 @@
 \begin{multicols*}{4}
 \setlength{\columnseprule}{0.4pt}
 \begin{footnotesize}
-\noindent
 \input{song_codes}
 \end{footnotesize}
 \end{multicols*}
@@ -177,7 +178,9 @@
 % ---------------------------------------
 \chapter{Setlists}
 
+\iffalse
 \input{setlists}
+\fi
 
 % ---------------------------------------
 % Songs Played
@@ -208,7 +211,6 @@
 
 \begin{multicols*}{3}
 \setlength{\columnseprule}{0.4pt}
-\noindent
 \input{hall_of_fame}
 \end{multicols*}
 
@@ -220,7 +222,6 @@
 
 \begin{multicols*}{3}
 \setlength{\columnseprule}{0.4pt}
-\noindent
 \input{jimmy_stewart}
 \end{multicols*}
 
@@ -232,7 +233,6 @@
 
 \begin{multicols*}{2}
 \setlength{\columnseprule}{0.4pt}
-\noindent
 \input{state_aggregation}
 \end{multicols*}
 
@@ -255,6 +255,5 @@
 \setlength{\columnseprule}{0.4pt}
 \input{support}
 \end{multicols*}
-
 
 \end{document}
