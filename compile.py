@@ -94,11 +94,7 @@ def compile_song_codes(credential):
     df['code'] = df['song_id'].apply(lambda x: ID_TO_CODE[x])
     df['tex'] = df.apply(lambda x: song_codes_tex(x), axis=1)
     with open('tex/song_codes.tex', 'w') as f:
-        f.write('\\begin{multicols*}{3}\n')
-        f.write('\\setlength{\columnseprule}{0.4pt}\n')
-        f.write('\\noindent\n')
         f.write(table_tex(list(df['tex']), ['4cm', '0.5cm']))
-        f.write('\\end{multicols*}\n')
 
 
 def setlists_tex(row):
@@ -258,13 +254,8 @@ def compile_every_time_played(credential):
             f.write(table)
 
     with open('tex/every_time_played.tex', 'w') as f:
-        f.write('\\begin{multicols*}{4}')
-        f.write('\\setlength{\columnseprule}{0.4pt}')
-        f.write('\\begin{scriptsize}')
         for song_id in every_time_played_by_song.keys():
             f.write('\\input{every_time_played/%s}\n' % song_id)
-        f.write('\\end{scriptsize}')
-        f.write('\\end{multicols*}')
 
 
 def hall_of_fame_tex(row):
@@ -279,11 +270,7 @@ def compile_hall_of_fame(credential):
     df = sql_util.query('sql/hall_of_fame.sql', credential)
     df['tex'] = df.apply(lambda x: hall_of_fame_tex(x), axis=1)
     with open('tex/hall_of_fame.tex', 'w') as f:
-        f.write('\\begin{multicols*}{3}')
-        f.write('\\setlength{\columnseprule}{0.4pt}')
-        f.write('\\noindent\n')
         f.write(table_tex(list(df['tex']), ['1.5cm', '4.5cm']))
-        f.write('\\end{multicols*}')
 
 
 def jimmy_stewart_tex(row):
@@ -298,11 +285,7 @@ def compile_jimmy_stewart(credential):
     df = sql_util.query('sql/jimmy_stewart.sql', credential)
     df['tex'] = df.apply(lambda x: jimmy_stewart_tex(x), axis=1)
     with open('tex/jimmy_stewart.tex', 'w') as f:
-        f.write('\\begin{multicols*}{3}')
-        f.write('\\setlength{\columnseprule}{0.4pt}')
-        f.write('\\noindent\n')
         f.write(table_tex(list(df['tex']), ['1.5cm', '4.5cm']))
-        f.write('\\end{multicols*}')
 
 
 def state_aggregation_tex(row):
@@ -316,11 +299,7 @@ def compile_state_aggregation(credential):
     df = sql_util.query('sql/state_aggregation.sql', credential)
     df['tex'] = df.apply(lambda x: state_aggregation_tex(x), axis=1)
     with open('tex/state_aggregation.tex', 'w') as f:
-        f.write('\\begin{multicols*}{2}')
-        f.write('\\setlength{\columnseprule}{0.4pt}')
-        f.write('\\noindent')
         f.write(table_tex(list(df['tex']), ['4cm', '2cm', '1cm', '1cm', '1cm', '1cm']))
-        f.write('\\end{multicols*}')
 
 
 def venue_aggregation_tex(row):
@@ -338,10 +317,7 @@ def compile_venue_aggregation(credential):
     df = df.fillna(0)  # venues where all shows have no known setlist
     df['tex'] = df.apply(lambda x: venue_aggregation_tex(x), axis=1)
     with open('tex/venue_aggregation.tex', 'w') as f:
-        f.write('\\begin{multicols*}{3}\n')
-        f.write('\\setlength{\columnseprule}{0.4pt}\n')
         f.write('\n'.join(df['tex']))
-        f.write('\\end{multicols*}\n')
 
 
 def support_tex(row):
@@ -356,13 +332,10 @@ def compile_support(credential):
     df = sql_util.query('sql/support.sql', credential)
     df['tex'] = df.apply(lambda x: support_tex(x), axis=1)
     with open('tex/support.tex', 'w') as f:
-        f.write('\\begin{multicols*}{3}')
-        f.write('\\setlength{\columnseprule}{0.4pt}')
         for _, row in df.iterrows():
             support = clean_text(row['opener'])
             table = table_tex(list(row['tex']), ['1.5cm', '5cm'])
             f.write('\\SupportSummary{%s}{%s}' % (support, table))
-        f.write('\\end{multicols*}')
 
 
 def main(credential: sql_util.Credentials):
