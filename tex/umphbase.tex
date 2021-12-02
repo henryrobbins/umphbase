@@ -72,11 +72,11 @@
 }
 
 \newcommand{\SupportSummary}[2] {
-    \setlength{\tabcolsep}{0pt}
-    \begin{minipage}{\columnwidth}
-    \begin{center}\textbf{#1}\end{center}
-    \input{#2} \newline
-    \end{minipage}
+    \noindent
+    \begin{center}
+        \textbf{#1}\newline % support
+        #2 % table of dates / venues
+    \end{center}
 }
 
 \newcommand{\SongInstances}[2] {

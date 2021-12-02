@@ -358,11 +358,10 @@ def compile_support(credential):
     with open('tex/support.tex', 'w') as f:
         f.write('\\begin{multicols*}{3}')
         f.write('\\setlength{\columnseprule}{0.4pt}')
-        for index, row in df.iterrows():
+        for _, row in df.iterrows():
             support = clean_text(row['opener'])
-            f.write("\\noindent\\begin{center}\\textbf{%s}\\newline\n" % support)
-            f.write(table_tex(list(row['tex']), ['1.5cm', '5cm']))
-            f.write('\n\\end{center}\n')
+            table = table_tex(list(row['tex']), ['1.5cm', '5cm'])
+            f.write('\\SupportSummary{%s}{%s}' % (support, table))
         f.write('\\end{multicols*}')
 
 
