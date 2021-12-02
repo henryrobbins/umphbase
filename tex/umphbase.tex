@@ -50,13 +50,11 @@
     \end{center}
     }
 
-\newcommand{\SetList}[4] {
+\newcommand{\SetList}[3] {
     \begin{minipage}{\textwidth}
-    \noindent\underline{\textbf{#1\quad#2}} \newline
-
-    \input{#3} \vspace{5pt}
-    #4
-
+    \noindent\underline{\textbf{#1}}\newline % title
+    #2\newline % setlist
+    #3 % remaining info
     \end{minipage}
 }
 

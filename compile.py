@@ -110,9 +110,6 @@ def setlists_tex(row):
     location = ', '.join([i for i in [city, state, country] if i != 'None'])
     title = ' | '.join([date, venue_name, location])
 
-    tex = '\\begin{minipage}{\\textwidth}\n'
-    tex += '\\noindent\\underline{\\textbf{%s}}\\newline\n' % title
-
     def listify(string, set_split, item_split):
         string_split = string.split(set_split)
         return [i.split(item_split) for i in string_split]
@@ -143,31 +140,26 @@ def setlists_tex(row):
         song_footnotes.append(tmp)
     footnotes = {v: k for k, v in footnotes.items()}
 
+    setlist_tex = ""
     for i in range(len(sets)):
         set_title = SET_CODES[sets[i]]
         set_song_objects = list(zip(*[set_songs[i], set_jimmy_stewart[i], set_with_lyrics[i], set_hof[i], song_footnotes[i]]))
         set_songs_tex = [song_tex(0, int(j), int(k), int(l), text=i, footnote=w) for i,j,k,l,w in set_song_objects]
         songs_tex = ' '.join([set_songs_tex[j] + TRANSITIONS[set_transitions[i][j]] for j in range(len(set_songs_tex) - 1)] + [set_songs_tex[-1]])
-        tex += '\\textbf{%s}: %s \\newline\n' % (set_title, songs_tex)
+        setlist_tex += '\\textbf{%s}: %s \\newline\n' % (set_title, songs_tex)
 
-    tex += '\\newline\n'
-
+    notes_tex = ""
     for i in range(1,len(footnotes)+1):
-        tex += '\\noindent[%d] %s\\newline\n' % (i, clean_text(footnotes[i]))
-
+        notes_tex += '\\noindent[%d] %s\\newline\n' % (i, clean_text(footnotes[i]))
     if len(footnotes) > 0:
-        tex += '\\newline\n'
-
+        notes_tex += '\\newline\n'
     if row['opener'] != 'None':
-        tex += '\\noindent\\textbf{Support:} %s\\newline\n' % clean_text(row['opener'])
-
+        notes_tex += '\\noindent\\textbf{Support:} %s\\newline\n' % clean_text(row['opener'])
     # TODO: Be more careful parsing show notes
     if row['show_notes'] != 'None':
-        tex += '\\noindent\\textbf{Notes:} %s\\newline\n' % clean_text(row['show_notes'])
+        notes_tex += '\\noindent\\textbf{Notes:} %s\\newline\n' % clean_text(row['show_notes'])
 
-    tex += '\\end{minipage}\n'
-
-    return tex
+    return '\\SetList{%s}{%s}{%s}' % (title, setlist_tex, notes_tex)
 
 
 def compile_setlists(credential):
