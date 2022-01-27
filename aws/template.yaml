@@ -98,7 +98,7 @@ Resources:
       AllocatedStorage: 20
       BackupRetentionPeriod: 0
       Engine: MySQL
-      EngineVersion: 8.0.23
+      EngineVersion: 8.0.27
       MasterUsername: !Ref DBUsername
       MasterUserPassword: !Ref DBPassword
     DeletionPolicy: Snapshot
