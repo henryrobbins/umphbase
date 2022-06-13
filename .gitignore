@@ -172,3 +172,6 @@ tex/*
 
 # text jupyter notebook
 test.ipynb
+
+# GIMP file
+umphbase.xcf
