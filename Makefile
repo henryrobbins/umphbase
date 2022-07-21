@@ -34,3 +34,7 @@ pdf:
 
 # Crete tex file and compile PDF
 book: tex pdf
+
+# Test
+test:
+	python -m pytest tests
