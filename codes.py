@@ -1,33 +1,33 @@
-import string
-import pandas as pd
 import argparse
 from ortools.linear_solver import pywraplp as OR
-from typing import List, Dict, Union, Optional
+import pandas as pd
+import re
+from string import ascii_lowercase
+from typing import Callable, Dict, Iterable, List, Optional, Set
 
 
 NUMBERS = list('0123456789')
-CHARS = list(string.ascii_lowercase)
-VALID_CHARS = CHARS + NUMBERS
-VOWELS = list('aeiou')
+CHARS = list(ascii_lowercase)
+VALID_CHARS = frozenset(CHARS + NUMBERS)
+VALID_CHARS_AND_SPACE = frozenset(CHARS + NUMBERS + [' '])
+vowel_but_not_first_re =  '(?!^)[aeiou]'  # Vowels not at beginning of a word
 
 # https://stackoverflow.com/a/38760564
 units = ["zero", "one", "two", "three", "four", "five", "six", "seven",
          "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",
          "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
-units.reverse()
-UNITS = {units[i]: 19-i for i in range(len(units))}
+UNITS = {unit: 19 - i for i, unit in enumerate(reversed(units))}
 tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
         "eighty", "ninety"]
 TENS = {tens[i]: i for i in range(2, len(tens))}
 ordinals = ["first", "second", "third", "fourth", "fifth"]
-ORDINALS = {ordinals[i]: i + 1 for i in range(len(ordinals))}
+ORDINALS = {ordinal: i + 1 for i, ordinal in enumerate(ordinals)}
 multiples = ["single", "double", "triple", "quadruple", "quintuple"]
-MULTIPLICATIVES = {multiples[i]: i + 1 for i in range(len(multiples))}
+MULTIPLICATIVES = {multiple: i + 1 for i, multiple in enumerate(multiples)}
 
 # used to measure how unique a words is
 with open('data/common_english_words.txt') as f:
-    words = [w.rstrip() for w in f.readlines()]
-ENGLISH_RANK = {words[i]: i for i in range(len(words))}
+    ENGLISH_RANK = {word.rstrip(): i for i, word in enumerate(f)}
 
 
 def is_valid_code(code: str, max_length: int, tight: bool = True) -> bool:
@@ -43,19 +43,15 @@ def is_valid_code(code: str, max_length: int, tight: bool = True) -> bool:
     """
     lb = max_length - 1 if tight else 1
     ub = max_length
-    return (all([c in VALID_CHARS for c in code]) &
-            (len(code) in range(lb, ub + 1)))
+    return lb <= len(code) <= ub and all(c in VALID_CHARS for c in code)
 
 
 def word_rank(word: str) -> int:
     """Return the rank of the word with lower rank being more frequent."""
-    if word in ENGLISH_RANK:
-        rank = ENGLISH_RANK[word]
-    else:
-        rank = len(ENGLISH_RANK)
+    rank = ENGLISH_RANK.get(word, len(ENGLISH_RANK))
     # plural form of low rank words should be low rank
-    if ((len(word) > 1) & (word[-1] == 's')):
-        return min(rank, word_rank(word[:-1]))
+    if len(word) > 1 and word[-1] == 's':
+        rank = min(rank, ENGLISH_RANK.get(word[:-1], len(ENGLISH_RANK)))
     return rank
 
 
@@ -69,9 +65,9 @@ def clean_title(title: str) -> str:
     # lower case and remove invalid chars
     title = title.lower()
     title = title.replace(' & ', ' n ')
-    title = title.replace("/", ' ')
-    title = title.replace("-", ' ')
-    title = ''.join([i for i in title if i in VALID_CHARS + [' ']])
+    title = title.replace('/', ' ')
+    title = title.replace('-', ' ')
+    title = ''.join([i for i in title if i in VALID_CHARS_AND_SPACE])
 
     # abbreviations
     abbreviations = {'chapter': 'ch',
@@ -84,33 +80,22 @@ def clean_title(title: str) -> str:
     for k, v in abbreviations.items():
         title = title.replace(k, v)
 
-    title = title.split()
+    title_words = title.split()
 
     # word replacement abbreviations
-    abbreviations = {'and': 'n'}
-    for k, v in abbreviations.items():
-        title = replace(k, str(v), title)
+    word_abbreviations: Dict[str, str] = {'and': 'n'}
+    for k, v in word_abbreviations.items():
+        title_words = replace(k, v, title_words)
 
     # map string numbers
-    for k, v in TENS.items():
-        title = replace(k, str(v), title)
-    for k, v in UNITS.items():
-        title = replace(k, str(v), title)
-    for k, v in ORDINALS.items():
-        title = replace(k, str(v), title)
-    for k, v in MULTIPLICATIVES.items():
-        title = replace(k, str(v), title)
+    for swaps in [TENS, UNITS, ORDINALS, MULTIPLICATIVES]:
+        for k, v in swaps.items():
+            title_words = replace(k, str(v), title_words)
 
-    title = '<' + ' '.join(title) + '>'
-    title = title.split()
-
-    # roman numerals -> digits
-    title = replace('i>', '1', title)
-    title = replace('ii>', '2', title)
-    title = replace('iii>', '3', title)
-
-    title = ' '.join(title)
-    title = title.strip('<>')
+    title = ' '.join(title_words)
+    title = re.sub('iii$', '3', title)
+    title = re.sub('ii$', '2', title)
+    title = re.sub('i$', '1', title)
 
     return title
 
@@ -118,39 +103,36 @@ def clean_title(title: str) -> str:
 def get_acronym(words: List[str], max_length, prune=False) -> str:
     """Return acronym of for the first [max_length] words."""
     if prune:
-        tmp = "".join([w[0] for w in words if word_rank(w) > 10])
+        acronym = "".join([w[0] for w in words if word_rank(w) > 10])
     else:
-        tmp = "".join([w[0] for w in words])
-    return tmp[:max_length]
+        acronym = "".join([w[0] for w in words])
+    return acronym[:max_length]
 
 
 def remove_vowels(word: str) -> str:
     """Remove vowels (except for the first letter) from the given word."""
-    if len(word) == 0:
-        return ''
-    else:
-        return word[0] + "".join([c for c in word[1:] if c not in VOWELS])
+    return re.sub(vowel_but_not_first_re, '', word)
 
 
 def remove_letters(word: str) -> str:
     """Remove any letters from the given word."""
-    return ''.join([c for c in word if c in NUMBERS])
+    return re.sub('\D', '', word)
 
 
 def remove_numbers(word: str) -> str:
     """Remove any numbers from the given word."""
-    return ''.join([c for c in word if c not in NUMBERS])
+    return re.sub('\d', '', word)
 
 
 def code_attempts(title: str,
                   max_length: int,
-                  word_title_freq) -> Union[str, List[str]]:
+                  word_title_freq: Callable[[str], int]) -> List[str]:
     """Return a list of potential song codes ordered by preference."""
     name = clean_title(title)
     words = name.split()
-    words_by_freq = sorted(words, key=lambda x: word_rank(x), reverse=True)
-    words_by_name_freq = sorted(words, key=lambda x: word_title_freq(x))
-    words_by_length = sorted(words, key=lambda x: len(x), reverse=True)
+    words_by_freq = sorted(words, key=word_rank, reverse=True)
+    words_by_name_freq = sorted(words, key=word_title_freq)
+    words_by_length = sorted(words, key=len, reverse=True)
 
     def short_name_code() -> Optional[str]:
         """Return a code for a song with a short name."""
@@ -158,7 +140,7 @@ def code_attempts(title: str,
         if is_valid_code(code, max_length, tight=False):
             return code
         code = remove_vowels(code)
-        if ((len(name) < max_length + 3) & (is_valid_code(code, max_length))):
+        if len(name) < max_length + 3 and is_valid_code(code, max_length):
             return code
         return None
 
@@ -172,14 +154,14 @@ def code_attempts(title: str,
     def part_number_code() -> Optional[str]:
         """Return a code which contains some numbers."""
         nums = remove_letters(name)
-        if (len(nums) in [1, 2]):
+        if len(nums) in [1, 2]:
             no_numbers = remove_numbers(name)
-            if (len(no_numbers) > 0):
+            if len(no_numbers):
                 sub_code = code_attempts(no_numbers,
                                          max_length - len(nums),
                                          word_title_freq)[0]
                 try:
-                    if (name.index(nums) < (len(name) / 2)):
+                    if name.index(nums) < len(name) / 2:
                         return nums + sub_code
                     else:
                         return sub_code + nums
@@ -189,8 +171,8 @@ def code_attempts(title: str,
 
     def acronym_code(prune: bool) -> Optional[str]:
         """Return an acronym code; common words excluded if prune is true."""
-        if (((prune) & (len(words) > max_length)) |
-            ((not prune) & (len(words) in range(max_length-1, max_length+1)))):
+        if ((prune and len(words) > max_length) or
+            (not prune and max_length - 1 <= len(words) <= max_length)):
             code = get_acronym(words, max_length, prune=prune)
             if is_valid_code(code, max_length, tight=False):
                 return code
@@ -198,7 +180,7 @@ def code_attempts(title: str,
 
     def unique_title_word_code(word: str, vowels: bool) -> Optional[str]:
         """Return a code that is a unique title word."""
-        if (word_title_freq(word) == 1):
+        if word_title_freq(word) == 1:
             code = word if vowels else remove_vowels(word)
             if is_valid_code(code, max_length):
                 return code
@@ -206,7 +188,7 @@ def code_attempts(title: str,
 
     def unique_english_word_code(word: str, vowels: bool) -> Optional[str]:
         """Return a code that is a unique title word."""
-        if (word_rank(word) > 2000):
+        if word_rank(word) > 2000:
             code = word if vowels else remove_vowels(word)
             if is_valid_code(code, max_length):
                 return code
@@ -219,26 +201,26 @@ def code_attempts(title: str,
             return code
         return None
 
-    attempts = (
-        [short_name_code()] +
-        [all_number_code()] +
-        [part_number_code()] +
-        [acronym_code(prune=True)] +
-        [unique_title_word_code(w, True) for w in words_by_name_freq] +
-        [unique_english_word_code(w, True) for w in words_by_freq] +
-        [unique_title_word_code(w, False) for w in words_by_name_freq] +
-        [unique_english_word_code(w, False) for w in words_by_freq] +
-        [acronym_code(prune=False)] +
-        [letters_code(w, True) for w in words_by_length] +
-        [letters_code(w, False) for w in words_by_length])
+    possible_attempts: List[Optional[str]] = [
+        short_name_code(),
+        all_number_code(),
+        part_number_code(),
+        acronym_code(prune=True),
+        *(unique_title_word_code(w, True) for w in words_by_name_freq),
+        *(unique_english_word_code(w, True) for w in words_by_freq),
+        *(unique_title_word_code(w, False) for w in words_by_name_freq),
+        *(unique_english_word_code(w, False) for w in words_by_freq),
+        acronym_code(prune=False),
+        *(letters_code(w, True) for w in words_by_length),
+        *(letters_code(w, False) for w in words_by_length)]
 
-    attempts = [code for code in attempts if code is not None]
-    attempts = list(dict.fromkeys(attempts))  # remove duplicates
+    attempts: Iterable[str] = filter(None, possible_attempts)
+    unique_attempts: List[str] = list(dict.fromkeys(attempts))  # remove duplicates
 
-    return attempts
+    return unique_attempts
 
 
-def assignment(titles, codes, edges):
+def assignment(titles: Iterable[str], codes: Iterable[str], edges):
     """A model for assigning song titles to valid song codes."""
     TITLES = titles       # song titles
     CODES = codes         # potential codes
@@ -263,7 +245,11 @@ def assignment(titles, codes, edges):
     for k in CODES:
         m.Add(sum(x[i, j] for i, j in EDGES if j == k) <= 1)
 
-    return m, x
+    if m.Solve() == 2:
+        raise ValueError("Unable to generate unique codes.")
+
+    return {title: code for (title, code), xval in x.items()
+            if xval.solution_value() > 0.5}
 
 
 def generate(songs: pd.DataFrame, max_length: int) -> Dict[str, str]:
@@ -281,38 +267,30 @@ def generate(songs: pd.DataFrame, max_length: int) -> Dict[str, str]:
     title_frequency = pd.Series(cleaned_titles).value_counts().to_dict()
 
     def word_title_freq(word: str) -> int:
-        if word in title_frequency:
-            rank = title_frequency[word]
-        else:
-            rank = len(title_frequency)
+        rank = title_frequency.get(word, len(title_frequency))
         # account for plural form
-        if ((len(word) > 1) & (word[-1] == 's')):
-            return max(rank, word_title_freq(word[:-1]))
+        if len(word) > 1 and word[-1] == 's':
+            rank = max(rank, title_frequency.get(word[:-1], len(title_frequency)))
         return rank
 
-    title_to_attempts = {}
-    all_attempts = set([])
-    for index, row in songs.iterrows():
+    title_to_attempts: Dict[str, List[str]] = {}
+    all_attempts: Set[str] = set()
+    for _, row in songs.iterrows():
         title = row['name']
         attempts = code_attempts(title, max_length, word_title_freq)
-        if bool(int(row['original'])):
-            attempts = [str.upper(code) for code in attempts]
+        if int(row['original']):
+            attempts = list(map(str.upper, attempts))
         title_to_attempts[title] = attempts
         all_attempts.update(attempts)
 
     edges = {}
     for title, attempts in title_to_attempts.items():
-        for i in range(len(attempts)):
-            edges[(title, attempts[i])] = 10**i
+        for i, attempt in enumerate(attempts):
+            edges[title, attempt] = 10**i
 
-    m, x = assignment(list(songs['name']), list(all_attempts), edges)
+    result = assignment(songs['name'], all_attempts, edges)
 
-    if m.Solve() == 2:
-        raise ValueError("Unable to generate unique codes.")
-    solution = {i: j.solution_value() for (i, j) in x.items()}
-    selected = {i: j for (i, j) in solution.items() if j == 1}
-
-    return {i: j for i, j in selected}
+    return result
 
 def main(songs_path: str, n: int):
     """Generate length n codes for songs at path.
@@ -322,15 +300,17 @@ def main(songs_path: str, n: int):
         length (int): Length of the codes to generate.
     """
     songs_df = pd.read_pickle(songs_path)
-    codes_dict = generate(songs_df, n)
-    songs_df['code'] = songs_df['name'].apply(lambda x: codes_dict[x])
-    return songs_df[['song_id', 'code']]
+    codes_df = pd.DataFrame.from_dict(generate(songs_df, n), orient='index',
+            columns=['code'])
+    result_df = songs_df.merge(codes_df, left_on='name', right_index=True,
+            how='left')[['song_id', 'code']]
+    return result_df
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('-s', '--songs_path', help="Path to songs")
-    parser.add_argument('-c', '--codes_path', help="Path to write codes to")
-    parser.add_argument('-l', '--length', help="Host name")
+    parser.add_argument('-s', '--songs_path', required=True, help="Path to songs")
+    parser.add_argument('-c', '--codes_path', required=True, help="Path to write codes to")
+    parser.add_argument('-l', '--length', type=int, required=True, help="Code length")
     args = parser.parse_args()
     main(args.songs_path, int(args.length)).to_csv(args.codes_path, index=0)
