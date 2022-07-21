@@ -116,12 +116,12 @@ def remove_vowels(word: str) -> str:
 
 def remove_letters(word: str) -> str:
     """Remove any letters from the given word."""
-    return re.sub('\D', '', word)
+    return re.sub(r'\D', '', word)
 
 
 def remove_numbers(word: str) -> str:
     """Remove any numbers from the given word."""
-    return re.sub('\d', '', word)
+    return re.sub(r'\d', '', word)
 
 
 def code_attempts(title: str,
