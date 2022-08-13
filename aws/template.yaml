@@ -148,7 +148,7 @@ Resources:
         Schedule1:
           Type: Schedule
           Properties:
-            Schedule: rate(1 day)
+            Schedule: rate(7 days)
       Environment:
         Variables:
           DB_HOST: !GetAtt Umphbase.Endpoint.Address
