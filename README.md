@@ -12,7 +12,7 @@ scrape the data from the site. However, in June of 2021, a new version of ATU
 was released which provides an [API](https://allthings.umphreys.com/api/docs)
 to access the site's data. Read more about the transition
 [here](https://allthings.umphreys.com/faq/). The TL;DR is the new version is
-based on a setlist engine called [Songfish](https://songfish.xyz/) by
+based on a setlist engine called [Songfish](https://songfishapp.com/) by
 [Adam Scheinberg](https://adamscheinberg.com/).
 
 ## Installation (v1.0.0)
