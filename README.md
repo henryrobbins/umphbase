@@ -61,6 +61,8 @@ python clean.py
 
 ## MySQL Database
 
+***NOTICE**: Due to the expense, this service is currently not being provided.*
+
 Pulling and cleaning the data from ATU can be a little time-consuming.
 Alternatively, you can download a `.sql` file which is regularly updated.
 Instructions for downloading the `.sql` file and creating the MySQL database
